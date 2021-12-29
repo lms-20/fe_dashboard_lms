@@ -46,7 +46,7 @@ const PermanentDrawer = props => {
                         </div>
                     </div>
                 </div>
-                <p>Hello world</p>
+                <p>Hello world tes</p>
                 <Outlet />
             </div>
             <div className="drawer-side">
