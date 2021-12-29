@@ -1,34 +1,31 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React from 'react'
-import PropTypes from 'prop-types'
-import NavBar from '../NavBar/NavBar'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link, Outlet } from 'react-router-dom';
 
-const PermanentDrawer = props => {
+const AppBar = (props) => {
+
     return (
         <div>
-            {/* <div className="rounded-lg shadow bg-base-200 drawer h-52"> */}
-            {/* <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-            <div className="flex drawer-content"> */}
-            {/* <div className="navbar mb-2 bg-neutral text-neutral-content rounded-box"> */}
-            {/* <div className="flex-none hidden lg:flex"> */}
-            {/* <button className="btn btn-square btn-ghost">
-                            </button> */}
-            {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg> */}
-            {/* </div> */}
-            {/* </div> */}
-            {/* <label htmlFor="my-drawer" className="btn drawer-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </label>
-                <div className="hidden px-2 mx-2 my-2 lg:flex ">
+            <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
+                {/* <div className="flex-none hidden lg:flex">
+                    <button className="btn btn-square btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div> */}
+                <div className="flex-1 hidden px-2 mx-2 lg:flex">
                     <span className="text-lg font-bold">
-                        daisyUI
+                        E - Learning
                     </span>
+                </div>
+                <div className="flex-1 lg:flex-none">
+                    <div className="form-control">
+                        <input type="text" placeholder="Search" className="input input-ghost" />
+                    </div>
                 </div>
                 <div className="flex-none">
                     <button className="btn btn-square btn-ghost">
@@ -52,39 +49,32 @@ const PermanentDrawer = props => {
                     </div>
                 </div>
             </div>
-            <div className="drawer-side">
-                <label htmlFor="my-drawer" className="drawer-overlay" />
-                <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-                    <li>
-                        <a>Menu Item</a>
-                    </li>
-                    <li>
-                        <a>Menu Item</a>
-                    </li>
-                </ul>
-            </div> */}
-            {/* </div> */}
-
-
             <div className="rounded-lg shadow bg-base-200 drawer drawer-mobile h-full">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="flex flex-col items-center justify-center drawer-content">
-                    <label htmlFor="my-drawer-2" className="mb-4 btn btn-primary drawer-button lg:hidden">open menu</label>
-                    <div className="hidden text-xs text-center lg:block">Menu is always open on desktop size.
+                <div className="flex drawer-content">
+                    <label htmlFor="my-drawer-2" className="mb-4 btn drawer-button lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </label>
+                    <div className="mx-5 my-5 text-xs text-center">
+                        <Outlet />
+                    </div>
+                    {/* <div className="hidden text-xs text-center lg:block">Menu is always open on desktop size.
                         <br />Resize the browser to see toggle button on mobile size
                     </div>
                     <div className="text-xs text-center lg:hidden">Menu can be toggled on mobile size.
                         <br />Resize the browser to see fixed sidebar on desktop size
-                    </div>
+                    </div> */}
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay" />
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                         <li>
-                            <a>Menu Item</a>
+                            <Link to="/home">Home</Link>
                         </li>
                         <li>
-                            <a>Menu Item</a>
+                            <Link to="/about">About</Link>
                         </li>
                     </ul>
                 </div>
@@ -93,8 +83,8 @@ const PermanentDrawer = props => {
     )
 }
 
-PermanentDrawer.propTypes = {
-
+AppBar.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
-export default PermanentDrawer
+export default AppBar;
