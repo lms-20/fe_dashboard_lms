@@ -2,13 +2,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import './App.css';
-import Layout from './pages/Layout/Layout';
+import PermanentDrawer from './components/PermanentDrawer/PermanentDrawer';
+import { Routes, Route } from 'react-router-dom';
+import MyClass from './pages/MyClass/MyClass';
+import Transaction from './pages/Transaction/Transaction';
 
 function App() {
   return (
     <div className="App">
-      <Layout />
-     
+      <Routes>
+        <Route path="/" element={<PermanentDrawer />} />
+        <Route element={<PermanentDrawer />}>
+          <Route path="/myclass" element={<MyClass />} />
+          <Route path="/transactions" element={<Transaction />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
