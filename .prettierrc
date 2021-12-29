@@ -15,6 +15,9 @@
       "usePrettierrc": false
     },
     {
+      "endOfLine": "auto"
+    },
+    {
       "fileInfoOptions": {
         "withNodeModules": true
       }

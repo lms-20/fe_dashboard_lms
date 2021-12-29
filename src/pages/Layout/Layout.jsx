@@ -5,15 +5,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NavBar from '../../components/NavBar/NavBar';
 import PermanentDrawer from '../../components/PermanentDrawer/PermanentDrawer';
-import Styles from './Layout.module.css'
+import styles from './Layout.module.css'
 
 const Layout = props => {
-    const { container } = Styles;
+  
 
     return (
-        <div className={container}>
-            <NavBar />
-            <PermanentDrawer />
+        <div>
+            <PermanentDrawer/>
+            {/* <div>
+                <NavBar/>
+            </div> */}
         </div>
     )
 }
