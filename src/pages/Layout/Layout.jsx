@@ -11,7 +11,7 @@ const Layout = props => {
   
 
     return (
-        <div className = "h-screen">
+        <div>
             <PermanentDrawer/>
             {/* <div>
                 <NavBar/>

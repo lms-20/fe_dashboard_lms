@@ -53,6 +53,7 @@ const PermanentDrawer = props => {
                         </div>
                     </div>
                 </div>
+                <p>Hello world</p>
             </div> 
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay" /> 
