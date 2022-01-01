@@ -49,6 +49,8 @@ const Register = props => {
         }
         if (!values.emailAddress) {
             errors.emailAddress = "Email Address is required!"
+        } else if (!emailRegex.test(values.emailAddress)) {
+            errors.emailAddress = "Email not valid!"
         }
         if (!values.fullname) {
             errors.fullname = "Fullname is required!"
@@ -83,48 +85,69 @@ const Register = props => {
                             <label className="label">
                                 <span className="label-text">Full Name</span>
                             </label>
-                            <input type="text" id='fullname' name='fullname' placeholder="Full Name" className="input" value={formData.fullname} onChange={handleChange} />
+                            <input type="text" id='fullname' name='fullname' placeholder="Full Name" className={!formErrors.fullname ? 'input' : ' input input-error'} value={formData.fullname} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.fullname}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email Address</span>
                             </label>
-                            <input type="text" id='emailAddress' name='emailAddress' placeholder="Email Address" className="input" value={formData.emailAddress} onChange={handleChange} />
+                            <input type="text" id='emailAddress' name='emailAddress' placeholder="Email Address" className={!formErrors.emailAddress ? 'input' : ' input input-error'} value={formData.emailAddress} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.emailAddress}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Age</span>
                             </label>
-                            <input type="text" id='age' name='age' placeholder="Age" className="input" value={formData.age} onChange={handleChange} />
+                            <input type="text" id='age' name='age' placeholder="Age" className={!formErrors.age ? 'input' : ' input input-error'} value={formData.age} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.age}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" id='password' name='password' placeholder="Password" className="input" value={formData.password} onChange={handleChange} />
+                            <input type="text" id='password' name='password' placeholder="Password" className={!formErrors.password ? 'input' : ' input input-error'} value={formData.password} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.password}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Check Password</span>
                             </label>
-                            <input type="text" id='checkPassword' name='checkPassword' placeholder="Check Password" className="input" value={formData.checkPassword} onChange={handleChange} />
+                            <input type="text" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!formErrors.checkPassword ? 'input' : ' input input-error'} value={formData.checkPassword} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.checkPassword}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Occupation</span>
                             </label>
-                            <select id='occupation' name='occupation' className="select select-bordered w-full max-w-xs" value={formData.occupation} onChange={handleChange}>
+                            <select id='occupation' name='occupation' className={!formErrors.occupation ? 'select select-bordered w-full max-w-xs' : ' select select-bordered w-full max-w-xs select-error'} value={formData.occupation} onChange={handleChange}>
                                 <option value="none" disabled selected>Choose your superpower</option>
                                 <option value="tele">telekinesis</option>
                                 <option value="time">time travel</option>
                                 <option value="invi">invisibility</option>
                             </select>
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.occupation}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Phone Number</span>
                             </label>
-                            <input type="text" id='phoneNumber' name='phoneNumber' placeholder="Phone Number" className="input" value={formData.phoneNumber} onChange={handleChange} />
+                            <input type="text" id='phoneNumber' name='phoneNumber' placeholder="Phone Number" className={!formErrors.phoneNumber ? 'input' : ' input input-error'} value={formData.phoneNumber} onChange={handleChange} />
+                            <div className="label">
+                                <span className='text-red-500 text-sm'>{formErrors.phoneNumber}</span>
+                            </div>
                         </div>
                         <div className="form-control">
                             <br />
