@@ -5,10 +5,13 @@ import bgImage from '../../../assets/undraw_resume_re_hkth.svg';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useRef } from 'react';
 
 const Register = props => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const password = useRef({});
+    password.current = watch("password", "");
 
     const onSubmit = (data) => {
         console.log(data)
@@ -65,9 +68,12 @@ const Register = props => {
                             <label className="label">
                                 <span className="label-text">Check Password</span>
                             </label>
-                            <input type="text" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!errors.checkPassword?.type ? 'input' : 'input input-error'} {...register("checkPassword", { required: true })} />
+                            <input type="text" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!errors.checkPassword?.type ? 'input' : 'input input-error'} {...register("checkPassword", { required: true, validate: value => value === password.current || "The passwords do not match" })} />
                             <div className="label">
-                                <span className='text-red-500 text-sm'>{errors.checkPassword?.type === "required" && "CheckPassword required"}</span>
+                                <span className='text-red-500 text-sm'>
+                                    {errors.checkPassword?.type === "required" && "CheckPassword required"}
+                                    {errors.checkPassword?.type === "validate" && "The passwords do not match"}
+                                </span>
                             </div>
                         </div>
                         <div className="form-control">
