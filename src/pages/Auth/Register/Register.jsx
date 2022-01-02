@@ -59,7 +59,7 @@ const Register = props => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" id='password' name='password' placeholder="Password" className={!errors.password?.type ? 'input' : 'input input-error'} {...register("password", { required: true })} />
+                            <input type="password" id='password' name='password' placeholder="Password" className={!errors.password?.type ? 'input' : 'input input-error'} {...register("password", { required: true })} />
                             <div className="label">
                                 <span className='text-red-500 text-sm'>{errors.password?.type === "required" && "Password required"}</span>
                             </div>
@@ -68,7 +68,7 @@ const Register = props => {
                             <label className="label">
                                 <span className="label-text">Check Password</span>
                             </label>
-                            <input type="text" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!errors.checkPassword?.type ? 'input' : 'input input-error'} {...register("checkPassword", { required: true, validate: value => value === password.current || "The passwords do not match" })} />
+                            <input type="password" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!errors.checkPassword?.type ? 'input' : 'input input-error'} {...register("checkPassword", { required: true, validate: value => value === password.current || "The passwords do not match" })} />
                             <div className="label">
                                 <span className='text-red-500 text-sm'>
                                     {errors.checkPassword?.type === "required" && "CheckPassword required"}
@@ -81,7 +81,7 @@ const Register = props => {
                                 <span className="label-text">Occupation</span>
                             </label>
                             <select id='occupation' name='occupation' className={!errors.occupation?.type ? 'select select-bordered w-full max-w-xs' : 'select select-bordered w-full max-w-xs select-error'} {...register("occupation", { required: true })}>
-                                <option value="none" disabled selected>Choose your superpower</option>
+                                <option value="none" disabled>Choose your superpower</option>
                                 <option value="tele">telekinesis</option>
                                 <option value="time">time travel</option>
                                 <option value="invi">invisibility</option>
