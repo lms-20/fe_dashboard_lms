@@ -6,15 +6,32 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useRef } from 'react';
+import axios from 'axios';
+
+const delay = (sec) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, sec)
+    })
+}
 
 const Register = props => {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, formState, reset } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const password = useRef({});
     password.current = watch("password", "");
+    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/users`;
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        axios.post(
+            ApiUrl,
+            data,
+            { headers: { 'Content-Type': 'application/json' } }
+        )
+            .then(response => {
+                reset();
+                console.log(response.data)
+            })
+            .catch(error => { console.log(error.data) });
     }
 
     return (
@@ -101,7 +118,7 @@ const Register = props => {
                         </div>
                         <div className="form-control">
                             <br />
-                            <button className="btn btn-primary" type='submit'>Register</button>
+                            <button className="btn btn-primary" type='submit' disabled={formState.isSubmitting}>Register</button>
                         </div>
                     </form>
                 </div>
