@@ -29,7 +29,7 @@ const style = {
 };
 
 const Register = props => {
-    const { register, handleSubmit, formState: { errors }, watch, formState, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const password = useRef({});
     password.current = watch("password", "");
@@ -65,7 +65,7 @@ const Register = props => {
             </div>
             <div className="p-10 bg-base-200">
                 <h1 className='text-2xl font-bold'>Get Started</h1>
-                <p>already have account ? <Link to='#'>Login</Link></p>
+                <p>already have account ? <Link to='/login'>Login</Link></p>
                 <br />
                 <div className="flex">
                     <div className="flex-auto w-64 border-black mx-5">

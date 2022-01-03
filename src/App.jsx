@@ -7,12 +7,14 @@ import { Routes, Route } from 'react-router-dom';
 import MyClass from './pages/MyClass/MyClass';
 import Transaction from './pages/Transaction/Transaction';
 import Register from './pages/Auth/Register/Register';
+import Login from './pages/Auth/Login/Login';
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<PermanentDrawer />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<PermanentDrawer />}>
           <Route path="/myclass" element={<MyClass />} />
