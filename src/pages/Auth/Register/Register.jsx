@@ -25,7 +25,8 @@ const style = {
     position: "fixed",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+    zIndex: "9999"
 };
 
 const Register = props => {
@@ -49,7 +50,7 @@ const Register = props => {
                     icon: 'success',
                     title: 'Succes register account!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 2000
                 })
                 reset();
             })

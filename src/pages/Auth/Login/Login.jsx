@@ -1,21 +1,61 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+//SWAL
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+//REACT SPINNERS
+import ClipLoader from "react-spinners/ClipLoader";
+
+const style = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: "9999"
+};
 
 const Login = props => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const ApiUrl = `http://yr19g.mocklab.io/users`;
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        console.log(data);
+        setIsLoading(true);
+        axios.post(
+            ApiUrl,
+            data,
+            { headers: { 'Content-Type': 'application/json' } }
+        )
+            .then(response => {
+                setIsLoading(false);
+                navigate('/');
+            })
+            .catch(error => {
+                setIsLoading(false);
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: error,
+                    showConfirmButton: false
+                })
+                console.log(error);
+            });
     }
 
     return (
         <Fragment>
+            <div style={style}>
+                <ClipLoader color="#ffffff" loading={isLoading} size={150} />
+            </div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="card-body">
                     <div className="p-10 card bg-base-200">
@@ -28,7 +68,6 @@ const Login = props => {
                                 <span className='text-red-500 text-sm'>
                                     {errors.email?.type === "required" && "Email required"}
                                     {errors.email?.type === "pattern" && "Invalid Email Address"}
-
                                 </span>
                             </div>
                         </div>
@@ -43,7 +82,7 @@ const Login = props => {
                         </div>
                         <div className="form-control">
                             <br />
-                            <button className="btn btn-primary" type='submit'>Login</button>
+                            <button className="btn btn-primary" type='submit' disabled={isLoading}>Login</button>
                             <br />
                             <Link to="/register" className='text-center'>Register</Link>
                         </div>
