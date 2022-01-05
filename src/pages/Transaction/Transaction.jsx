@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 
 const Transaction = props => {
     return (
-        <div>
-            <h1>Trancaction Page</h1>
+        // Page Container
+        <div className='mt-8 flex flex-col  w-11/12 mx-auto'>
+            <h2 className='text-center text-xl lg:text-4xl font-extrabold text-primary'> History Transactions</h2>
         </div>
     )
 }

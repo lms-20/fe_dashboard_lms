@@ -4,9 +4,8 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Montserrat', sans-serif;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -14,4 +13,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.input-ghost {
+  @apply outline-none bg-transparent
+}
+
+.btn {
+  @apply bg-transparent normal-case text-base-100 border-2 border-primary
+}
+
+
+.btn-hover-primary {
+  @apply hover:bg-primary hover:text-neutral-focus
+}
+.btn-rounded {
+  @apply rounded-full
 }
