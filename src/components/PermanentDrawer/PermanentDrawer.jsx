@@ -4,8 +4,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, Outlet } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 const PermanentDrawer = props => {
+    const globalStateUser = useSelector(state => state.user);
+
     return (
         <div className="shadow bg-base-200 drawer drawer-mobile min-h-screen relative">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -60,6 +63,15 @@ const PermanentDrawer = props => {
                     <li>
                         <Link to="/transactions">Trancaction</Link>
                     </li>
+                    {
+                        globalStateUser?.data.role === 1
+                            ?
+                            <li>
+                                <Link to="/transactions">Menu Admin</Link>
+                            </li>
+                            :
+                            null
+                    }
                 </ul>
             </div>
         </div>

@@ -12,7 +12,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../../../store/userSlice';
 
 const style = {
@@ -30,7 +30,6 @@ const Login = props => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const globalStateUser = useSelector(state => state.user);
 
     const onSubmit = (data) => {
         setIsLoading(true);
