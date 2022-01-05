@@ -30,7 +30,7 @@ const Login = props => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const globalState = useSelector(state => state.user);
+    const globalStateUser = useSelector(state => state.user);
 
     const onSubmit = (data) => {
         setIsLoading(true);
