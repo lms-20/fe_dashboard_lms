@@ -41,7 +41,7 @@ const Login = props => {
         )
             .then(response => {
                 setIsLoading(false);
-                dispatch(login(data))
+                dispatch(login(response.data))
                 navigate('/');
             })
             .catch(error => {
