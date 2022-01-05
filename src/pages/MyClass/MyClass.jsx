@@ -12,6 +12,8 @@ const MyClass = props => {
     // Init API endpoint
     const apiUrl = "https://61d3c74ab4c10c001712ba8e.mockapi.io/courses";
     const [myCourses,setMyCourses] = useState([]);
+    const [isLoading,setIsLoading] = useState(false);
+    const [isError,setIsError] = useState(false);
     // Function for request get with axios
     const retrieveMyCourses = async () => {
         const response = await axios.get(apiUrl);
@@ -20,10 +22,18 @@ const MyClass = props => {
     }
     useEffect(() => {   
         const getAllMyCourses = async () => {
-            const allMyCourses = await retrieveMyCourses();
-            if (allMyCourses) setMyCourses(allMyCourses);
-            // console.log("ini adalah",allMyCourses);
-
+            try {
+                setIsLoading(true);
+                const allMyCourses = await retrieveMyCourses();
+                if (allMyCourses) {
+                    setIsLoading(false);
+                    setMyCourses(allMyCourses);
+                }
+                   // console.log("ini adalah",allMyCourses);
+            } catch {
+                setIsError(true);
+                setIsLoading(false);
+            }
         }
         getAllMyCourses();
     },[])
@@ -36,6 +46,7 @@ const MyClass = props => {
                 <Link to = "" className='btn  btn-hover-primary btn-rounded mx-2'>On Progress</Link>
                 <Link to = "" className='btn  btn-hover-primary btn-rounded mx-2'>Finished</Link>
             </div>
+            {isLoading === true ? <p>Loading Bro</p>: isError == true ? <p>Error Bro</p> : ""}
             {/* Course Content Container */}
             <div className='w-96 mx-auto lg:w-full lg:mx-0'>
                 <div className='hidden lg:flex flex mt-4 flex-wrap'>
