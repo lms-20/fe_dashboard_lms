@@ -12,6 +12,8 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../../store/userSlice';
 
 const style = {
     position: "fixed",
@@ -27,6 +29,8 @@ const Login = props => {
     const ApiUrl = `http://yr19g.mocklab.io/users`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const globalState = useSelector(state => state.user);
 
     const onSubmit = (data) => {
         setIsLoading(true);
@@ -37,6 +41,7 @@ const Login = props => {
         )
             .then(response => {
                 setIsLoading(false);
+                dispatch(login(data))
                 navigate('/');
             })
             .catch(error => {
