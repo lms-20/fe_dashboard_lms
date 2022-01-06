@@ -3,9 +3,9 @@
 /* eslint-disable prettier/prettier */
 import bgImage from '../../../assets/undraw_resume_re_hkth.svg';
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 //SWAL
 import Swal from 'sweetalert2'
@@ -13,6 +13,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader";
+import { useSelector } from 'react-redux';
 
 
 // const delay = (sec) => {
@@ -36,6 +37,14 @@ const Register = props => {
     password.current = watch("password", "");
     const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/users`;
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const token = useSelector(state => state.userData.user?.data.token);
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token])
 
     const onSubmit = async (data) => {
         setIsLoading(true);
