@@ -9,10 +9,8 @@ import Transaction from './pages/Transaction/Transaction';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-// import { useSelector } from 'react-redux';
 
 function App() {
-  // const token = useSelector(state => state.userData?.user.data.token);
 
   return (
     <div className="App">
