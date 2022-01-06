@@ -8,7 +8,7 @@ const MyClass = props => {
     return (
         <div>
             <h1>My Class Page</h1>
-            <p>branch dev</p>
+            <p>branch admin add new course</p>
         </div>
     )
 }
