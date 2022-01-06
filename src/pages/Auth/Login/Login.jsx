@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../../store/userSlice';
 
 const style = {
@@ -30,6 +30,13 @@ const Login = props => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const token = useSelector(state => state.userData.user?.data.token);
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token])
 
     const onSubmit = (data) => {
         setIsLoading(true);
