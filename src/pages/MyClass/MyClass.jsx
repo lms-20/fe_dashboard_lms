@@ -8,6 +8,7 @@ const MyClass = props => {
     return (
         <div>
             <h1>My Class Page</h1>
+            <p>master</p>
         </div>
     )
 }
