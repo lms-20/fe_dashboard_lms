@@ -6,12 +6,12 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 const MyClass = props => {
-    const globalStateUser = useSelector(state => state.user);
+    const globalStateUser = useSelector(state => state.userData?.user);
 
     return (
         <div>
             <h1>My Class Page</h1>
-            <h2>hello {globalStateUser && globalStateUser.data.email}</h2>
+            <h2>hello {globalStateUser && globalStateUser?.data.email}</h2>
         </div>
     )
 }

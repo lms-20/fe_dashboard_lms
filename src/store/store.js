@@ -2,8 +2,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer } from "./userSlice";
+import { userReducer } from "./userSlice";
 
 export const store = configureStore({
-    reducer
+    reducer: {
+        userData: userReducer
+    }
 });

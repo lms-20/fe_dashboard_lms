@@ -7,7 +7,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
 const PermanentDrawer = props => {
-    const globalStateUser = useSelector(state => state.user);
+    const globalStateUser = useSelector(state => state.userData?.user);
 
     return (
         <div className="shadow bg-base-200 drawer drawer-mobile min-h-screen relative">
