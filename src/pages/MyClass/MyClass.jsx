@@ -46,8 +46,8 @@ const MyClass = props => {
                 <Link to = "" className='btn  btn-hover-primary btn-rounded mx-2'>On Progress</Link>
                 <Link to = "" className='btn  btn-hover-primary btn-rounded mx-2'>Finished</Link>
             </div>
-            {isLoading === true ? <p>Loading Bro</p>: isError == true ? <p>Error Bro</p> : ""}
-            {/* Course Content Container */}
+            {isLoading === true ? <p>Loading Bro</p>: isError == true ? <p>Error Bro</p> : 
+            // {/* Course Content Container */}
             <div className='w-96 mx-auto lg:w-full lg:mx-0'>
                 <div className='hidden lg:flex flex mt-4 flex-wrap'>
                         {/* Card only appear in desktop view */}
@@ -98,6 +98,7 @@ const MyClass = props => {
                                
                 
             </div>
+            }
             {/* End of course content */}
         </div>
         // End of pages container
