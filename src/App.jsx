@@ -8,17 +8,22 @@ import MyClass from './pages/MyClass/MyClass';
 import Transaction from './pages/Transaction/Transaction';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+// import { useSelector } from 'react-redux';
 
 function App() {
+  // const token = useSelector(state => state.userData?.user.data.token);
+
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<PermanentDrawer />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route element={<PermanentDrawer />}>
-          <Route path="/myclass" element={<MyClass />} />
-          <Route path="/transactions" element={<Transaction />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route element={<PrivateRoute />}>
+          <Route exact path="/" element={<PermanentDrawer />} >
+            <Route exact path="/myclass" element={<MyClass />} />
+            <Route exact path="/transactions" element={<Transaction />} />
+          </Route>
         </Route>
       </Routes>
     </div>

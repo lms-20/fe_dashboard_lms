@@ -49,7 +49,7 @@ const PermanentDrawer = props => {
                         </div>
                     </div>
                 </div>
-                <p>Hello world</p>
+                <p>Hello world!</p>
                 <Outlet />
             </div>
             <div className="drawer-side">
@@ -58,7 +58,14 @@ const PermanentDrawer = props => {
                 <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                     <h1>E-Learning</h1>
                     <li>
-                        <Link to="/myclass">My Class</Link>
+                        <Link to="/myclass">
+                            {globalStateUser?.data.role === 1
+                                ?
+                                'Class'
+                                :
+                                'My Class'
+                            }
+                        </Link>
                     </li>
                     <li>
                         <Link to="/transactions">Trancaction</Link>
