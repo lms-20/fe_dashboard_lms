@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle,faEye } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -34,13 +34,14 @@ const Login = props => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const token = useSelector(state => state.userData.user?.data.token);
+    // For toggle,if the eye in input password fieed is clicked,the password is shown
+    const [isPasswordShown,setIsPasswordShown] = useState(false);
 
     useEffect(() => {
         if (token) {
             navigate('/');
         }
     }, [token])
-
     const onSubmit = (data) => {
         setIsLoading(true);
         axios.post(
@@ -77,12 +78,19 @@ const Login = props => {
             <div className='min-h-screen bg-neutral-content'>
                 {/* Form Flex Container */}
                 <div className = "min-h-screen flex justify-center items-center">
+                    {/* Form Container */}
                     <form  className = "w-full lg:w-2/4 mx-auto"onSubmit={handleSubmit(onSubmit)}>
+
                         <div className="card-body">
+                            {/* Border Form Container */}
                             <div className="p-10 card border-2 border-primary">
+                                <div className='flex flex-col items-center text-base-300 mb-2'>
+                                    <h2 className='text-xl lg:text-4xl font-extrabold text-primary text-center'>Start Learning</h2>
+                                    <p className='text-sm mt-1 text-center'>You must be login into your account to access the courses</p>
+                                </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text text-lg text-primary font-bold">Email</span>
+                                        <span className="label-text text-lg text-base-100 font-bold">Email</span>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
                                     <input type="text" placeholder="Email" className={`${!errors.email?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("email", { required: true, pattern: emailRegex })} />
@@ -96,9 +104,13 @@ const Login = props => {
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text text-lg text-primary font-bold">Password</span>
+                                        <span className="label-text text-lg text-base-100 font-bold">Password</span>
                                     </label>
-                                    <input type="password" placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
+                                    <div className='flex flex-nowrap items-center'>
+                                        <input type={isPasswordShown ? "password" : "text"} placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
+                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-base-300" : "text-info"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
+                                    </div>
+                                    
                                     <div className="label justify-start">
                                         {errors.password ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.password?.type === "required" && "Password required"}</span>
@@ -106,15 +118,28 @@ const Login = props => {
                                 </div>
                                 <div className="form-control flex flex-col items-center">
                                     <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Login</button>
-                                    <div className='flex items-center mt-8'>
-                                        <p className='text-base-300 text-sm'>Are you dont have an account?</p>
-                                        <Link to="/register" className='text-sm ml-1 text-info'>Register Here</Link>
+                                   
+                                    <div className="flex flex-col w-full mt-8">
+                                        <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
+                                            <p className='text-base-300 text-sm'>Are you dont have an account?</p>
+                                            <Link to="/register" className='text-sm ml-1 text-info'>Register Here</Link>
+                                        </div>
+                                        <div className="divider text-primary">OR</div> 
+                                        <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
+                                            <p className='text-base-300 text-sm'>Are you forgot your password?</p>
+                                            <Link to="/register" className='text-sm ml-1 text-info'>Forgot Password</Link>
+                                        </div>
                                     </div>
+
+
                                 </div>
                             </div>
+                            {/* End Of Form Container */}
                         </div>
                     </form>
+                    {/* End Of Form Container */}
                 </div>
+                {/* Emd Of Form Flex Container */}
             </div>
             
         </Fragment>
