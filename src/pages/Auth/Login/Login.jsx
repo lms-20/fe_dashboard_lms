@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle,faEye,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -75,7 +75,18 @@ const Login = props => {
                 <ClipLoader color="#ffffff" loading={isLoading} size={150} />
             </div>
             {/* Pages Container */}
-            <div className='min-h-screen bg-neutral-content'>
+            <div className='min-h-screen bg-neutral-content relative'>
+                {/* Navigation for go to the homepage lms */}
+                <div className='absolute top-4 left-4'>
+                    <div className='flex items-center'>
+                        <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
+                                <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
+                        </div>
+                        <div className=''>
+                            <p className='text-primary text-sm ml-2'>Back to home</p>
+                        </div>
+                    </div>
+                </div>
                 {/* Form Flex Container */}
                 <div className = "min-h-screen flex justify-center items-center">
                     {/* Form Container */}

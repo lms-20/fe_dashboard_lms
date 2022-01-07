@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGraduationCap, faStore, faDoorOpen, faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faStore, faDoorOpen, faUserEdit, faCommentDots, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/userSlice';
 
@@ -54,7 +54,10 @@ const PermanentDrawer = props => {
                         <div className="ml-2">
                             {/* Dropdown */}
                             <div className="m-1 dropdown dropdown-end ">
-                                <img src="https://i.pravatar.cc/500?img=32" tabIndex="0" className='rounded-full w-12 h-12 ' />
+                                <div className='rounded-full w-12 text-primary h-12 flex items-center justify-center hover:border-2 border-current' tabIndex= "0">
+                                    <FontAwesomeIcon icon = {faUser} className='text-2xl text-current' />
+                                </div>
+                                {/* <img src="https://i.pravatar.cc/500?img=32" tabIndex="0" className='rounded-full w-12 h-12 ' /> */}
                                 <ul tabIndex="0" className="text-base-100 p-2 shadow menu dropdown-content bg-neutral rounded-box w-52 mt-2">
                                     <li>
                                         <a className='btn-hover-primary'><FontAwesomeIcon icon={faUserEdit} className='mr-2' />Settings</a>
@@ -106,7 +109,7 @@ const PermanentDrawer = props => {
                         ?
                         <li className='mb-2'>
                             <Link to="/" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
-                                <FontAwesomeIcon icon={faUserEdit} className='mr-4' />
+                                <FontAwesomeIcon icon={faCommentDots} className='mr-4' />
                                 Feedback
                             </Link>
                         </li>

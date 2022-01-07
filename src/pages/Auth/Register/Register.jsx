@@ -9,7 +9,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle,faEye,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -80,14 +80,25 @@ const Register = props => {
             </div>
             {/* Pages Container */}
             <div className="bg-neutral">
+                {/* Navigation for go to the homepage lms */}
+                <div className='absolute top-4 left-4'>
+                    <div className='flex items-center'>
+                        <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
+                                <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
+                        </div>
+                        <div className=''>
+                            <p className='text-primary text-sm ml-2'>Back to home</p>
+                        </div>
+                    </div>
+                </div>
                 {/* Flex Container For Content */}
                 <div className='flex flex-col lg:flex-row-reverse mx-auto'>
                     {/* Left Content Container*/}
                     <div className='bg-neutral-content lg:basis-6/12 lg:p-12'>
                         {/* Left Content */}
-                        <div className='flex flex-col w-9/12 py-4 lg:py-0 mx-auto lg:w-full'>
+                        <div className='flex flex-col w-9/12 py-16 lg:py-0 mx-auto lg:w-full'>
                             <div className='flex flex-col items-center mb-4'>
-                                <h1 className='text-center text-4xl lg:text-4xl font-extrabold text-primary'>Get Started</h1>
+                                <h2 className='text-xl lg:text-4xl font-extrabold text-primary text-center'>Get Started</h2>
                                 <p className='text-base-300'>Are you already have an account ? <Link to='/login' className='text-info'>Login</Link></p>
                             </div>
                         
@@ -182,7 +193,7 @@ const Register = props => {
                                     </div>
                                 </div>
                                 <div className="form-control">
-                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Register</button>
+                                    <button className="btn w-full mt-6 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Register</button>
                                 </div>
                             </form>
                         </div>
