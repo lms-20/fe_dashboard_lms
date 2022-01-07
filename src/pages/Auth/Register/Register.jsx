@@ -1,12 +1,15 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import bgImage from '../../../assets/undraw_resume_re_hkth.svg';
+import bgImage from '../../../assets/undraw_join_of2w.svg';
 import PropTypes from 'prop-types'
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+// FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle,faEye } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -39,6 +42,8 @@ const Register = props => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const token = useSelector(state => state.userData.user?.data.token);
+    const [isPasswordShown,setIsPasswordShown] = useState(false);
+
 
     useEffect(() => {
         if (token) {
@@ -73,95 +78,125 @@ const Register = props => {
             <div style={style}>
                 <ClipLoader color="#ffffff" loading={isLoading} size={150} />
             </div>
-            <div className="p-10 bg-base-200">
-                <h1 className='text-2xl font-bold'>Get Started</h1>
-                <p>already have account ? <Link to='/login'>Login</Link></p>
-                <br />
-                <div className="flex">
-                    <div className="flex-auto w-64 border-black mx-5">
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Full Name</span>
-                                </label>
-                                <input type="text" id='fullname' name='fullname' placeholder="Full Name" className={!errors.fullname?.type ? 'input' : 'input input-error'} {...register("fullname", { required: true })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>{errors.fullname?.type === "required" && "Fullname required"}</span>
+            {/* Pages Container */}
+            <div className="bg-neutral">
+                {/* Flex Container For Content */}
+                <div className='flex flex-col lg:flex-row-reverse mx-auto'>
+                    {/* Left Content Container*/}
+                    <div className='bg-neutral-content lg:basis-6/12 lg:p-12'>
+                        {/* Left Content */}
+                        <div className='flex flex-col w-9/12 py-4 lg:py-0 mx-auto lg:w-full'>
+                            <div className='flex flex-col items-center mb-4'>
+                                <h1 className='text-center text-4xl lg:text-4xl font-extrabold text-primary'>Get Started</h1>
+                                <p className='text-base-300'>Are you already have an account ? <Link to='/login' className='text-info'>Login</Link></p>
+                            </div>
+                        
+                            <form onSubmit={handleSubmit(onSubmit)} className='mb-4'>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Name</span>
+                                    </label>
+                                    <input type="text" id='fullname' name='fullname' placeholder="Full Name" className={`${!errors.fullname?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("fullname", { required: true })} />
+                                    <div className="label justify-start">
+                                        {errors.fullname ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.fullname?.type === "required" && "Name is required"}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email Address</span>
-                                </label>
-                                <input type="text" id='emailAddress' name='emailAddress' placeholder="Email Address" className={!errors.emailAddress?.type ? 'input' : 'input input-error'} {...register("emailAddress", { required: true, pattern: emailRegex })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>
-                                        {errors.emailAddress?.type === "required" && "Email Address required"}
-                                        {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
-                                    </span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Email Address</span>
+                                    </label>
+                                    <input type="text" id='emailAddress' name='emailAddress' placeholder="Email Address" className={`${!errors.emailAddress?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `}  {...register("emailAddress", { required: true, pattern: emailRegex })} />
+                                    <div className="label justify-start">
+                                        {errors.emailAddress ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.emailAddress?.type === "required" && "Email is required"}
+                                            {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Age</span>
-                                </label>
-                                <input type="text" id='age' name='age' placeholder="Age" className={!errors.age?.type ? 'input' : 'input input-error'} {...register("age", { required: true })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>{errors.age?.type === "required" && "Age required"}</span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Age</span>
+                                    </label>
+                                    <input type="text" id='age' name='age' placeholder="Age" className={`${!errors.age?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("age", { required: true })} />
+                                    <div className="label justify-start">
+                                        {errors.age ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.age?.type === "required" && "Age is required"}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input type="password" id='password' name='password' placeholder="Password" className={!errors.password?.type ? 'input' : 'input input-error'} {...register("password", { required: true })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>{errors.password?.type === "required" && "Password required"}</span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Password</span>
+                                    </label>
+                                    <div className='flex flex-nowrap items-center'>
+                                        <input type={isPasswordShown ? "text" : "password"} placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
+                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
+                                    </div>
+                                    
+                                    <div className="label justify-start">
+                                        {errors.password ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>{errors.password?.type === "required" && "Password required"}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Check Password</span>
-                                </label>
-                                <input type="password" id='checkPassword' name='checkPassword' placeholder="Check Password" className={!errors.checkPassword?.type ? 'input' : 'input input-error'} {...register("checkPassword", { required: true, validate: value => value === password.current || "The passwords do not match" })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>
-                                        {errors.checkPassword?.type === "required" && "CheckPassword required"}
-                                        {errors.checkPassword?.type === "validate" && "The passwords do not match"}
-                                    </span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Check Password</span>
+                                    </label>
+                                    <input type="password" id='checkPassword' name='checkPassword' placeholder="Check Password" className={`${!errors.checkPassword?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("checkPassword", { required: true, validate: value => value === password.current || "The passwords do not match" })} />
+                                    <div className="label justify-start">
+                                        {errors.checkPassword ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.checkPassword?.type === "required" && "Check Password is required"}
+                                            {errors.checkPassword?.type === "validate" && "The passwords do not match"}
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Occupation</span>
-                                </label>
-                                <select id='occupation' name='occupation' className={!errors.occupation?.type ? 'select select-bordered w-full max-w-xs' : 'select select-bordered w-full max-w-xs select-error'} {...register("occupation", { required: true })}>
-                                    <option value="none" disabled>Choose your superpower</option>
-                                    <option value="tele">telekinesis</option>
-                                    <option value="time">time travel</option>
-                                    <option value="invi">invisibility</option>
-                                </select>
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>{errors.occupation?.type === "required" && "Occupation required"}</span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Occupation</span>
+                                    </label>
+                                    <select id='occupation' name='occupation' className={`${!errors.occupation?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("occupation", { required: true })}>
+                                        <option value="none" disabled>Choose your superpower</option>
+                                        <option value="tele">telekinesis</option>
+                                        <option value="time">time travel</option>
+                                        <option value="invi">invisibility</option>
+                                    </select>
+                                    <div className="label justify-start">
+                                        {errors.occupation ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>{errors.occupation?.type === "required" && "Occupation required"}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Phone Number</span>
-                                </label>
-                                <input type="text" id='phoneNumber' name='phoneNumber' placeholder="Phone Number" className={!errors.phoneNumber?.type ? 'input' : 'input input-error'} {...register("phoneNumber", { required: true })} />
-                                <div className="label">
-                                    <span className='text-red-500 text-sm'>{errors.phoneNumber?.type === "required" && "PhoneNumber required"}</span>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-base-100 font-bold">Phone Number</span>
+                                    </label>
+                                    <input type="text" id='phoneNumber' name='phoneNumber' placeholder="Phone Number" className={`${!errors.phoneNumber?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("phoneNumber", { required: true })} />
+                                    <div className="label justify-start">
+                                        {errors.phoneNumber ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>{errors.phoneNumber?.type === "required" && "Phone Number required"}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-control">
-                                <br />
-                                <button className="btn btn-primary" type='submit' disabled={isLoading}>Register</button>
-                            </div>
-                        </form>
+                                <div className="form-control">
+                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Register</button>
+                                </div>
+                            </form>
+                        </div>
+                        
                     </div>
-                    <div className="flex-auto w-32 border-black">
-                        <img src={bgImage} alt="image" />
+                    {/* Right Content Container */}
+                    <div className="basis-6/12 hidden lg:flex flex-col items-center justify-center">
+                        <div className='w-4/5'>
+                            <img src={bgImage} alt="image" />
+                        </div>
+                        <div className='w-4/5 mt-10'>
+                            <p className='text-xl lg:text-4xl font-extrabold text-primary'>Be Greedy For Knowledge</p>
+                            <p className='text-base-300 text-lg'>Learn everything and rule the world.</p>
+                        </div>
                     </div>
                 </div>
             </div>

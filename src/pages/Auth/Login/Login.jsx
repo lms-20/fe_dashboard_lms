@@ -83,7 +83,7 @@ const Login = props => {
 
                         <div className="card-body">
                             {/* Border Form Container */}
-                            <div className="p-10 card border-2 border-primary">
+                            <div className="p-10 card">
                                 <div className='flex flex-col items-center text-base-300 mb-2'>
                                     <h2 className='text-xl lg:text-4xl font-extrabold text-primary text-center'>Start Learning</h2>
                                     <p className='text-sm mt-1 text-center'>You must be login into your account to access the courses</p>
@@ -107,8 +107,8 @@ const Login = props => {
                                         <span className="label-text text-lg text-base-100 font-bold">Password</span>
                                     </label>
                                     <div className='flex flex-nowrap items-center'>
-                                        <input type={isPasswordShown ? "password" : "text"} placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
-                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-base-300" : "text-info"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
+                                        <input type={isPasswordShown ? "text" : "password"} placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
+                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
                                     </div>
                                     
                                     <div className="label justify-start">
