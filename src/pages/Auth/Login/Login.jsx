@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+// FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -54,6 +57,9 @@ const Login = props => {
                 setIsLoading(false);
                 MySwal.fire({
                     icon: 'error',
+                    color: '#66FCF1',
+                    background: '#1F2833',
+                    iconColor: '#ff5724',
                     title: 'Error!',
                     text: error,
                     showConfirmButton: false
@@ -67,39 +73,50 @@ const Login = props => {
             <div style={style}>
                 <ClipLoader color="#ffffff" loading={isLoading} size={150} />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="card-body">
-                    <div className="p-10 card bg-base-200">
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
-                            <input type="text" placeholder="email" className={!errors.email?.type ? 'input' : 'input input-error'} {...register("email", { required: true, pattern: emailRegex })} />
-                            <div className="label">
-                                <span className='text-red-500 text-sm'>
-                                    {errors.email?.type === "required" && "Email required"}
-                                    {errors.email?.type === "pattern" && "Invalid Email Address"}
-                                </span>
+            {/* Pages Container */}
+            <div className='min-h-screen bg-neutral-content'>
+                {/* Form Flex Container */}
+                <div className = "min-h-screen flex justify-center items-center">
+                    <form  className = "w-full lg:w-2/4 mx-auto"onSubmit={handleSubmit(onSubmit)}>
+                        <div className="card-body">
+                            <div className="p-10 card border-2 border-primary">
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-primary font-bold">Email</span>
+                                    </label>
+                                    {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
+                                    <input type="text" placeholder="Email" className={`${!errors.email?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("email", { required: true, pattern: emailRegex })} />
+                                    <div className="label justify-start">
+                                        {errors.email ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.email?.type === "required" && "Email required"}
+                                            {errors.email?.type === "pattern" && "Invalid Email Address"}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text text-lg text-primary font-bold">Password</span>
+                                    </label>
+                                    <input type="password" placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
+                                    <div className="label justify-start">
+                                        {errors.password ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>{errors.password?.type === "required" && "Password required"}</span>
+                                    </div>
+                                </div>
+                                <div className="form-control flex flex-col items-center">
+                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Login</button>
+                                    <div className='flex items-center mt-8'>
+                                        <p className='text-base-300 text-sm'>Are you dont have an account?</p>
+                                        <Link to="/register" className='text-sm ml-1 text-info'>Register Here</Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
-                            <input type="password" placeholder="password" className={!errors.password?.type ? 'input' : 'input input-error'} {...register("password", { required: true })} />
-                            <div className="label">
-                                <span className='text-red-500 text-sm'>{errors.password?.type === "required" && "Password required"}</span>
-                            </div>
-                        </div>
-                        <div className="form-control">
-                            <br />
-                            <button className="btn btn-primary" type='submit' disabled={isLoading}>Login</button>
-                            <br />
-                            <Link to="/register" className='text-center'>Register</Link>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+            
         </Fragment>
     )
 }
