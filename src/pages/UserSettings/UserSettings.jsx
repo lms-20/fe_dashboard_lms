@@ -39,9 +39,15 @@ const UserSettings = () => {
         getUser()
     }, [])
 
-    const onSubmit = (data) => {
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
-        return false;
+    const onSubmit = async (data) => {
+        setIsFormDisabled((current) => !current)
+        try {
+            const updateData = await axios.put(apiUrl, data)
+            alert('SUCCESS!! :-)\n\n' + updateData);
+        } catch (error) {
+            setIsLoading(false)
+            setIsError(true)
+        }
     }
 
     useEffect(() => {
@@ -122,7 +128,12 @@ const UserSettings = () => {
                                         setIsFormDisabled((current) => !current)
                                     }
                                     }>Cancel</div>
-                                    <div className='btn btn-hover-primary bg-transparent border-primary' onClick={() => setIsFormDisabled((current) => !current)}>{`${isFormDisabled === true ? "Edit Data" : "Save Changes"}`}</div>
+                                    {isFormDisabled ?
+                                        <div className='btn btn-hover-primary bg-transparent border-primary' onClick={() => setIsFormDisabled((current) => !current)}>Edit Data</div>
+                                        :
+                                        <button className='btn btn-hover-primary bg-transparent border-primary' type='submit'>Save Changes</button>
+                                    }
+                                    {/* <div className='btn btn-hover-primary bg-transparent border-primary' onClick={() => setIsFormDisabled((current) => !current)}>{`${isFormDisabled === true ? "Edit Data" : "Save Changes"}`}</div> */}
                                 </div>
 
                             </form>
