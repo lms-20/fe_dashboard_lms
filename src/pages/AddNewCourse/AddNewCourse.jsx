@@ -5,6 +5,8 @@ import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { storeIdCourse } from '../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +30,7 @@ const AddNewCourse = props => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
+    const dispatch = useDispatch();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
@@ -38,6 +41,7 @@ const AddNewCourse = props => {
         )
             .then(response => {
                 setIsLoading(false);
+                dispatch(storeIdCourse(response.data.id))
                 MySwal.fire({
                     icon: 'success',
                     title: 'Succes register account!',
