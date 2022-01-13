@@ -10,11 +10,12 @@ import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-i
 import { Link } from 'react-router-dom';
 
 const AddNewCourse = props => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const onSubmit = (data) => {
         console.log('aaaaa')
         console.log(data);
+        reset();
     }
 
     return (
@@ -29,8 +30,7 @@ const AddNewCourse = props => {
                                 <label className="label">
                                     <span className="label-text text-lg text-base-100 font-bold">name</span>
                                 </label>
-                                {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                <input type="text" placeholder="name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("name")} />
+                                <input type="text" placeholder="name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300`} {...register("name", { required: true })} />
                                 <div className="label justify-start">
                                     {errors.name ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                     <span className='text-error text-sm font-bold'>
@@ -90,11 +90,11 @@ const AddNewCourse = props => {
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">Premium</span>
-                                    <input type="radio" name="typekelas" defaultChecked="true" className="radio" value="premium" {...register('typekelas')} />
+                                    <input type="radio" name="typekelas" defaultChecked="true" className="radio" value="premium" {...register('typekelas', { required: true })} />
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">Free</span>
-                                    <input type="radio" name="typekelas" className="radio" value="free" {...register('typekelas')} />
+                                    <input type="radio" name="typekelas" className="radio" value="free" {...register('typekelas', { required: true })} />
                                 </label>
                             </div>
                             <div className="form-control">
@@ -103,11 +103,11 @@ const AddNewCourse = props => {
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">Draft</span>
-                                    <input type="radio" name="status" defaultChecked="true" className="radio" value="draft" {...register('status')} />
+                                    <input type="radio" name="status" defaultChecked="true" className="radio" value="draft" {...register('status', { required: true })} />
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">Published</span>
-                                    <input type="radio" name="status" className="radio" value="published" {...register('status')} />
+                                    <input type="radio" name="status" className="radio" value="published" {...register('status', { required: true })} />
                                 </label>
                             </div>
                             <div className="form-control">
@@ -116,11 +116,11 @@ const AddNewCourse = props => {
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">Yes</span>
-                                    <input type="radio" name="certificate" defaultChecked="true" className="radio" value="yes" {...register('certificate')} />
+                                    <input type="radio" name="certificate" defaultChecked="true" className="radio" value="yes" {...register('certificate', { required: true })} />
                                 </label>
                                 <label className="cursor-pointer label">
                                     <span className="label-text">No</span>
-                                    <input type="radio" name="certificate" className="radio" value="no" {...register('certificate')} />
+                                    <input type="radio" name="certificate" className="radio" value="no" {...register('certificate', { required: true })} />
                                 </label>
                             </div>
                             <div className="form-control">
@@ -128,7 +128,7 @@ const AddNewCourse = props => {
                                     <span className="label-text text-lg text-base-100 font-bold">price</span>
                                 </label>
                                 {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                <input type="text" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price")} />
+                                <input type="text" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price", { required: true })} />
                                 <div className="label justify-start">
                                     {errors.price ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                     <span className='text-error text-sm font-bold'>
@@ -142,7 +142,7 @@ const AddNewCourse = props => {
                                     <span className="label-text text-lg text-base-100 font-bold">description</span>
                                 </label>
                                 {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description")} />
+                                <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description", { required: true })} />
                                 <div className="label justify-start">
                                     {errors.description ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                     <span className='text-error text-sm font-bold'>
