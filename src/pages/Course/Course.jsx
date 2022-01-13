@@ -12,6 +12,9 @@ const Course = () => {
     const [isError, setIsError] = useState(false);
     const[course,setCourse] = useState([]);
     const[videoCourse,setVideoCourse] = useState("");
+    const[isQuizTime,setIsQuizTime] = useState(false);
+    const[quizPosition,setQuizPosition] = useState(0);
+    const[nowPlaying,setNowPlaying] = useState(-1);
     const apiUrl = "https://61d3c74ab4c10c001712ba8e.mockapi.io/mycourses"
     const retrieveUser = async () => {
         const response = await axios.get(apiUrl);
@@ -66,8 +69,57 @@ const Course = () => {
             {/* Container For The Content */}
             <div className=' mx-auto px-8 text-base-100 py-4 flex'>
                 {/* Video Content */}
-                <div className='basis-8/12'>
-                    <iframe width="100%" height="500" src={videoCourse} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                <div className='basis-8/12 relative course-video'>
+                    {isQuizTime === true ? 
+                        <div className='bg-error p-4'>
+                            {data?.chapter[quizPosition].quiz[0].exercise.map((elm,idx) => {
+                                return(
+                                 <div key = {elm.id} className='bg-neutral w-full'>
+                                     <div className='w-full my-4'>
+                                        <p>{`${elm.question}`}</p>
+                                     </div>
+                                    {elm.answer.map((elm) => {
+                                        return(
+                                            <p key={elm.id}>{`${elm.answer}. ${elm.name}`}</p>
+                                        )
+                                    })}
+                                 </div>
+                                )
+                            })}
+                           
+                            <p className='text-base-100'>Lagi Quiz</p>
+                        </div>
+                        :
+                        <iframe width="100%" height="500" src={videoCourse} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                    }
+                    {isQuizTime == false ? 
+                    <div onClick = {() => {
+                        const currLessons =  data?.chapter[quizPosition].lessons
+                        let nav = ""
+                        console.log(currLessons.length)
+                        console.log(nowPlaying)
+
+                        if (Number(nowPlaying)+1 >= currLessons.length ){
+                            setNowPlaying(0)
+                            nav = data?.chapter[quizPosition].lessons[0].video
+                            setVideoCourse(nav)
+
+
+                        } else {
+                            nav = data?.chapter[quizPosition].lessons[Number(nowPlaying)+1].video
+
+                            setVideoCourse(nav)
+                            setNowPlaying((curr) => curr+1)
+
+
+                        }
+
+                        console.log("end "+nowPlaying)
+                    }} className=' active:translate-y-1 opacity-0 absolute transition-all next-video bg-primary top-1/2 -right-10 py-3 px-2 cursor-pointer text-neutral-content grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
+                            <p className='font-bold'>Next Video</p>
+                    </div> 
+                    
+                    :""}
                 </div>
                 {/* Container For The Sidebar */}
                 <div className='basis-4/12 px-4 flex-grow'>
@@ -84,14 +136,14 @@ const Course = () => {
                         {/* Card Section Container*/}
                         <div className='rounded-lg my-3'>
                             {/* Collapse Container */}
-                            {data?.chapter.map((elm) => {
+                            {data?.chapter.map((elm,idxSection) => {
                                 return(
                                     <div key = {elm.id}className="collapse w-96 my-4 border rounded-box border-base-300 hover:border-primary collapse-arrow">
                                         {/* This input purpose is,if the arrow is clicked,the div parent will expand */}
                                         <input type="checkbox"/> 
                                         <div className="collapse-title">
                                             <p className='font-bold'>{elm.name}</p>
-                                            <p className='text-sm'>{elm.lesson.length} Videos</p>
+                                            <p className='text-sm'>{elm.lessons.length} Videos</p>
                                         </div>
                                         <div className="collapse-content"> 
                                             {/* The First Collapse Content Is Always The Resource Of The Section */}
@@ -100,14 +152,20 @@ const Course = () => {
                                                 <span className='mx-1' >Resources</span>
                                             </a>
                                             {/* Card For Refrence To The Video */}
-                                            {elm.lesson.map((elm) => {
+                                            {elm.lessons.map((elm,idx) => {
                                                 return(
                                                     <div key = {elm.id} className="p-2 card-bordered rounded-lg mt-4 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100">
                                                         <div className="form-control">
                                                             <div className="cursor-pointer p-2 flex items-center justify-start">
                                                                 <FontAwesomeIcon icon={faPlayCircle} className='text-xl mr-4'></FontAwesomeIcon>
                                                                 {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
-                                                                <span onClick={() => setVideoCourse(elm.video) } className="label-text text-primary font-medium">{elm.name}</span> 
+                                                                <span onClick={() => {
+                                                                    setVideoCourse(elm.video)
+                                                                    setIsQuizTime(false)
+                                                                    setNowPlaying(idx)
+                                                                    setQuizPosition(idxSection)
+
+                                                                }} className="label-text text-primary font-medium">{elm.name}</span> 
                                                                 <input type="checkbox" className="checkbox border-primary ml-auto"/>
                                                             </div>
                                                         </div>
@@ -122,7 +180,10 @@ const Course = () => {
                                                     <div className="cursor-pointer p-2 flex items-center justify-start">
                                                         <FontAwesomeIcon icon={faFlag} className='text-xl mr-4'></FontAwesomeIcon>
                                                         {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
-                                                        <span className="label-text text-primary font-medium">Quiz | Section 1 : Introduction </span> 
+                                                        <span onClick={() => {
+                                                            setIsQuizTime(true)
+                                                            setQuizPosition(idxSection)
+                                                        } } className="label-text text-primary font-medium">Quiz | {elm.quiz[0].name} </span> 
                                                         <input type="checkbox" className="checkbox border-primary ml-auto"/>
                                                     </div>
                                                 </div>
