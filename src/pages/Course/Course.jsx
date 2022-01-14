@@ -82,14 +82,21 @@ const Course = () => {
                                      </div>
                                     {elm.answer.map((elm) => {
                                         return(
-                                            <p key={elm.id}>{`${elm.answer}. ${elm.name}`}</p>
+                                            
+                                            <div className="p-1 card my-2 btn-hover-primary text-base-100 hover:text-neutral" key={elm.id}>
+                                                <div className="form-control">
+                                                    <label className="cursor-pointer label ">
+                                                    <span className="label-text text-inherit">{`${elm.answer}. ${elm.name}`}</span> 
+                                                    <input type="radio" name={`opt-${idx}`}  className="radio" />
+                                                    </label>
+                                                </div>
+                                            </div>
                                         )
                                     })}
                                  </div>
                                 )
                             })}
                            
-                            <p className='text-base-100'>Lagi Quiz</p>
                         </div>
                         :
                         <iframe width="100%" height="500" src={videoCourse} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
@@ -111,14 +118,10 @@ const Course = () => {
 
                         } else {
                             nav = data?.chapter[quizPosition].lessons[Number(nowPlaying)+1].video
-
                             setVideoCourse(nav)
                             setNowPlaying((curr) => curr+1)
-
-
                         }
 
-                        console.log("end "+nowPlaying)
                     }} className=' active:translate-y-1 opacity-0 absolute transition-all next-video bg-primary top-1/2 -right-10 py-3 px-2 cursor-pointer text-neutral-content grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
                             <p className='font-bold'>Next Lesson</p>
                     </div> 

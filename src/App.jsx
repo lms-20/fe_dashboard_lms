@@ -12,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/landing" element={<div></div>}/>
         <Route path="/" element={<PermanentDrawer />} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
 
