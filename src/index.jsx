@@ -7,12 +7,28 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+/**
+ * Use this import if u want the global state 
+ * doesnt needs to store in local storage
+ * 
+ * // import { store } from './store/store';
+ * 
+ */
+
+//imports if u needs to save the global state into the localstorage
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { store, persistor } from './store/store';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

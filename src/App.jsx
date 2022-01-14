@@ -6,19 +6,32 @@ import PermanentDrawer from './components/PermanentDrawer/PermanentDrawer';
 import { Routes, Route } from 'react-router-dom';
 import MyClass from './pages/MyClass/MyClass';
 import Transaction from './pages/Transaction/Transaction';
+import UserSettings from './pages/UserSettings/UserSettings';
+import AddNewCourse from './pages/AddNewCourse/AddNewCourse';
+import Register from './pages/Auth/Register/Register';
+import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+
 
 function App() {
+
   return (
     <div className="App">
       <Routes>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
         <Route path="/landing" element={<div></div>}/>
-        <Route path="/" element={<PermanentDrawer />} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
-
-        <Route element={<PermanentDrawer />}>
-          <Route path="/myclass" element={<MyClass />} />
-          <Route path="/transactions" element={<Transaction />} />
+        <Route element={<PrivateRoute />}>
+          <Route exact path="/" element={<PermanentDrawer />} >
+            <Route exact path="/myclass" element={<MyClass />} />
+            <Route exact path="/transactions" element={<Transaction />} />
+            <Route exact path="/settings" element={<UserSettings />} />
+          </Route>
+          <Route exact path="/addcourse" element={<AddNewCourse />} />
+          <Route exact path="/addsection" element={<AddNewSection />} />
         </Route>
       </Routes>
     </div>
