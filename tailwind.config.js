@@ -10,7 +10,7 @@ module.exports = {
       {
         'mytheme': {
           'primary': '#66FCF1', //change, for primary content
-          'primary-focus': '#4506cb',
+          'primary-focus': '#45A29E',
           'primary-content': '#ffffff',
           'secondary': '#f000b8',
           'secondary-focus': '#bd0091',
@@ -23,7 +23,7 @@ module.exports = {
           'neutral-content': '#0B0C10',//change, for drawer content
           'base-100': '#ffffff',
           'base-200': '#f9fafb',
-          'base-300': '#d1d5db',
+          'base-300': '#d1d5db', //for opacity < 100 or gray color
           'base-content': '#1f2937',
           'info': '#2094f3',
           'success': '#009485',

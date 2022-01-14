@@ -19,7 +19,7 @@ code {
 }
 
 .btn {
-  @apply bg-transparent normal-case text-base-100 border-2 border-primary
+  @apply normal-case text-base-100 border-2 
 }
 
 
