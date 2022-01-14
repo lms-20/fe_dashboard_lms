@@ -5,7 +5,7 @@ import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -27,9 +27,10 @@ const style = {
 };
 
 const AddNewSection = props => {
+    const courseId = useSelector(state => state.courseData.courseId);
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
-            items: [{ linkslide: "", namesection: "" }]
+            items: [{ courseId, linkslide: "", namesection: "" }]
         }
     });
     const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +43,7 @@ const AddNewSection = props => {
     // const [inputFields, setInputFields] = useState([
     //     { section: '', name: '' }
     // ]);
-
+    console.log(courseId)
     const onSubmit = async (data) => {
         console.log(data)
         // setIsLoading(true);
@@ -107,10 +108,15 @@ const AddNewSection = props => {
                                         </div>
                                     </div>
                                     <div className="form-control">
-                                        <button type='button' onClick={() => remove(index)}> - </button>
+                                        <button type='button' onClick={() => {
+                                            // if (items >= 0) {
+                                            remove(index)
+                                            // }
+                                        }
+                                        }> - </button>
                                     </div>
                                     <div className="form-control">
-                                        <button type='button' onClick={() => append({ linkslide: "", namesection: "" })}> + </button>
+                                        <button type='button' onClick={() => append({ courseId, linkslide: "", namesection: "" })}> + </button>
                                     </div>
                                     {/* End Of Form Container */}
                                 </div>
