@@ -17,7 +17,6 @@ module.exports = {
           'secondary-content': '#ffffff',
           'accent': '#37cdbe',
           'accent-focus': '#2aa79b',
-          
           'accent-content': '#ffffff',
           'neutral': '#1F2833', //change , for sidebar bg
           'neutral-focus': '#2a2e37',
