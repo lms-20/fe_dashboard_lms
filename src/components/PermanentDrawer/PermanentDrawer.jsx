@@ -60,7 +60,7 @@ const PermanentDrawer = props => {
                                 {/* <img src="https://i.pravatar.cc/500?img=32" tabIndex="0" className='rounded-full w-12 h-12 ' /> */}
                                 <ul tabIndex="0" className="text-base-100 p-2 shadow menu dropdown-content bg-neutral rounded-box w-52 mt-2">
                                     <li>
-                                        <a className='btn-hover-primary'><FontAwesomeIcon icon={faUserEdit} className='mr-2' />Settings</a>
+                                        <Link to='/settings' className='btn-hover-primary'><FontAwesomeIcon icon={faUserEdit} className='mr-2' />Settings</Link>
                                     </li>
                                     <li>
                                         <a className='btn-hover-primary' onClick={handleLogout}><FontAwesomeIcon icon={faDoorOpen} className='mr-2' />Logout</a>
@@ -117,7 +117,7 @@ const PermanentDrawer = props => {
                         null
                     }
                     <li className='mb-2'>
-                        <Link to="/" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
+                        <Link to="/settings" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
                             <FontAwesomeIcon icon={faUserEdit} className='mr-4' />
                             Settings
                         </Link>
