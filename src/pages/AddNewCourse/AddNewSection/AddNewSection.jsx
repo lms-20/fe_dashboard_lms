@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 // FontAwesome
@@ -27,96 +27,98 @@ const style = {
 };
 
 const AddNewSection = props => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
+        defaultValues: {
+            items: [{ linkslide: "", namesection: "" }]
+        }
+    });
     const [isLoading, setIsLoading] = useState(false);
     const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
     const dispatch = useDispatch();
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "items"
+    });
+    // const [inputFields, setInputFields] = useState([
+    //     { section: '', name: '' }
+    // ]);
 
     const onSubmit = async (data) => {
-        setIsLoading(true);
-        axios.post(
-            ApiUrl,
-            data,
-            { headers: { 'Content-Type': 'application/json' } }
-        )
-            .then(response => {
-                setIsLoading(false);
-                // dispatch(storeIdCourse(response.data.id))
-                MySwal.fire({
-                    icon: 'success',
-                    title: 'Succes register account!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                reset();
-            })
-            .catch(error => {
-                setIsLoading(false);
-            });
+        console.log(data)
+        // setIsLoading(true);
+        // axios.post(
+        //     ApiUrl,
+        //     data,
+        //     { headers: { 'Content-Type': 'application/json' } }
+        // )
+        //     .then(response => {
+        //         setIsLoading(false);
+        //         // dispatch(storeIdCourse(response.data.id))
+        //         MySwal.fire({
+        //             icon: 'success',
+        //             title: 'Succes register account!',
+        //             showConfirmButton: false,
+        //             timer: 2000
+        //         })
+        //         reset();
+        //     })
+        //     .catch(error => {
+        //         setIsLoading(false);
+        //     });
     }
 
     return (
         <Fragment>
-
             <div style={style}>
                 <ClipLoader color="#ffffff" loading={isLoading} size={150} />
             </div>
 
             <div className='min-h-screen bg-neutral-content relative'>
                 <div className="min-h-screen flex justify-center items-center">
-                    {/* Form Container */}
                     <form className="w-full lg:w-2/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-                        <div className="card-body">
-                            {/* Border Form Container */}
-                            <div className="p-10 card">
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">category</span>
-                                    </label>
-                                    <select id='category' name='category' className={`${!errors.category?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("category", { required: true })}>
-                                        <option value="none" disabled>Choose your superpower</option>
-                                        <option value="backend">Backend</option>
-                                        <option value="frontend">Frontend</option>
-                                        <option value="devops">DevOps</option>
-                                    </select>
-                                    <div className="label justify-start">
-                                        {errors.category ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>{errors.category?.type === "required" && "category required"}</span>
+                        {fields.map((field, index) => {
+                            return (
+                                <div className="card-body" key={field.id}>
+                                    {/* Border Form Container */}
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text text-lg text-base-100 font-bold">linkslide</span>
+                                        </label>
+                                        <input type="text" placeholder="linkslide" className={`${!errors.linkslide?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].linkslide`, { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.linkslide ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.linkslide?.type === "required" && "linkslide required"}
+                                                {errors.linkslide?.type === "pattern" && "Invalid linkslide Address"}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">description</span>
-                                    </label>
-                                    {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.description ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.description?.type === "required" && "description required"}
-                                            {errors.description?.type === "pattern" && "Invalid description Address"}
-                                        </span>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text text-lg text-base-100 font-bold">namesection</span>
+                                        </label>
+                                        <input type="text" placeholder="namesection" className={`${!errors.namesection?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namesection`, { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.namesection ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.namesection?.type === "required" && "namesection required"}
+                                                {errors.namesection?.type === "pattern" && "Invalid namesection Address"}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">description</span>
-                                    </label>
-                                    {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.description ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.description?.type === "required" && "description required"}
-                                            {errors.description?.type === "pattern" && "Invalid description Address"}
-                                        </span>
+                                    <div className="form-control">
+                                        <button type='button' onClick={() => remove(index)}> - </button>
                                     </div>
+                                    <div className="form-control">
+                                        <button type='button' onClick={() => append({ linkslide: "", namesection: "" })}> + </button>
+                                    </div>
+                                    {/* End Of Form Container */}
                                 </div>
-                                <button type='submit' disabled={isLoading}>Next Move</button>
-                            </div>
-                            {/* End Of Form Container */}
-                        </div>
+                            )
+                        })}
+                        <button type='submit' disabled={isLoading}>Next Move</button>
                     </form>
+                    {/* Form Container */}
                     {/* End Of Form Container */}
                 </div>
             </div>
