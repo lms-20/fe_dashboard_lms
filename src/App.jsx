@@ -10,8 +10,10 @@ import UserSettings from './pages/UserSettings/UserSettings';
 import AddNewCourse from './pages/AddNewCourse/AddNewCourse';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
+import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+
 
 function App() {
 
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
+        <Route path="/landing" element={<div></div>}/>
+        <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
             <Route exact path="/myclass" element={<MyClass />} />
