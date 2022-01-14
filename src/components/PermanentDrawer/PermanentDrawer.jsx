@@ -3,6 +3,8 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import PropTypes from 'prop-types'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faGraduationCap,faStore,faDoorOpen,faUserEdit} from '@fortawesome/free-solid-svg-icons';
 import { Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,6 +36,7 @@ const PermanentDrawer = props => {
                             <p className='text-lg text-base-100 font-bold '>Welcome, {globalStateUser?.data.name}</p>
                             <p className='text-sm text-base-300'>You’re doing a great job,keep it up!</p>
                         </div>
+                    
                     </div>
                     <div className='flex items:center'>
                         {/* Search Form */}
@@ -123,6 +126,8 @@ const PermanentDrawer = props => {
                             Settings
                         </Link>
                     </li>
+                    
+                   
                 </ul>
             </div>
         </div>
