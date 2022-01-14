@@ -10,7 +10,7 @@ import { storeIdCourse } from '../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -31,6 +31,7 @@ const AddNewCourse = props => {
     const [isLoading, setIsLoading] = useState(false);
     const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         setIsLoading(true);
@@ -42,13 +43,7 @@ const AddNewCourse = props => {
             .then(response => {
                 setIsLoading(false);
                 dispatch(storeIdCourse(response.data.id))
-                MySwal.fire({
-                    icon: 'success',
-                    title: 'Succes register account!',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                reset();
+                navigate('/addsection')
             })
             .catch(error => {
                 setIsLoading(false);

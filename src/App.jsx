@@ -10,6 +10,7 @@ import AddNewCourse from './pages/AddNewCourse/AddNewCourse';
 import Register from './pages/Auth/Register/Register';
 import Login from './pages/Auth/Login/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route exact path="/transactions" element={<Transaction />} />
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
+          <Route exact path="/addsection" element={<AddNewSection />} />
         </Route>
       </Routes>
     </div>
