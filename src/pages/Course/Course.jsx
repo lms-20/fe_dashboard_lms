@@ -70,13 +70,15 @@ const Course = () => {
             <div className=' mx-auto px-8 text-base-100 py-4 flex'>
                 {/* Video Content */}
                 <div className='basis-8/12 relative course-video'>
+                    {/* Logic For displaying what content should be appear */}
                     {isQuizTime === true ? 
-                        <div className='bg-error p-4'>
+                        <div className=''>
                             {data?.chapter[quizPosition].quiz[0].exercise.map((elm,idx) => {
                                 return(
-                                 <div key = {elm.id} className='bg-neutral w-full'>
-                                     <div className='w-full my-4'>
-                                        <p>{`${elm.question}`}</p>
+                                 <div key = {elm.id} className=' w-full '>
+                                     <div className='w-full p-4 bg-neutral rounded-lg mb-3'>
+                                         <p className='font-sm text-base-300 mb-1'>{`Quiz Question ${idx+1} of ${data?.chapter[quizPosition].quiz[0].exercise.length}`}</p>
+                                        <p className='font-bold'>{`${elm.question}`}</p>
                                      </div>
                                     {elm.answer.map((elm) => {
                                         return(
@@ -92,6 +94,7 @@ const Course = () => {
                         :
                         <iframe width="100%" height="500" src={videoCourse} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     }
+                    {/* Logic For Next Video Button */}
                     {isQuizTime == false ? 
                     <div onClick = {() => {
                         const currLessons =  data?.chapter[quizPosition].lessons
@@ -100,9 +103,10 @@ const Course = () => {
                         console.log(nowPlaying)
 
                         if (Number(nowPlaying)+1 >= currLessons.length ){
-                            setNowPlaying(0)
-                            nav = data?.chapter[quizPosition].lessons[0].video
-                            setVideoCourse(nav)
+                            setIsQuizTime(true)
+                            // setNowPlaying(0)
+                            // nav = data?.chapter[quizPosition].lessons[0].video
+                            // setVideoCourse(nav)
 
 
                         } else {
@@ -116,7 +120,7 @@ const Course = () => {
 
                         console.log("end "+nowPlaying)
                     }} className=' active:translate-y-1 opacity-0 absolute transition-all next-video bg-primary top-1/2 -right-10 py-3 px-2 cursor-pointer text-neutral-content grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
-                            <p className='font-bold'>Next Video</p>
+                            <p className='font-bold'>Next Lesson</p>
                     </div> 
                     
                     :""}
