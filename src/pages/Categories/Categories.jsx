@@ -10,7 +10,6 @@ import Navbar from '../../components/Navbar/Navbar';
 const Categories = () => {
     return(
         <div className='min-h-screen  bg-neutral-content'>
-            <Navbar/>
             <div className='w-11/12 mx-auto my-10'>
                 <div className='flex justify-center'>
                     <h3 className='text-primary font-extrabold text-4xl'>All Categories</h3>

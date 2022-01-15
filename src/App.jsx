@@ -16,6 +16,7 @@ import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
 import Landing from './pages/Landing/Landing';
 import Categories from './pages/Categories/Categories';
 import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
+import Drawer from './components/Drawer/Drawer';
 
 
 function App() {
@@ -23,11 +24,14 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route element={<Drawer/>}>
+          <Route path="/landing" element={<Landing/>}/>
+          <Route path="/allcategories" element={<Categories/>}/>
+          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+        </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route path="/landing" element={<Landing/>}/>
-        <Route path="/allcategories" element={<Categories/>}/>
-        <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+       
 
 
         <Route path="/mycourses/:my_course_id" element={<Course />} />

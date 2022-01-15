@@ -15,10 +15,10 @@ const CategoriesCard = () => {
     }
     return(
         
-        <div className=' flex flex-wrap flex-grow basis-2/5'>
+        <div className=' flex flex-wrap justify-center flex-grow basis-2/5'>
             {x.map((elm,idx) => {
                 return(
-                    <div className="card mb-8 bg-neutral lg:card-side mr-6 cursor-pointer" key ={idx} onClick={handleClick}>
+                    <div className="card mb-8 bg-neutral lg:card-side basis-5/12 flex-grow mr-6 cursor-pointer" key ={idx} onClick={handleClick}>
                         <div className="card-body">
                             <div>
                                 <div className='inline-block bg-primary px-3 py-2 rounded-lg'>
