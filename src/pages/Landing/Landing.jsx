@@ -2,80 +2,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { Link } from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { Link, Outlet } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
 import heroImg from "../../assets/undraw_online_learning.svg";
-import { logout } from '../../store/userSlice';
-import { faGraduationCap, faListUl, faLightbulb, faSignal , faStore, faThumbsUp , faDoorOpen, faUserEdit, faCommentDots, faUser, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faListUl, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import Navbar from '../../components/Navbar/Navbar';
+import CategoriesCard from '../../components/CategoriesCard/CategoriesCard';
+import CardCourseFull from '../../components/CardCourseFull/CardCourseFull';
 
 
 const Landing = () => {
-    
-    const globalStateUser = useSelector(state => state.userData?.user);
-    const dispatch = useDispatch();
-
-
-    const handleLogout = () => {
-        dispatch(logout());
-    }
     return(
-        <div>
+        <div className='bg-neutral-content'>
             {/* Navbar */}
-            <div className='bg-neutral'>
-                <div className="navbar flex shadow-lg  text-primary justify-between w-11/12 mx-auto">
-                        <div className="">
-                            <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost drawer-button lg:hidden border-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            </label>
-                            <div className='hidden lg:flex justify-center lg:items-center h-full'>
-                                
-                                <h1 className='text-2xl text-base-100 font-bold text-primary px-4'>E-Learning</h1>
-                                <div className='flex'>
-                                    <a href ="#" className='text-base-100 px-4 hover:text-primary'>Home</a>
-                                    <a href = "#" className='text-base-100 px-4 hover:text-primary'>Categories</a>
-                                    <a href = "#" className='text-base-100 px-4 hover:text-primary'>About Us</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='flex items-center'>
-                            {/* Search Form */}
-                            <div className="">
-                                <div className="form-control">
-                                    <input type="text" placeholder="Search Course Name" className=" pr-10 transition-all w-52 focus:w-72 border-2 border-primary input input-ghost rounded-full text-base-100 focus:text-base-100" />
-                                </div>
-                            </div>
-                            {/*  Button Search */}
-                            <div className="-ml-12 ">
-                                <button className="btn-square border-none  btn btn-ghost bg-transparent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block text-primary w-6 h-6 stroke-current">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            {/* Avatar + Dropdown*/}
-                            <div className="ml-2">
-                                {/* Dropdown */}
-                                <div className="m-1 dropdown dropdown-end ">
-                                    <div className='rounded-full w-12 text-primary h-12 flex items-center justify-center hover:border-2 border-current' tabIndex="0">
-                                        <FontAwesomeIcon icon={faUser} className='text-2xl text-current' />
-                                    </div>
-                                    {/* <img src="https://i.pravatar.cc/500?img=32" tabIndex="0" className='rounded-full w-12 h-12 ' /> */}
-                                    <ul tabIndex="0" className="text-base-100 p-2 shadow menu dropdown-content bg-neutral rounded-box w-52 mt-2">
-                                        <li>
-                                            <Link to='/settings' className='btn-hover-primary'><FontAwesomeIcon icon={faUserEdit} className='mr-2' />Settings</Link>
-                                        </li>
-                                        <li>
-                                            <a className='btn-hover-primary' onClick={handleLogout}><FontAwesomeIcon icon={faDoorOpen} className='mr-2' />Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <Navbar/>
             {/* End Of Navbar */}
             {/* Hero */}
             <div className="hero bg-neutral-content">
@@ -88,7 +28,7 @@ const Landing = () => {
                         <p className="mb-5 text-base-100">
                         Skills for your present (and your future).Get started with us.
                         </p> 
-                        <button className="btn bg-transparent w-2/5 text-base-100 border-primary btn-hover-primary rounded-full">Register</button>
+                        <Link to = "/register" className="btn bg-transparent w-2/5 text-base-100 border-primary btn-hover-primary rounded-full">Register</Link>
                     </div>
                 </div>
             </div>
@@ -142,73 +82,15 @@ const Landing = () => {
                     {/* End Break */}
                     {/* Cateogires Items */}
                     <div className='flex lg:w-11/12 mx-auto mt-8'>
-                        {/* Card Categories Container */}
-                        <div className=' flex justify-between flex-wrap basis-2/5'>
-                            {/* Categories Items */}
-                            <div className="card mb-8 bg-neutral lg:card-side">
-                                <div className="card-body">
-                                    <div>
-                                        <div className='inline-block bg-primary px-3 py-2 rounded-lg'>
-                                            <FontAwesomeIcon icon={faLightbulb} className=' text-2xl  inline-block align-middle'></FontAwesomeIcon>
-                                        </div>
-                                    </div>
-                                    <p className='font-bold text-base-100 mt-4'>Finance Accounting</p> 
-                                    <div className='flex text-primary items-center justify-between mt-1'>
-                                        <p>11 Courses</p>
-                                        <FontAwesomeIcon icon={faArrowRight} className='text-lg '/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card mb-8 bg-neutral lg:card-side">
-                                <div className="card-body">
-                                    <div>
-                                        <div className='inline-block bg-primary px-3 py-2 rounded-lg'>
-                                            <FontAwesomeIcon icon={faLightbulb} className=' text-2xl  inline-block align-middle'></FontAwesomeIcon>
-                                        </div>
-                                    </div>
-                                    <p className='font-bold text-base-100 mt-4'>Finance Accounting</p> 
-                                    <div className='flex text-primary items-center justify-between mt-1'>
-                                        <p>11 Courses</p>
-                                        <FontAwesomeIcon icon={faArrowRight} className='text-lg '/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card mb-8 bg-neutral lg:card-side">
-                                <div className="card-body">
-                                    <div>
-                                        <div className='inline-block bg-primary px-3 py-2 rounded-lg'>
-                                            <FontAwesomeIcon icon={faLightbulb} className=' text-2xl  inline-block align-middle'></FontAwesomeIcon>
-                                        </div>
-                                    </div>
-                                    <p className='font-bold text-base-100 mt-4'>Finance Accounting</p> 
-                                    <div className='flex text-primary items-center justify-between mt-1'>
-                                        <p>11 Courses</p>
-                                        <FontAwesomeIcon icon={faArrowRight} className='text-lg '/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card mb-8  bg-neutral lg:card-side">
-                                <div className="card-body">
-                                    <div>
-                                        <div className='inline-block bg-primary px-3 py-2 rounded-lg'>
-                                            <FontAwesomeIcon icon={faLightbulb} className=' text-2xl  inline-block align-middle'></FontAwesomeIcon>
-                                        </div>
-                                    </div>
-                                    <p className='font-bold text-base-100 mt-4'>Finance Accounting</p> 
-                                    <div className='flex text-primary items-center justify-between mt-1'>
-                                        <p>11 Courses</p>
-                                        <FontAwesomeIcon icon={faArrowRight} className='text-lg '/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className=' basis-2/4 ml-10 flex flex-col justify-center'>
+                        {/* Categories Items */}
+                        <CategoriesCard/>
+                        {/* End OF Categories Items */}
+                        <div className=' basis-2/4 ml-10 flex flex-col justify-center flex-grow'>
                             <h3 className='font-extrabold text-5xl text-primary'>Feel Free <span className='mt-3 text-base-100 block'>To Explore More</span></h3>
                             <p className='text-base-300 my-10'>Megangar. Enkortsdator. Självoptimering. Hegisk. Pugon. Iren. Nykalingar. Regt. Sönera. Biokemi. Kroselig. Miren. Ode. Kefåtoskapet. Masuligen. Hämndporr. Tin. Treseda. Desplastisk. Brony. </p>
-                            <button className="btn bg-transparent w-2/5 text-base-100 border-primary btn-hover-primary rounded-full">See All Categories</button>
+                            <Link to ="/allcategories" className="btn bg-transparent w-2/5 text-base-100 border-primary btn-hover-primary rounded-full">See All Categories</Link>
                         </div>
                     </div>
-                    {/* End OF Categories Items */}
             </div>
             {/* End OF Categories  */}
             {/* Top Courses Container */}
@@ -220,52 +102,46 @@ const Landing = () => {
                                 <p className='text-xl inline-block ml-2 align-middle font-bold'>Top Courses</p>
                             </div>   
                     </div>
-                    <div className='flex mt-8'>
-                        {/* Card */}
-                        <div className= "card-compact bg-neutral drop-shadow-lg mr-4 basis-3/12 rounded-lg">
-                            <figure className=' px-4 pt-4'>
-                                <img src={heroImg} className='rounded-box'/>
-                            </figure> 
-                            <div className="card-body">
-                                <div className='h-10 overflow-hidden break-all mb-2'>
-                                    <h2 className="font-bold text-base-100 text-ellipsis">React - The Complete Guide (incl Hooks, React uasdkghasdkgasdkjgasdkjasgdkjasgdjkasdkjasgda</h2> 
-
-                                </div>
-                                <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : Rizki</p>
-                                <div className='flex h-6 items-center mb-2'>
-                                    <div className='h-6 overflow-hidden basis-6/12 break-all'>
-                                        <p className='text-base-300'>
-                                            <FontAwesomeIcon icon={faLightbulb} className='mr-2'></FontAwesomeIcon>
-                                            Technology
-                                        </p>
-                                    </div>
-                                   
-                                    <div className='basis-6/12 flex justify-end'>
-                                        <p className='text-right text-base-300  font-bold'>
-                                            <FontAwesomeIcon icon={faSignal} className='mr-2'></FontAwesomeIcon>
-                                            Expert
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='flex items-center mb-2'>
-                                    <div className='grow'>
-                                        <p className='font-bold text-primary text-2xl'>Rp900.000</p>
-                                    </div>
-                                    <div className='text-sm text-base-300 flex flex-col'>
-                                        <p>Lifetime Access</p>
-                                        <p className='font-bold text-sm text-right'>58 Videos</p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <Link to = "" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
-                                </div>
-                            </div>
-                        </div>
-                        {/* End Of Cart */}
+                    {/* Card */}
+                    <CardCourseFull/>
+                    {/* End Of Cart */}
+                    <div className='flex justify-center mt-10 '>
+                        <Link to = "" className='bg-transparent text-base-100 btn btn-hover-primary border-2 border-primary'>See All Courses</Link>
                     </div>
                 </div>
             </div>
             {/* End Of Top Course Container */}
+            {/* FAQ Container */}
+            <div className='bg-neutral-content py-10'>
+                <div className='lg:w-11/12 mx-auto flex flex-col items-center'>
+                    <div className='mb-10'>
+                        <h3 className='text-primary font-extrabold text-4xl'>Frequently Asked Questions</h3>
+                    </div>
+                    {/* Collapse */}
+                    <div className="collapse w-3/5 mx-auto text-base-100 mb-4 rounded-box bg-neutral collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div className="collapse-title font-bold">
+                           Apa itu E-Learning?
+                        </div> 
+                        <div className="collapse-content text-base-300"> 
+                            <p>Sistem pembelajaran elektronik atau e-pembelajaran dapat didefinisikan sebagai sebuah bentuk teknologi informasi yang diterapkan di bidang pendidikan berupa situs web yang dapat diakses di mana saja
+                            </p>
+                        </div>
+                    </div>
+                    <div className="collapse w-3/5 mx-auto text-base-100  rounded-box bg-neutral collapse-arrow">
+                        <input type="checkbox" /> 
+                        <div className="collapse-title font-bold">
+                           Apakah
+                        </div> 
+                        <div className="collapse-content text-base-300"> 
+                            <p>Sistem pembelajaran elektronik atau e-pembelajaran dapat didefinisikan sebagai sebuah bentuk teknologi informasi yang diterapkan di bidang pendidikan berupa situs web yang dapat diakses di mana saja
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/* End Of FAQ Container */}
+            {/* Footer */}
             <div className='bg-neutral'>
                 <footer className="footer  text-base-100 w-11/12 mx-auto py-8">
                     <div>

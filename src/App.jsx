@@ -14,6 +14,8 @@ import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
 import Landing from './pages/Landing/Landing';
+import Categories from './pages/Categories/Categories';
+import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
 
 
 function App() {
@@ -24,6 +26,10 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route path="/landing" element={<Landing/>}/>
+        <Route path="/allcategories" element={<Categories/>}/>
+        <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+
+
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
