@@ -18,7 +18,7 @@ const Card = (props) => {
                 
                 <progress className="progress progress-primary bg-base-300 mt-1" value={course.progress} max="100"></progress> 
                 <p className='my-2 font-bold'>{course.progress}% Completed</p>
-                <Link to = "" className='btn btn-hover-primary w-full'>Start Learning</Link>
+                <Link to = "" className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Start Learning</Link>
             </div>
         </div>
     )

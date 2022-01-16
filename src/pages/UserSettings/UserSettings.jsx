@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle,faEye } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle,faEye,faUser } from '@fortawesome/free-solid-svg-icons';
 import propTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom'
@@ -70,9 +70,9 @@ const UserSettings = () => {
                         <div className='flex rounded-lg transition-all w-full hover:shadow-md hover:shadow-primary hover:-translate-y-1 '>
                             {/* Profile Image */}
                             <div className='hidden lg:flex justify-center'>
-                                <div className="avatar ">
-                                    <div className="rounded-lg w-40 h-40">
-                                        <img src={userResponse.avatar} />
+                                <div className="avatar ml-4 ">
+                                    <div className="rounded-lg w-full h-40  ">
+                                        <FontAwesomeIcon icon={faUser} className='text-9xl  text-current  w-full  h-full' />
                                     </div>
                                 </div>
                             </div>
@@ -82,9 +82,9 @@ const UserSettings = () => {
                                     <p className='font-bold text-2xl'>{userResponse.fullname}</p>
                                     <p className=''>{userResponse.occupation}</p>
                                 </div>
-                                <div className='w-full mb-5'>
-                                    <Link to="" className='btn btn-hover-primary w-full self-end bg-transparent border-primary'>Change Password</Link>
-                                </div>
+                                {/* <div className='w-full mb-5'>
+                                    <Link to="" className='btn btn-hover-primary w-full self-end bg-transparent border-2 text-base-100 border-primary'>Change Password</Link>
+                                </div> */}
                             </div>
                         </div>
                         {/* End Of Card Container */}
@@ -170,15 +170,15 @@ const UserSettings = () => {
                                     </div>
                                 </div>
                                 <div className='mt-8 flex justify-end'>
-                                    <div className={`${isFormDisabled === true ? "hidden" : ""} btn hover:bg-warning mx-4 border-warning`} onClick={() => {
+                                    <div className={`${isFormDisabled === true ? "hidden" : ""} btn hover:bg-warning mx-4 text-base-100 border-warning`} onClick={() => {
                                         reset()
                                         setIsFormDisabled((current) => !current)
                                     }
                                     }>Cancel</div>
                                     {isFormDisabled ?
-                                        <div className='btn btn-hover-primary bg-transparent border-primary' onClick={() => setIsFormDisabled((current) => !current)}>Edit Data</div>
+                                        <div className='btn btn-hover-primary bg-transparent text-base-100 border-2 border-primary' onClick={() => setIsFormDisabled((current) => !current)}>Edit Data</div>
                                         :
-                                        <button className='btn btn-hover-primary bg-transparent border-primary' type='submit'>Save Changes</button>
+                                        <button className='btn btn-hover-primary bg-transparent text-base-100 border-2 border-primary' type='submit'>Save Changes</button>
                                     }
                                     {/* <div className='btn btn-hover-primary bg-transparent border-primary' onClick={() => setIsFormDisabled((current) => !current)}>{`${isFormDisabled === true ? "Edit Data" : "Save Changes"}`}</div> */}
                                 </div>
