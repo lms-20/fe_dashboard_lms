@@ -34,7 +34,7 @@ const AddNewSection = props => {
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
+    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
     const dispatch = useDispatch();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -43,29 +43,32 @@ const AddNewSection = props => {
     // const [inputFields, setInputFields] = useState([
     //     { section: '', name: '' }
     // ]);
-    console.log(courseId)
+    // console.log(courseId)
     const onSubmit = async (data) => {
-        console.log(data)
-        // setIsLoading(true);
-        // axios.post(
-        //     ApiUrl,
-        //     data,
-        //     { headers: { 'Content-Type': 'application/json' } }
-        // )
-        //     .then(response => {
-        //         setIsLoading(false);
-        //         // dispatch(storeIdCourse(response.data.id))
-        //         MySwal.fire({
-        //             icon: 'success',
-        //             title: 'Succes register account!',
-        //             showConfirmButton: false,
-        //             timer: 2000
-        //         })
-        //         reset();
-        //     })
-        //     .catch(error => {
-        //         setIsLoading(false);
-        //     });
+        // console.log(data.items)
+        data.items.forEach(element => {
+            console.log(element)
+            setIsLoading(true);
+            axios.post(
+                ApiUrl,
+                element,
+                { headers: { 'Content-Type': 'application/json' } }
+            )
+                .then(response => {
+                    setIsLoading(false);
+                    // dispatch(storeIdCourse(response.data.id))
+                    // MySwal.fire({
+                    //     icon: 'success',
+                    //     title: 'Succes register account!',
+                    //     showConfirmButton: false,
+                    //     timer: 2000
+                    // })
+                    // reset();
+                })
+                .catch(error => {
+                    setIsLoading(false);
+                });
+        });
     }
 
     return (
