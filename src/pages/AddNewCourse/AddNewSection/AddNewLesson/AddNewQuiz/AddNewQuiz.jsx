@@ -25,15 +25,15 @@ const style = {
     zIndex: "9999"
 };
 
-const AddNewLesson = props => {
+const AddNewQuiz = props => {
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
-            items: [{ section: "", namelesson: "", linkvideo: "" }]
+            items: [{ section: "", namequiz: "" }]
         }
     });
     const [isLoading, setIsLoading] = useState(false);
     const ApiSections = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/lessons`;
+    const ApiUrl = `https://61e62635ce3a2d0017358fa7.mockapi.io/quiz`;
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -68,7 +68,7 @@ const AddNewLesson = props => {
             )
                 .then(response => {
                     setIsLoading(false);
-                    navigate('/addquiz')
+                    // navigate('/addsection')
                 })
                 .catch(error => {
                     setIsLoading(false);
@@ -108,27 +108,14 @@ const AddNewLesson = props => {
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">namelesson</span>
+                                            <span className="label-text text-lg text-base-100 font-bold">namequiz</span>
                                         </label>
-                                        <input type="text" placeholder="namelesson" className={`${!errors.namelesson?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namelesson`, { required: true })} />
+                                        <input type="text" placeholder="namequiz" className={`${!errors.namequiz?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namequiz`, { required: true })} />
                                         <div className="label justify-start">
-                                            {errors.namelesson ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            {errors.namequiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                             <span className='text-error text-sm font-bold'>
-                                                {errors.namelesson?.type === "required" && "namelesson required"}
-                                                {errors.namelesson?.type === "pattern" && "Invalid namelesson Address"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="form-control">
-                                        <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">linkvideo</span>
-                                        </label>
-                                        <input type="text" placeholder="linkvideo" className={`${!errors.linkvideo?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].linkvideo`, { required: true })} />
-                                        <div className="label justify-start">
-                                            {errors.linkvideo ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                            <span className='text-error text-sm font-bold'>
-                                                {errors.linkvideo?.type === "required" && "linkvideo required"}
-                                                {errors.linkvideo?.type === "pattern" && "Invalid linkvideo Address"}
+                                                {errors.namequiz?.type === "required" && "namequiz required"}
+                                                {errors.namequiz?.type === "pattern" && "Invalid namequiz Address"}
                                             </span>
                                         </div>
                                     </div>
@@ -141,7 +128,7 @@ const AddNewLesson = props => {
                                         }> - </button>
                                     </div>
                                     <div className="form-control">
-                                        <button type='button' onClick={() => append({ section: "", namelesson: "", linkvideo: "" })}> + </button>
+                                        <button type='button' onClick={() => append({ section: "", namequiz: "" })}> + </button>
                                     </div>
                                     {/* End Of Form Container */}
                                 </div>
@@ -157,8 +144,8 @@ const AddNewLesson = props => {
     )
 }
 
-AddNewLesson.propTypes = {
+AddNewQuiz.propTypes = {
 
 }
 
-export default AddNewLesson
+export default AddNewQuiz
