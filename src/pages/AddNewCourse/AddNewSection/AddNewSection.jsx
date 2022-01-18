@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -36,14 +36,12 @@ const AddNewSection = props => {
     const [isLoading, setIsLoading] = useState(false);
     const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
         name: "items"
     });
-    // const [inputFields, setInputFields] = useState([
-    //     { section: '', name: '' }
-    // ]);
-    // console.log(courseId)
+
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {
@@ -56,14 +54,7 @@ const AddNewSection = props => {
             )
                 .then(response => {
                     setIsLoading(false);
-                    // dispatch(storeIdCourse(response.data.id))
-                    // MySwal.fire({
-                    //     icon: 'success',
-                    //     title: 'Succes register account!',
-                    //     showConfirmButton: false,
-                    //     timer: 2000
-                    // })
-                    // reset();
+                    navigate('/addlesson')
                 })
                 .catch(error => {
                     setIsLoading(false);
