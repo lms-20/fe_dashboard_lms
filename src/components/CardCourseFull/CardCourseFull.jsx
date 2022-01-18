@@ -49,7 +49,7 @@ const CardCourseFull = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Link to = "" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                    <Link to = "/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ const CardCourseFull = () => {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Link to = "" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                                    <Link to = "/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
                                                 </div>
                                             </div>
                                         </div>
