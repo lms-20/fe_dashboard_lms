@@ -5,6 +5,8 @@ import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { deleteIdCourse } from '../../../../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -34,6 +36,7 @@ const AddNewExercise = props => {
     const [isLoading, setIsLoading] = useState(false);
     const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/quiz`;
     const ApiUrl = `https://61e62635ce3a2d0017358fa7.mockapi.io/exercises`;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -69,6 +72,7 @@ const AddNewExercise = props => {
                 .then(response => {
                     setIsLoading(false);
                     navigate('/myclass')
+                    dispatch(deleteIdCourse());
                 })
                 .catch(error => {
                     setIsLoading(false);

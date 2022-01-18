@@ -11,11 +11,13 @@ export const courseSlice = createSlice({
     reducers: {
         storeIdCourse: (state, action) => {
             state.courseId = action.payload;
-            console.log(state.courseId)
+        },
+        deleteIdCourse: (state, action) => {
+            state.courseId = null
         }
     }
 });
 
 export const courseReducer = courseSlice.reducer;
 
-export const { storeIdCourse } = courseSlice.actions
+export const { storeIdCourse, deleteIdCourse } = courseSlice.actions
