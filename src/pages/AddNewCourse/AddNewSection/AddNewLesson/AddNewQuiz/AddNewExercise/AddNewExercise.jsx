@@ -25,27 +25,27 @@ const style = {
     zIndex: "9999"
 };
 
-const AddNewQuiz = props => {
+const AddNewExercise = props => {
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
-            items: [{ section: "", namequiz: "" }]
+            items: [{ quiz: "", soal: "", jawaban: "" }]
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const ApiSections = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
-    const ApiUrl = `https://61e62635ce3a2d0017358fa7.mockapi.io/quiz`;
+    const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/quiz`;
+    const ApiUrl = `https://61e62635ce3a2d0017358fa7.mockapi.io/exercises`;
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
         name: "items"
     });
-    const [sections, setSections] = useState([]);
+    const [quizs, setQuizs] = useState([]);
 
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
                 response?.data.forEach(dataSections => {
-                    setSections(
+                    setQuizs(
                         prevstate => [...prevstate, dataSections]
                     )
                 })
@@ -68,7 +68,7 @@ const AddNewQuiz = props => {
             )
                 .then(response => {
                     setIsLoading(false);
-                    navigate('/addexercise')
+                    navigate('/myclass')
                 })
                 .catch(error => {
                     setIsLoading(false);
@@ -91,32 +91,48 @@ const AddNewQuiz = props => {
                                     {/* Border Form Container */}
                                     <div className="form-control">
                                         <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">section</span>
+                                            <span className="label-text text-lg text-base-100 font-bold">quiz</span>
                                         </label>
-                                        <select id='section' name='section' className={`${!errors.section?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].section`, { required: true })}>
+                                        <select id='quiz' name='quiz' className={`${!errors.quiz?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].quiz`, { required: true })}>
                                             <option value="" disabled >Choose your superpower</option>
                                             {
-                                                sections.map((data, index) => {
-                                                    return <option key={index} value={data.id}>{data.namesection}</option>
+                                                quizs.map((data, index) => {
+                                                    return <option key={index} value={data.id}>{data.namequiz}</option>
                                                 })
                                             }
                                         </select>
                                         <div className="label justify-start">
-                                            {errors.section ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                            <span className='text-error text-sm font-bold'>{errors.section?.type === "required" && "section required"}</span>
+                                            {errors.quiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>{errors.quiz?.type === "required" && "quiz required"}</span>
                                         </div>
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">namequiz</span>
+                                            <span className="label-text text-lg text-base-100 font-bold">soal</span>
                                         </label>
-                                        <input type="text" placeholder="namequiz" className={`${!errors.namequiz?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namequiz`, { required: true })} />
+                                        <input type="text" placeholder="soal" className={`${!errors.soal?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].soal`, { required: true })} />
                                         <div className="label justify-start">
-                                            {errors.namequiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            {errors.soal ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                             <span className='text-error text-sm font-bold'>
-                                                {errors.namequiz?.type === "required" && "namequiz required"}
-                                                {errors.namequiz?.type === "pattern" && "Invalid namequiz Address"}
+                                                {errors.soal?.type === "required" && "soal required"}
+                                                {errors.soal?.type === "pattern" && "Invalid soal Address"}
                                             </span>
+                                        </div>
+                                    </div>
+                                    <div className="form-control">
+                                        <label className="label">
+                                            <span className="label-text text-lg text-base-100 font-bold">jawaban</span>
+                                        </label>
+                                        <select id='jawaban' name='jawaban' className={`${!errors.jawaban?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].jawaban`, { required: true })}>
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                        <div className="label justify-start">
+                                            {errors.jawaban ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>{errors.jawaban?.type === "required" && "jawaban required"}</span>
                                         </div>
                                     </div>
                                     <div className="form-control">
@@ -128,7 +144,7 @@ const AddNewQuiz = props => {
                                         }> - </button>
                                     </div>
                                     <div className="form-control">
-                                        <button type='button' onClick={() => append({ section: "", namequiz: "" })}> + </button>
+                                        <button type='button' onClick={() => append({ quiz: "", soal: "", jawaban: "" })}> + </button>
                                     </div>
                                     {/* End Of Form Container */}
                                 </div>
@@ -144,8 +160,8 @@ const AddNewQuiz = props => {
     )
 }
 
-AddNewQuiz.propTypes = {
+AddNewExercise.propTypes = {
 
 }
 
-export default AddNewQuiz
+export default AddNewExercise

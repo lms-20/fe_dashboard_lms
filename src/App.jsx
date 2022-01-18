@@ -15,6 +15,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
 import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
 import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
+import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route exact path="/addsection" element={<AddNewSection />} />
           <Route exact path="/addlesson" element={<AddNewLesson />} />
           <Route exact path="/addquiz" element={<AddNewQuiz />} />
+          <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
       </Routes>
     </div>
