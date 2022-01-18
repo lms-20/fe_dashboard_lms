@@ -5,6 +5,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faPlayCircle ,faAngleDoubleRight,faFileAlt,faFlag } from '@fortawesome/free-solid-svg-icons';
+import YoutubePlayer from '../../components/YoutubePlayer/YoutubePlayer';
+import Navbar from '../../components/Navbar/Navbar';
 
 const CoursePreview = () => {
     const howManySections = [1,1];
@@ -12,32 +14,21 @@ const CoursePreview = () => {
     const howManyVideos = [1,1,1,1];
     return(
         <div className='bg-neutral-content'>
-             {/* Navbar */}
-             <div className='bg-neutral'>
-                    {/* Navbar Center */}
-                    <div className='w-11/12 mx-auto px-8 py-4 flex items-center'>
-                        <div className=' items-center flex grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 cursor-pointer text-primary'>
-                            <div className='flex h-8 w-8 items-center justify-center rounded-full bg-current'>
-                                <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
-                            </div>    
-                            <p className='text-current text-sm ml-2'>Back to home</p>
-                        </div> 
-                        
-                        <div className="divider divider-vertical  before:bg-base-100 after:bg-base-100  grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100"></div> 
-                        <h2 className=' text-base-100 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>React - The Complete Guide (incl Hooks, React Router, Redux)</h2>
-                    </div>
-                    {/* End Of Navbar Center */}
-                </div>
-                {/* End Of Navbar */}
+            <Navbar/>
+            
             <div className='w-11/12 mx-auto'>
                
                 {/* Container For The Content */}
                 <div className=''>
                     <div className=' mx-auto px-8 text-base-100 py-4 flex'>
-                    {/* Video Content */}
+                        {/* Video Container */}
                         <div className='basis-8/12 bg-neutral-content'>
-                            <iframe width="100%" height="500" src="https://www.youtube.com/embed/O_GWbkXIqEY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                            <YoutubePlayer
+                            
+                            />
+                            {/* <iframe width="100%" height="500" src="https://www.youtube.com/embed/O_GWbkXIqEY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
                         </div>
+                        {/* End Of Video Container */}
                         {/* Container For The Sidebar */}
                         <div className='basis-4/12 px-4 flex-grow'>
                             {/* Sidebar */}
