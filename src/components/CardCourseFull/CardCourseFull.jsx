@@ -27,8 +27,6 @@ const CardCourseFull = () => {
             })
     }, []);
 
-    console.log(courses.slice(0, 4));
-
     return (
         <>
             <div className='mt-8 hidden lg:flex'>
