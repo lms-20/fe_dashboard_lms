@@ -15,7 +15,8 @@ const SidebarPreview = () => {
                 <p className='text-neutral-content font-bold text-xl w-full text-center -ml-4'>Course Content</p>
             </div>
             <CollapsedContentPreview/>
-
+            <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4'>Buy Course</div>
+            
            
         </div>
      

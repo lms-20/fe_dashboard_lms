@@ -32,7 +32,22 @@ const CoursePreview = () => {
                                     </div>
                                 </div>
                             </div>
+                            {/* End Of Author */}
                             <YoutubePlayer/>
+                            {/* Information */}
+                            <div className='flex my-4'>
+                                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4'>345 Students</div>
+                                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4'>120 Videos</div>
+                                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4'>Beginner</div>
+                                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4'>Premium</div>
+                            </div>
+                            {/* Description */}
+                            <div>
+                                <h3 className='text-primary font-extrabold text-2xl mb-4'>Description</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id velit ut dignissimos voluptate totam inventore et voluptates odio exercitationem quia eveniet deleniti cum amet incidunt, molestiae non officia praesentium? Assumenda?</p>
+                            </div>
+                            {/* End Of Description */}
+                            {/*  */}
                         </div>
                         {/* End Of Video Container */}
                         {/* Container For The Sidebar */}
