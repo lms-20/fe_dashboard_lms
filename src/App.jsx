@@ -24,15 +24,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<Drawer/>}>
-          <Route path="/landing" element={<Landing/>}/>
-          <Route path="/allcategories" element={<Categories/>}/>
-          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+        <Route element={<Drawer />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/allcategories" element={<Categories />} />
+          <Route path="/categories/:category_id" element={<CategoriesDetails />} />
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-       
-
 
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
