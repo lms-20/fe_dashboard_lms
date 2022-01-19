@@ -18,6 +18,7 @@ import Categories from './pages/Categories/Categories';
 import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
 import Drawer from './components/Drawer/Drawer';
 import CoursePreview from './pages/CoursePreview/CoursePreview';
+import Payments from './pages/Payments/Payments';
 
 
 function App() {
@@ -29,10 +30,11 @@ function App() {
           <Route path="/landing" element={<Landing/>}/>
           <Route path="/allcategories" element={<Categories/>}/>
           <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+          <Route exact path = "/course/:course_id" element={<CoursePreview/>}/>
+          <Route exact path = "/payments/course/:course_id" element={<Payments/>}/>
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path = "/course/:course_id" element={<CoursePreview/>}/>
        
 
 

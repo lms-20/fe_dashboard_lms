@@ -10,7 +10,7 @@ const CollapsedContentPreview = () => {
     return(
         <div className='rounded-lg my-3'>
             {/* Collapse Container */}
-            <div className="collapse w-96 border rounded-box border-base-300 hover:border-primary collapse-arrow">
+            <div className="collapse w-full border rounded-box border-base-300 hover:border-primary collapse-arrow">
                 {/* This input purpose is,if the arrow is clicked,the div parent will expand */}
                 <input type="checkbox"/> 
                 <div className="collapse-title">
@@ -33,7 +33,6 @@ const CollapsedContentPreview = () => {
                                 <FontAwesomeIcon icon={faFlag} className='text-xl mr-4'></FontAwesomeIcon>
                                 {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
                                 <span className="label-text text-primary font-medium">Quiz | Section 1 : Judul Quiz </span> 
-                                <input type="checkbox" className="checkbox border-primary ml-auto"/>
                             </div>
                         </div>
                     </div>
