@@ -11,7 +11,6 @@ import axios from "axios";
 const CategoriesCard = () => {
     const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/category`;
     const [categories, setCategories] = useState([]);
-    let x = [1, 2, 3, 4];
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -27,10 +26,6 @@ const CategoriesCard = () => {
                 console.log(error)
             })
     }, []);
-
-    // const handleClick = () => {
-    //     navigate("/categories/1");
-    // }
 
     return (
 
