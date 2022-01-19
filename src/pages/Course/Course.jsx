@@ -60,7 +60,7 @@ const Course = () => {
                     {/* Logic For Next Video Button */}
                     {isQuizTime == false ? 
                         <div className=' active:translate-y-1 opacity-0 absolute transition-all next-video bg-primary top-1/2 -right-10 py-3 px-2 cursor-pointer text-neutral-content grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
-                                <p className='font-bold'>Next Lesson</p>
+                                <p  className='font-bold'>Next Lesson</p>
                         </div> 
                     
                     :""}
