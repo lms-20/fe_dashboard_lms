@@ -4,104 +4,41 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faPlayCircle ,faAngleDoubleRight,faFileAlt,faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from '../../components/YoutubePlayer/YoutubePlayer';
 import Navbar from '../../components/Navbar/Navbar';
+import CollapsedContentPreview from '../../components/CollapsedContentPreview/CollapsedContentPreview';
+import SidebarPreview from '../../components/SidebarPreview/SidebarPreview';
 
 const CoursePreview = () => {
-    const howManySections = [1,1];
-    // Test for how much the video in the section will be
-    const howManyVideos = [1,1,1,1];
     return(
-        <div className='bg-neutral-content'>
+        <div className='bg-neutral-content min-h-screen'>
             <Navbar/>
-            
+            {/* Centered Content */}
             <div className='w-11/12 mx-auto'>
-               
                 {/* Container For The Content */}
                 <div className=''>
-                    <div className=' mx-auto px-8 text-base-100 py-4 flex'>
+                    <div className=' mx-auto text-base-100 py-4 flex'>
                         {/* Video Container */}
                         <div className='basis-8/12 bg-neutral-content'>
-                            <YoutubePlayer
-                            
-                            />
-                            {/* <iframe width="100%" height="500" src="https://www.youtube.com/embed/O_GWbkXIqEY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
+                            <h3 className='text-primary font-extrabold text-4xl mb-4'>Judul Course</h3>
+                            {/* Author */}
+                            <div className='mb-2'>
+                                <div className='flex items-center'>
+                                    <FontAwesomeIcon icon = {faChalkboardTeacher}  className='text-3xl text-base-300'/>
+                                    <div className='flex flex-col justify-center text-base-300 pl-2'>
+                                        <p className='text-sm'>Mentor by : Dan Abramov</p>
+                                        <p className='text-sm'>Software Engineer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <YoutubePlayer/>
                         </div>
                         {/* End Of Video Container */}
                         {/* Container For The Sidebar */}
                         <div className='basis-4/12 px-4 flex-grow'>
-                            {/* Sidebar */}
-                            <div className='bg-neutral flex-col rounded-lg p-4 '>
-                                {/* Header */}
-                                <div className='flex items-center bg-primary p-2 rounded-lg grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
-                                    <FontAwesomeIcon icon = {faAngleDoubleRight} className='text-4xl text-neutral-content mr-2 ' />
-                                    <p className='text-neutral-content font-bold text-xl w-full text-center -ml-4'>Course Content</p>
-                                </div>
-                                <div className='flex justify-center my-4'>
-                                    <a href = "#" className='text-xs text-base-300 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>Are you have a problem? <span className='text-primary underline decoration-solid'>Request Consultation</span></a>
-                                </div>
-                                {/* Card Section */}
-                                {
-                                    howManySections.map((elm,idx) => {
-                                        return(
-                                            <div key = {idx} className='rounded-lg my-3'>
-                                                {/* Collapse Container */}
-                                                <div className="collapse w-96 border rounded-box border-base-300 hover:border-primary collapse-arrow">
-                                                    {/* This input purpose is,if the arrow is clicked,the div parent will expand */}
-                                                    <input type="checkbox"/> 
-                                                    <div className="collapse-title">
-                                                        <p className='font-bold'>Section 1 : Introduction</p>
-                                                        <p className='text-sm'>5 Videos</p>
-                                                    </div> 
-                                                    {/* Collapse Content */}
-                                                    <div className="collapse-content"> 
-                                                        {/* The First Collapse Content Is Always The Resource Of The Section */}
-                                                        <a href = "#" title = "Download The Resource For This Section"className=' p-1 border border-primary my-1 inline-block  grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
-                                                            <FontAwesomeIcon icon={faFileAlt} className='mx-1'/>
-                                                            <span className='mx-1'>Resources</span>
-                                                        </a>
-                                                        {/* Card For Refrence To The Video */}
-                                                        {
-                                                            howManyVideos.map((elm,idx) => {
-                                                                return(
-                                                                    <div key = {idx} className="p-2 card-bordered rounded-lg mt-4 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100">
-                                                                        <div className="form-control">
-                                                                            <div className="cursor-pointer p-2 flex items-center justify-start">
-                                                                                <FontAwesomeIcon icon={faPlayCircle} className='text-xl mr-4'></FontAwesomeIcon>
-                                                                                {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
-                                                                                <span className="label-text text-primary font-medium">1.What is React JS?</span> 
-                                                                                <input type="checkbox" className="checkbox border-primary ml-auto"/>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        }
-                                                        {/* End Of Card For Refrence To The Video */}
-                                                        {/* Quiz */}
-                                                        <div className="p-2 card-bordered rounded-lg mt-4 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100">
-                                                            <div className="form-control">
-                                                                <div className="cursor-pointer p-2 flex items-center justify-start">
-                                                                    <FontAwesomeIcon icon={faFlag} className='text-xl mr-4'></FontAwesomeIcon>
-                                                                    {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
-                                                                    <span className="label-text text-primary font-medium">Quiz | Section 1 : Introduction </span> 
-                                                                    <input type="checkbox" className="checkbox border-primary ml-auto"/>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {/* End Of Collapse Container */}
-                                            </div> 
-                                        )
-                                    })
-                                }
-                                {/* End Of Card Section */}
-                            </div>
-                            {/* End Of Sidebar */}
-                        </div>
-                        {/* End Of Sidebar Container */}
+                            <SidebarPreview/>
+                        </div> 
                     </div>
                 </div>
                 {/* End Of Container For The Content */}
