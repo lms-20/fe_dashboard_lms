@@ -13,6 +13,7 @@ import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+import RequestCounselling from './pages/RequestCounselling/RequestCounselling';
 
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
+        <Route exact path="/help/courses/:course_id" element={<RequestCounselling/>} />
+
         <Route path="/landing" element={<div></div>}/>
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
