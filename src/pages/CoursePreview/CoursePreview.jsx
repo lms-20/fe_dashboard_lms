@@ -40,9 +40,9 @@ const CoursePreview = () => {
                                     <CourseInformationPreview/>
                                 </div>
                             </div>
-                            <div className='my-4'>
+                            {/* <div className='my-4'>
                                 <PricingPlans/>
-                            </div>
+                            </div> */}
                         </div>
                         {/* End Of Video Container */}
                         {/* Container For The Sidebar */}

@@ -5,6 +5,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
+import PricingPlans from '../../components/PricingPlans/PricingPlans';
+
 
 const CourseInformationPreview = () => {
     return(
@@ -43,6 +45,7 @@ const CourseInformationPreview = () => {
                 <Reviews/>
                 <Link to ="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
             </div>
+            <PricingPlans/>
         </>
     )
 
