@@ -11,6 +11,7 @@ import CategoriesCard from '../../components/CategoriesCard/CategoriesCard';
 import CardCourseFull from '../../components/CardCourseFull/CardCourseFull';
 import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
+import CardCategory from '../../components/CardCategory/CardCategory';
 
 
 const Landing = () => {
@@ -31,8 +32,6 @@ const Landing = () => {
                 console.log(error)
             })
     }, []);
-
-    console.log(categories.slice(0, 4))
 
     return (
         <>
@@ -105,7 +104,13 @@ const Landing = () => {
                     <div className='lg:hidden'>
                         <Link to="/allcategories" className="btn w-full bg-transparent text-base-100 border-primary btn-hover-primary rounded-full">See All Categories</Link>
                     </div>
-                    <CategoriesCard />
+                    <div className=' flex flex-wrap justify-center flex-grow basis-2/5'>
+                        {
+                            categories.slice(0, 4).map((elm, idx) => {
+                                return <CardCategory key={idx} id={elm.id} name={elm.name} courses={elm.courses} />
+                            })
+                        }
+                    </div>
 
                     {/* End OF Categories Items */}
                     <div className=' basis-2/4 mb-10 lg:mb-0 lg:ml-10 flex flex-col  justify-center flex-grow'>
