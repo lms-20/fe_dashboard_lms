@@ -30,7 +30,7 @@ const CategoriesCard = () => {
     return (
 
         <div className=' flex flex-wrap justify-center flex-grow basis-2/5'>
-            {categories.slice(0, 4).map((elm, idx) => {
+            {categories.map((elm, idx) => {
                 return (
                     <div className="card mb-8 bg-neutral lg:card-side basis-5/12 flex-grow mr-6 cursor-pointer" key={idx} onClick={() => navigate(`/categories/${elm.id}`)}>
                         <div className="card-body">

@@ -27,6 +27,7 @@ const CardCourseFull = () => {
             })
     }, []);
 
+
     return (
         <>
             <div className='mt-8 hidden lg:flex'>
@@ -85,40 +86,40 @@ const CardCourseFull = () => {
                 </div>
                 <div className="lg:hidden carousel rounded-box">
                     {
-                        a.map((elm, idx) => {
+                        courses.slice(0, 4).map((elm, idx) => {
                             return (
                                 <div className='w-full carousel-item' key={idx}>
                                     <div key={idx} className="card-compact bg-neutral drop-shadow-lg mr-3 basis-3/12 flex-grow rounded-lg">
                                         <figure className=' px-4 pt-4'>
-                                            <img src={heroImg} className='rounded-box' />
+                                            <img src={elm.thumbnail} className='rounded-box' />
                                         </figure>
                                         <div className="card-body">
                                             <div className='h-10 overflow-hidden break-all mb-2'>
-                                                <h2 className="font-bold text-base-100 text-ellipsis">React - The Complete Guide (incl Hooks, React uasdkghasdkgasdkjgasdkjasgdkjasgdjkasdkjasgda</h2>
+                                                <h2 className="font-bold text-base-100 text-ellipsis">{elm.name}</h2>
 
                                             </div>
-                                            <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : Rizki</p>
+                                            <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm.mentor}</p>
                                             <div className='flex h-6 items-center mb-2'>
                                                 <div className='h-6 overflow-hidden basis-6/12 break-all'>
                                                     <p className='text-base-300'>
                                                         <FontAwesomeIcon icon={faLightbulb} className='mr-2'></FontAwesomeIcon>
-                                                        Technology
+                                                        {elm.category}
                                                     </p>
                                                 </div>
 
                                                 <div className='basis-6/12 flex justify-end'>
                                                     <p className='text-right text-base-300  font-bold'>
                                                         <FontAwesomeIcon icon={faSignal} className='mr-2'></FontAwesomeIcon>
-                                                        Expert
+                                                        {elm.level}
                                                     </p>
                                                 </div>
                                             </div>
                                             <div className='flex items-center mb-2'>
                                                 <div className='grow'>
-                                                    <p className='font-bold text-primary text-2xl'>Rp900.000</p>
+                                                    <p className='font-bold text-primary text-2xl'>Rp{elm.price}</p>
                                                 </div>
                                                 <div className='text-sm text-base-300 flex flex-col'>
-                                                    <p>Lifetime Access</p>
+                                                    <p>{elm.typekelas}</p>
                                                     <p className='font-bold text-sm text-right'>58 Videos</p>
                                                 </div>
                                             </div>
