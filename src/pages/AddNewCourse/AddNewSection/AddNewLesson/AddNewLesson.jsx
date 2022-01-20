@@ -15,6 +15,7 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader";
+import { useSelector } from 'react-redux';
 
 
 const style = {
@@ -40,6 +41,13 @@ const AddNewLesson = props => {
         name: "items"
     });
     const [sections, setSections] = useState([]);
+
+    const sectionAdded = useSelector(state => state.courseData.sectionAdded);
+    useEffect(() => {
+        if (!sectionAdded || sectionAdded === false) {
+            navigate('/addsection')
+        }
+    }, []);
 
     useEffect(() => {
         axios.get(ApiSections)

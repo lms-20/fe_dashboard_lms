@@ -6,7 +6,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const courseSlice = createSlice({
     name: 'courseData',
     initialState: {
-        courseId: null
+        courseId: null,
+        courseAdded: null,
+        sectionAdded: null,
+        quizAdded: null
     },
     reducers: {
         storeIdCourse: (state, action) => {
@@ -14,10 +17,24 @@ export const courseSlice = createSlice({
         },
         deleteIdCourse: (state, action) => {
             state.courseId = null
+        },
+        setFalseCourseAdded: (state, action) => {
+            state.courseAdded = action.payload
+        },
+        setFalseSectionAdded: (state, action) => {
+            state.sectionAdded = action.payload
+        },
+        setFalseQuizAdded: (state, action) => {
+            state.quizAdded = action.payload
+        },
+        completedAddCoursePackages: (state, action) => {
+            state.courseAdded = action.payload
+            state.sectionAdded = action.payload
+            state.quizAdded = action.payload
         }
     }
 });
 
 export const courseReducer = courseSlice.reducer;
 
-export const { storeIdCourse, deleteIdCourse } = courseSlice.actions
+export const { storeIdCourse, deleteIdCourse, setFalseCourseAdded, setFalseSectionAdded, setFalseQuizAdded, completedAddCoursePackages } = courseSlice.actions

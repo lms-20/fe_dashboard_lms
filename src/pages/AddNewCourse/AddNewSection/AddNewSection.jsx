@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { setFalseSectionAdded } from '../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +29,7 @@ const style = {
 
 const AddNewSection = props => {
     const courseId = useSelector(state => state.courseData.courseId);
+    const courseAdded = useSelector(state => state.courseData.courseAdded);
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
             items: [{ courseId, linkslide: "", namesection: "" }]
@@ -42,6 +44,12 @@ const AddNewSection = props => {
         name: "items"
     });
 
+    useEffect(() => {
+        if (!courseAdded || courseAdded === false) {
+            navigate('/addcourse')
+        }
+    }, []);
+
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {
@@ -54,6 +62,7 @@ const AddNewSection = props => {
             )
                 .then(response => {
                     setIsLoading(false);
+                    dispatch(setFalseSectionAdded(true))
                     navigate('/addlesson')
                 })
                 .catch(error => {

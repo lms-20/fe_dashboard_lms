@@ -5,6 +5,8 @@ import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFalseQuizAdded } from '../../../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -40,6 +42,15 @@ const AddNewQuiz = props => {
         name: "items"
     });
     const [sections, setSections] = useState([]);
+    const dispatch = useDispatch();
+
+
+    const sectionAdded = useSelector(state => state.courseData.sectionAdded);
+    useEffect(() => {
+        if (!sectionAdded || sectionAdded === false) {
+            navigate('/addsection')
+        }
+    }, []);
 
     useEffect(() => {
         axios.get(ApiSections)
@@ -68,6 +79,7 @@ const AddNewQuiz = props => {
             )
                 .then(response => {
                     setIsLoading(false);
+                    dispatch(setFalseQuizAdded(true))
                     navigate('/addexercise')
                 })
                 .catch(error => {

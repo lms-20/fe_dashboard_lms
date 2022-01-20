@@ -5,8 +5,8 @@ import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { deleteIdCourse } from '../../../../../../store/courseSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteIdCourse, completedAddCoursePackages } from '../../../../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -44,6 +44,13 @@ const AddNewExercise = props => {
     });
     const [quizs, setQuizs] = useState([]);
 
+    const quizAdded = useSelector(state => state.courseData.quizAdded);
+    useEffect(() => {
+        if (!quizAdded || quizAdded === false) {
+            navigate('/addquiz')
+        }
+    }, []);
+
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
@@ -73,6 +80,7 @@ const AddNewExercise = props => {
                     setIsLoading(false);
                     navigate('/myclass')
                     dispatch(deleteIdCourse());
+                    dispatch(completedAddCoursePackages(false))
                 })
                 .catch(error => {
                     setIsLoading(false);
