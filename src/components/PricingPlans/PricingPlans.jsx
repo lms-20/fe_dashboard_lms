@@ -11,7 +11,7 @@ const PricingPlans = () => {
     return(
         <>
             <h3 className='text-primary font-extrabold text-3xl mb-4'>Let&apos;s Join The Class</h3>
-            <div className='border-2 border-primary flex p-8 rounded-lg' ref = {pricingRef}>
+            <div className='border-2 border-primary flex p-8 rounded-lg'>
                     <div className=' flex flex-col items-center rounded-lg  p-4 border-2 border-primary basis-2/4'>
                         <div className="text-center">
                             <p className='text-3xl font-extrabold text-primary mb-2'>Selamanya</p>
