@@ -101,7 +101,7 @@ const PermanentDrawer = props => {
                         </Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to="/" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
+                        <Link to="/landing" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
                             <FontAwesomeIcon icon={faStore} className='mr-4' />
                             Catalog
                         </Link>
