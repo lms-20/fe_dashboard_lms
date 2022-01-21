@@ -43,15 +43,22 @@ const MyClass = props => {
         // Pages Container
         <div className=' mt-8 flex flex-col  w-11/12 mx-auto'>
             <h2 className='text-center text-xl lg:text-4xl font-extrabold text-primary'>Its your available course yet</h2>
+            
             <div className='flex justify-center flex-wrap mt-4'>
                 <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>All Courses</Link>
                 <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>On Progress</Link>
                 <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>Finished</Link>
             </div>
+            {globalStateUser?.data.role === 1
+                ?
+                <Link className='btn btn-primary text-neutral-content my-4 w-96 mx-auto' to='/addcourse'>Add New Course</Link>
+                :
+                null
+            }
             {isLoading === true ? <p>Loading Bro</p> : isError == true ? <p>Error Bro</p> :
                 // {/* Course Content Container */}
                 <div className='w-96 mx-auto lg:w-full lg:mx-0'>
-                    <div className='hidden lg:flex flex mt-4 flex-wrap'>
+                    <div className='hidden lg:flex lg:justify-center mt-4 flex-wrap '>
                         {/* Card only appear in desktop view */}
                         {
                             myCourses.map((course) => {
@@ -102,12 +109,7 @@ const MyClass = props => {
                 </div>
             }
             {/* End of course content */}
-            {globalStateUser?.data.role === 1
-                ?
-                <Link className='btn btn-primary' to='/addcourse'>Add New Course</Link>
-                :
-                null
-            }
+            
         </div>
         // End of pages container
     )

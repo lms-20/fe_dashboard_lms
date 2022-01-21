@@ -104,7 +104,7 @@ const Landing = () => {
                     <div className='lg:hidden'>
                         <Link to="/allcategories" className="btn w-full bg-transparent text-base-100 border-primary btn-hover-primary rounded-full">See All Categories</Link>
                     </div>
-                    <div className=' flex flex-wrap justify-center flex-grow basis-2/5'>
+                    <div className=' flex flex-wrap basis-2/5'>
                         {
                             categories.slice(0, 4).map((elm, idx) => {
                                 return <CardCategory key={idx} id={elm.id} name={elm.name} courses={elm.courses} />

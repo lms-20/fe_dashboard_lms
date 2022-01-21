@@ -69,7 +69,7 @@ const Navbar = () => {
                                 </ul>
                             </div>
                             :
-                            <Link className='btn btn-primary' to='/login'>Login</Link>
+                            <Link className='btn btn-primary text-neutral-content hover:bg-base-100 mx-3' to='/login'>Login</Link>
                         }
                     </div>
                 </div>
