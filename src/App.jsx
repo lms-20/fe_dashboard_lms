@@ -13,6 +13,9 @@ import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
+import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
+import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
 
 
 function App() {
@@ -22,7 +25,7 @@ function App() {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route path="/landing" element={<div></div>}/>
+        <Route path="/landing" element={<div></div>} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
@@ -32,6 +35,9 @@ function App() {
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
           <Route exact path="/addsection" element={<AddNewSection />} />
+          <Route exact path="/addlesson" element={<AddNewLesson />} />
+          <Route exact path="/addquiz" element={<AddNewQuiz />} />
+          <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
       </Routes>
     </div>
