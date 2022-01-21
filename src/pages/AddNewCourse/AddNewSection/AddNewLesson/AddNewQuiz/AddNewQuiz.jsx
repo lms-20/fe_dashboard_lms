@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { useForm, useFieldArray } from 'react-hook-form';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFalseSectionAdded } from '../../../store/courseSlice';
+import { setFalseQuizAdded } from '../../../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -27,33 +27,50 @@ const style = {
     zIndex: "9999"
 };
 
-const AddNewSection = props => {
-    const courseId = useSelector(state => state.courseData.courseId);
-    const courseAdded = useSelector(state => state.courseData.courseAdded);
+const AddNewQuiz = props => {
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
-            items: [{ courseId, linkslide: "", namesection: "" }]
+            items: [{ section: "", namequiz: "" }]
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
-    const dispatch = useDispatch();
+    const ApiSections = `https://6141ca84357db50017b3dd36.mockapi.io/sections`;
+    const ApiUrl = `https://61e62635ce3a2d0017358fa7.mockapi.io/quiz`;
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
         name: "items"
     });
+    const [sections, setSections] = useState([]);
+    const dispatch = useDispatch();
 
+
+    const sectionAdded = useSelector(state => state.courseData.sectionAdded);
     useEffect(() => {
-        if (!courseAdded || courseAdded === false) {
-            navigate('/addcourse')
+        if (!sectionAdded || sectionAdded === false) {
+            navigate('/addsection')
         }
     }, []);
+
+    useEffect(() => {
+        axios.get(ApiSections)
+            .then(response => {
+                response?.data.forEach(dataSections => {
+                    setSections(
+                        prevstate => [...prevstate, dataSections]
+                    )
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+
+    // console.log(sections)
 
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {
-            console.log(element)
             setIsLoading(true);
             axios.post(
                 ApiUrl,
@@ -62,8 +79,8 @@ const AddNewSection = props => {
             )
                 .then(response => {
                     setIsLoading(false);
-                    dispatch(setFalseSectionAdded(true))
-                    navigate('/addlesson')
+                    dispatch(setFalseQuizAdded(true))
+                    navigate('/addexercise')
                 })
                 .catch(error => {
                     setIsLoading(false);
@@ -86,27 +103,31 @@ const AddNewSection = props => {
                                     {/* Border Form Container */}
                                     <div className="form-control">
                                         <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">linkslide</span>
+                                            <span className="label-text text-lg text-base-100 font-bold">section</span>
                                         </label>
-                                        <input type="text" placeholder="linkslide" className={`${!errors.linkslide?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].linkslide`, { required: true })} />
+                                        <select id='section' name='section' className={`${!errors.section?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].section`, { required: true })}>
+                                            <option value="" disabled >Choose your superpower</option>
+                                            {
+                                                sections.map((data, index) => {
+                                                    return <option key={index} value={data.id}>{data.namesection}</option>
+                                                })
+                                            }
+                                        </select>
                                         <div className="label justify-start">
-                                            {errors.linkslide ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                            <span className='text-error text-sm font-bold'>
-                                                {errors.linkslide?.type === "required" && "linkslide required"}
-                                                {errors.linkslide?.type === "pattern" && "Invalid linkslide Address"}
-                                            </span>
+                                            {errors.section ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>{errors.section?.type === "required" && "section required"}</span>
                                         </div>
                                     </div>
                                     <div className="form-control">
                                         <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">namesection</span>
+                                            <span className="label-text text-lg text-base-100 font-bold">namequiz</span>
                                         </label>
-                                        <input type="text" placeholder="namesection" className={`${!errors.namesection?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namesection`, { required: true })} />
+                                        <input type="text" placeholder="namequiz" className={`${!errors.namequiz?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namequiz`, { required: true })} />
                                         <div className="label justify-start">
-                                            {errors.namesection ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            {errors.namequiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                             <span className='text-error text-sm font-bold'>
-                                                {errors.namesection?.type === "required" && "namesection required"}
-                                                {errors.namesection?.type === "pattern" && "Invalid namesection Address"}
+                                                {errors.namequiz?.type === "required" && "namequiz required"}
+                                                {errors.namequiz?.type === "pattern" && "Invalid namequiz Address"}
                                             </span>
                                         </div>
                                     </div>
@@ -119,7 +140,7 @@ const AddNewSection = props => {
                                         }> - </button>
                                     </div>
                                     <div className="form-control">
-                                        <button type='button' onClick={() => append({ courseId, linkslide: "", namesection: "" })}> + </button>
+                                        <button type='button' onClick={() => append({ section: "", namequiz: "" })}> + </button>
                                     </div>
                                     {/* End Of Form Container */}
                                 </div>
@@ -135,8 +156,8 @@ const AddNewSection = props => {
     )
 }
 
-AddNewSection.propTypes = {
+AddNewQuiz.propTypes = {
 
 }
 
-export default AddNewSection
+export default AddNewQuiz
