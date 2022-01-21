@@ -13,6 +13,9 @@ import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+import Feedback from './pages/Feedback/Feedback';
+import FeedbackReqCourse from './pages/FeedbackReqCourse/FeedbackReqCourse';
+import FeedbackReqCouns from './pages/FeedbackReqCouns/FeedbackReqCouns';
 import RequestCourse from './pages/RequestCourse/RequestCourse';
 import RequestCounselling from './pages/RequestCounselling/RequestCounselling';
 import Landing from './pages/Landing/Landing';
@@ -48,6 +51,10 @@ function App() {
             <Route exact path="/myclass" element={<MyClass />} />
             <Route exact path="/transactions" element={<Transaction />} />
             <Route exact path="/settings" element={<UserSettings />} />
+            <Route element={<Feedback />} >
+              <Route exact path="/feedback/reqCourse" element ={<FeedbackReqCourse/>}/>
+              <Route exact path="/feedback/reqCounselling" element ={<FeedbackReqCouns/>}/>
+            </Route>
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
           <Route exact path="/addsection" element={<AddNewSection />} />

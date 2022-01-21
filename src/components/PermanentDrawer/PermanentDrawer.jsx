@@ -109,7 +109,7 @@ const PermanentDrawer = props => {
                     {globalStateUser?.data.role === 1
                         ?
                         <li className='mb-2'>
-                            <Link to="/" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
+                            <Link to="/feedback/reqCourse" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
                                 <FontAwesomeIcon icon={faCommentDots} className='mr-4' />
                                 Feedback
                             </Link>
