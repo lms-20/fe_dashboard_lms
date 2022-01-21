@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLightbulb, faSignal } from '@fortawesome/free-solid-svg-icons';
 import heroImg from "../../assets/undraw_online_learning.svg";
@@ -11,7 +11,7 @@ import axios from 'axios';
 const CardCourseFull = () => {
     const ApiSections = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
     const [courses, setCourses] = useState([]);
-    let a = [1, 2, 3, 4]
+    let navigate = useNavigate();
 
     useEffect(() => {
         axios.get(ApiSections)
@@ -68,7 +68,7 @@ const CardCourseFull = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Link to="/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                    <button onClick={() => navigate(`/course/${elm.id}`)} className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</button>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +120,7 @@ const CardCourseFull = () => {
                                                 </div>
 
                                                 <div>
-                                                    <Link to="/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                                    <button onClick={() => navigate(`/course/${elm.id}`)} className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</button>
                                                 </div>
 
                                                 <div className='text-sm text-base-300 flex flex-col'>
@@ -130,7 +130,7 @@ const CardCourseFull = () => {
                                                 </div>
                                             </div>
                                             <div>
-                                                <Link to="" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                                <button onClick={() => navigate(`/course/${elm.id}`)} className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</button>
                                             </div>
                                         </div>
                                     </div>
