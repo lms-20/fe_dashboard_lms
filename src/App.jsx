@@ -17,6 +17,9 @@ import Landing from './pages/Landing/Landing';
 import Categories from './pages/Categories/Categories';
 import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
 import Drawer from './components/Drawer/Drawer';
+import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
+import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
+import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
 
 
 function App() {
@@ -31,7 +34,6 @@ function App() {
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
@@ -41,6 +43,9 @@ function App() {
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
           <Route exact path="/addsection" element={<AddNewSection />} />
+          <Route exact path="/addlesson" element={<AddNewLesson />} />
+          <Route exact path="/addquiz" element={<AddNewQuiz />} />
+          <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
       </Routes>
     </div>
