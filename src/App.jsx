@@ -13,6 +13,7 @@ import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+import RequestCounselling from './pages/RequestCounselling/RequestCounselling';
 import Landing from './pages/Landing/Landing';
 import Categories from './pages/Categories/Categories';
 import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
@@ -38,6 +39,7 @@ function App() {
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
+        <Route exact path="/help/courses/:course_id" element={<RequestCounselling/>} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
