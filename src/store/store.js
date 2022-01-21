@@ -24,7 +24,7 @@ const reducers = combineReducers({
 const persistConfig = {
     key: 'userData',
     storage,
-    blacklist: ['courseData']
+    // blacklist: ['courseData']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers);

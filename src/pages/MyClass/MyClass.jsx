@@ -44,9 +44,9 @@ const MyClass = props => {
         <div className=' mt-8 flex flex-col  w-11/12 mx-auto'>
             <h2 className='text-center text-xl lg:text-4xl font-extrabold text-primary'>Its your available course yet</h2>
             <div className='flex justify-center flex-wrap mt-4'>
-                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2'>All Courses</Link>
-                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2'>On Progress</Link>
-                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2'>Finished</Link>
+                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>All Courses</Link>
+                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>On Progress</Link>
+                <Link to="" className='btn  btn-hover-primary btn-rounded mx-2 bg-transparent border-2 border-primary text-base-100'>Finished</Link>
             </div>
             {isLoading === true ? <p>Loading Bro</p> : isError == true ? <p>Error Bro</p> :
                 // {/* Course Content Container */}
