@@ -11,18 +11,18 @@ const Reviews = () => {
     function makeArray(rating) {
         let arr = []
         for (let i = 0; i < 5; i++) {
-                if (rating > 0) {
-                   arr.push(1) 
-                } else  {
-                    arr.push(0)
-                }
-                rating--
+            if (rating > 0) {
+                arr.push(1)
+            } else {
+                arr.push(0)
+            }
+            rating--
         }
         return arr
-    } 
+    }
 
     const givenRating = makeArray(3);
-    return(
+    return (
         <>
             <div className='flex flex-col lg:flex-row flex-wrap flex-grow'>
                 {/* The Card */}
@@ -31,11 +31,11 @@ const Reviews = () => {
                         {/* Rating */}
                         <div className='flex mb-2'>
                             {
-                                givenRating.map((elm) => {
+                                givenRating.map((elm, idx) => {
                                     if (elm === 0) {
-                                       return  <FontAwesomeIcon icon = {faStar} className='text-base-300 mr-1'></FontAwesomeIcon>
+                                        return <FontAwesomeIcon key={idx} icon={faStar} className='text-base-300 mr-1'></FontAwesomeIcon>
                                     } else {
-                                       return  <FontAwesomeIcon icon = {faStar} className='text-yellow-400 mr-1 '></FontAwesomeIcon>
+                                        return <FontAwesomeIcon key={idx} icon={faStar} className='text-yellow-400 mr-1 '></FontAwesomeIcon>
                                     }
                                 })
                             }
@@ -49,11 +49,11 @@ const Reviews = () => {
                         {/* End Of Rating */}
                     </div>
                 </div>
-                
-                
+
+
             </div>
-            
-        
+
+
         </>
     )
 }
