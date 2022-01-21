@@ -13,6 +13,10 @@ import Login from './pages/Auth/Login/Login';
 import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
+import Landing from './pages/Landing/Landing';
+import Categories from './pages/Categories/Categories';
+import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
+import Drawer from './components/Drawer/Drawer';
 import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
 import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
 import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
@@ -23,9 +27,13 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route element={<Drawer />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/allcategories" element={<Categories />} />
+          <Route path="/categories/:category_id" element={<CategoriesDetails />} />
+        </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route path="/landing" element={<div></div>} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
