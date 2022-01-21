@@ -14,6 +14,16 @@ import Course from './pages/Course/Course';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import AddNewSection from './pages/AddNewCourse/AddNewSection/AddNewSection';
 import RequestCourse from './pages/RequestCourse/RequestCourse';
+import RequestCounselling from './pages/RequestCounselling/RequestCounselling';
+import Landing from './pages/Landing/Landing';
+import Categories from './pages/Categories/Categories';
+import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
+import Drawer from './components/Drawer/Drawer';
+import CoursePreview from './pages/CoursePreview/CoursePreview';
+import Payments from './pages/Payments/Payments';
+import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
+import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
+import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
 
 
 function App() {
@@ -21,11 +31,17 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route element={<Drawer/>}>
+          <Route path="/landing" element={<Landing/>}/>
+          <Route path="/allcategories" element={<Categories/>}/>
+          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+          <Route exact path = "/course/:course_id" element={<CoursePreview/>}/>
+          <Route exact path = "/payments/course/:course_id" element={<Payments/>}/>
+        </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/req-courses" element={<RequestCourse />} />
-
-        <Route path="/landing" element={<div></div>}/>
+        <Route exact path="/help/courses/:course_id" element={<RequestCounselling/>} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
@@ -35,6 +51,9 @@ function App() {
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
           <Route exact path="/addsection" element={<AddNewSection />} />
+          <Route exact path="/addlesson" element={<AddNewLesson />} />
+          <Route exact path="/addquiz" element={<AddNewQuiz />} />
+          <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
       </Routes>
     </div>

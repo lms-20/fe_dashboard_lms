@@ -82,7 +82,7 @@ const Register = props => {
             <div className="bg-neutral">
                 {/* Navigation for go to the homepage lms */}
                 <div className='absolute top-4 left-4'>
-                    <div className='flex items-center'>
+                    <div className='flex items-center cursor-pointer' onClick={() => navigate('/landing')}>
                         <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
                                 <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
                         </div>

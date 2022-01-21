@@ -19,7 +19,7 @@ code {
 }
 
 .btn {
-  @apply normal-case text-base-100 border-2 
+  @apply normal-case border-2 
 }
 
 .course-video:hover > .next-video {
