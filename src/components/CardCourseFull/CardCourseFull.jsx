@@ -68,7 +68,7 @@ const CardCourseFull = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Link to="" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+                                    <Link to = "/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
                                 </div>
                             </div>
                         </div>
@@ -118,9 +118,14 @@ const CardCourseFull = () => {
                                                 <div className='grow'>
                                                     <p className='font-bold text-primary text-2xl'>Rp{elm.price}</p>
                                                 </div>
+
+                                                <div>
+                                                    <Link to = "/course/1" className='btn bg-transparent border-2 border-primary text-base-100 btn-hover-primary w-full'>Check it</Link>
+
                                                 <div className='text-sm text-base-300 flex flex-col'>
                                                     <p>{elm.typekelas}</p>
                                                     <p className='font-bold text-sm text-right'>58 Videos</p>
+
                                                 </div>
                                             </div>
                                             <div>

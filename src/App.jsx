@@ -17,6 +17,8 @@ import Landing from './pages/Landing/Landing';
 import Categories from './pages/Categories/Categories';
 import CategoriesDetails from './pages/CategoriesDetails/CategoriesDetails';
 import Drawer from './components/Drawer/Drawer';
+import CoursePreview from './pages/CoursePreview/CoursePreview';
+import Payments from './pages/Payments/Payments';
 import AddNewLesson from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewLesson';
 import AddNewQuiz from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewQuiz';
 import AddNewExercise from './pages/AddNewCourse/AddNewSection/AddNewLesson/AddNewQuiz/AddNewExercise/AddNewExercise';
@@ -27,10 +29,12 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<Drawer />}>
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/allcategories" element={<Categories />} />
-          <Route path="/categories/:category_id" element={<CategoriesDetails />} />
+        <Route element={<Drawer/>}>
+          <Route path="/landing" element={<Landing/>}/>
+          <Route path="/allcategories" element={<Categories/>}/>
+          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
+          <Route exact path = "/course/:course_id" element={<CoursePreview/>}/>
+          <Route exact path = "/payments/course/:course_id" element={<Payments/>}/>
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
