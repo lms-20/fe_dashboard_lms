@@ -6,10 +6,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
+import { useSelector } from 'react-redux';
 
 
 const CourseInformationPreview = () => {
-    return(
+    const token = useSelector(state => state.userData.user?.data.token);
+
+    return (
         <>
             {/* Information */}
             <div className='flex flex-wrap my-4'>
@@ -26,12 +29,12 @@ const CourseInformationPreview = () => {
                         <div className="rounded-box w-20 h-20 ring ring-primary ring-offset-base-100 ring-offset-2">
                             <img src="http://daisyui.com/tailwind-css-component-profile-1@94w.png" />
                         </div>
-                        </div>
+                    </div>
                     <div className='-ml-4 py-2 px-10 rounded-lg inline border-2 border-primary'>
                         <p className='font-bold text-xl'>Ronaldo Gates</p>
                         <p className='text-base-300'>Software Engineer</p>
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -42,10 +45,10 @@ const CourseInformationPreview = () => {
             </div>
             <div className='my-4'>
                 <h3 className='text-primary font-extrabold text-3xl mb-4'>What They Think ?</h3>
-                <Reviews/>
-                <Link to ="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
+                <Reviews />
+                <Link to="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
             </div>
-            <PricingPlans/>
+            <PricingPlans />
         </>
     )
 
