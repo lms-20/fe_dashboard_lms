@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
-import { faGraduationCap, faStore, faDoorOpen, faUserEdit, faCommentDots, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faGraduationCap, faStore, faDoorOpen, faUserEdit, faCommentDots, faUser, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/userSlice';
 
@@ -78,7 +78,7 @@ const PermanentDrawer = props => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay" />
-                <ul className="menu p-4 overflow-y-auto w-80 bg-neutral  text-base-100 ">
+                <ul className="menu p-4 overflow-y-auto w-80 bg-neutral  text-base-100">
                     <h1 className=' font-extrabold text-3xl text-primary mb-10 pl-6'>E-Learning</h1>
                     <li className='mb-2'>
                         <Link to="/myclass" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
@@ -123,8 +123,12 @@ const PermanentDrawer = props => {
                             Settings
                         </Link>
                     </li>
-                    
-                   
+                    <li className='mt-auto' >
+                        <Link to = "/req-courses" className='flex justify-between text-xl bg-transparent border-2 border-primary text-neutral-content btn-hover-primary'style={{ padding: "1.2rem 1.25rem" }} >
+                            Request Course
+                            <FontAwesomeIcon icon={faArrowRight} className='mr-4'></FontAwesomeIcon>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>

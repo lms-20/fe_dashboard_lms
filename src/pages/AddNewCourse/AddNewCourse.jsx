@@ -5,8 +5,8 @@ import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { storeIdCourse } from '../../store/courseSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { storeIdCourse, setFalseCourseAdded } from '../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -43,6 +43,7 @@ const AddNewCourse = props => {
             .then(response => {
                 setIsLoading(false);
                 dispatch(storeIdCourse(response.data.id))
+                dispatch(setFalseCourseAdded(true))
                 navigate('/addsection')
             })
             .catch(error => {
