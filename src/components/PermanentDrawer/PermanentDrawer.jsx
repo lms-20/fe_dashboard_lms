@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 import PropTypes from 'prop-types'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { faGraduationCap, faStore, faDoorOpen, faUserEdit, faCommentDots, faUser, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -34,7 +34,7 @@ const PermanentDrawer = props => {
                             <p className='text-lg text-base-100 font-bold '>Welcome, {globalStateUser?.data.name}</p>
                             <p className='text-sm text-base-300'>You’re doing a great job,keep it up!</p>
                         </div>
-                    
+
                     </div>
                     <div className='flex items:center'>
                         {/* Search Form */}
@@ -123,12 +123,17 @@ const PermanentDrawer = props => {
                             Settings
                         </Link>
                     </li>
-                    <li className='mt-auto' >
-                        <Link to = "/req-courses" className='flex justify-between text-xl bg-transparent border-2 border-primary text-neutral-content btn-hover-primary'style={{ padding: "1.2rem 1.25rem" }} >
-                            Request Course
-                            <FontAwesomeIcon icon={faArrowRight} className='mr-4'></FontAwesomeIcon>
-                        </Link>
-                    </li>
+                    {globalStateUser?.data.role === 1
+                        ?
+                        null
+                        :
+                        <li className='mt-auto' >
+                            <Link to="/req-courses" className='flex justify-between text-xl bg-transparent border-2 border-primary text-neutral-content btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }} >
+                                Request Course
+                                <FontAwesomeIcon icon={faArrowRight} className='mr-4'></FontAwesomeIcon>
+                            </Link>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
