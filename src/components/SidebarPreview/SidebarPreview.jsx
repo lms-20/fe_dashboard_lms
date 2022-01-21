@@ -26,10 +26,14 @@ const SidebarPreview = () => {
                     <p>Buy course</p>
                 </Link>
                 {/* If Course Was Enrolled */}
-                {/* <div className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
-                <FontAwesomeIcon icon = {faSchool} className='mr-2 text-neutral'/>
-                <p>Go to class</p>
-            </div> */}
+                {
+                    token
+                    &&
+                    <div className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
+                        <FontAwesomeIcon icon={faSchool} className='mr-2 text-neutral' />
+                        <p>Go to class</p>
+                    </div>
+                }
 
             </div>
 
