@@ -13,12 +13,13 @@ const MyClass = props => {
     const globalStateUser = useSelector(state => state.userData?.user);
     // Init API endpoint
     const apiUrl = "https://61d3c74ab4c10c001712ba8e.mockapi.io/courses";
+    const apiPivot = "https://61e62635ce3a2d0017358fa7.mockapi.io/pivot";
     const [myCourses, setMyCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     // Function for request get with axios
     const retrieveMyCourses = async () => {
-        const response = await axios.get(apiUrl);
+        const response = await axios.get(globalStateUser?.data.role === 1 ? apiUrl : apiPivot);
         return response.data;
 
     }
@@ -39,6 +40,7 @@ const MyClass = props => {
         }
         getAllMyCourses();
     }, [])
+    console.log(myCourses)
     return (
         // Pages Container
         <div className=' mt-8 flex flex-col  w-11/12 mx-auto'>
