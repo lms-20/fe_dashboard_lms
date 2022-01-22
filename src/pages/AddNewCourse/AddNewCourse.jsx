@@ -61,164 +61,210 @@ const AddNewCourse = props => {
             <div className='min-h-screen bg-neutral-content relative'>
                 <div className="min-h-screen flex justify-center items-center">
                     {/* Form Container */}
-                    <form className="w-full lg:w-2/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+                    <form className="w-full lg:w-4/5 mx-auto" onSubmit={handleSubmit(onSubmit)}>
                         <div className="card-body">
                             {/* Border Form Container */}
                             <div className="p-10 card">
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">name</span>
+                                <div className='my-8'>
+                                    <h2 className='text-primary text-4xl font-extrabold'>Add Course</h2>
+                                    <p className='text-base-100 '>Course Information</p>
+                                </div>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8" htmlFor='name'>
+                                        <p className="label-text text-lg text-primary text-xl font-bold">Name</p>
+                                        <p className='text-base-300 text-xs'>Include course name,the course name should have minimum 40 characters</p>
                                     </label>
-                                    <input type="text" placeholder="name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300`} {...register("name", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.name ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.name?.type === "required" && "name required"}
-                                            {errors.name?.type === "pattern" && "Invalid name Address"}
-                                        </span>
+                                    <div className=' flex-grow'>
+                                        <input type="text" placeholder="Insert your product name" name = "name" id = "name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  my-2 w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300`} {...register("name", { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.name ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.name?.type === "required" && "name required"}
+                                                {errors.name?.type === "pattern" && "Invalid name Address"}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">category</span>
-                                    </label>
-                                    <select id='category' name='category' className={`${!errors.category?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("category", { required: true })}>
-                                        <option value="none" disabled>Choose your superpower</option>
-                                        <option value="backend">Backend</option>
-                                        <option value="frontend">Frontend</option>
-                                        <option value="devops">DevOps</option>
-                                    </select>
-                                    <div className="label justify-start">
-                                        {errors.category ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>{errors.category?.type === "required" && "category required"}</span>
+                                <div className="form-control flex flex-row my-4">
+                                    <div className='flex flex-col items-start basis-1/5 mr-8'>
+                                        <p className='text-lg text-primary text-xl font-bold'>General</p>
+                                        <p className='text-base-300 text-xs'>The general information about the course</p>
                                     </div>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">mentor</span>
-                                    </label>
-                                    <select id='mentor' name='mentor' className={`${!errors.mentor?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("mentor", { required: true })}>
-                                        <option value="none" disabled>Choose your superpower</option>
-                                        <option value="whyyu">Whyyu</option>
-                                        <option value="sandikagalih">Sandhika Galih</option>
-                                        <option value="eko">Eko</option>
-                                    </select>
-                                    <div className="label justify-start">
-                                        {errors.mentor ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>{errors.mentor?.type === "required" && "mentor required"}</span>
+                                    <div className='flex flex-grow flex-row justify-around'>
+                                        <div className='form-control basis-1/4 mr-10 flex flex-col'>
+                                            <label className="label p-0 flex flex-col items-start mb-4">
+                                                <span className="label-text text-lg text-base-100 font-bold">Category</span>
+                                                <p className='text-base-300 text-xs'>Categories according to the field studied</p>
+                                            </label>
+                                            <select id='category' name='category' className={`${!errors.category?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("category", { required: true })}>
+                                                <option value="none" disabled>Choose your superpower</option>
+                                                <option value="backend">Backend</option>
+                                                <option value="frontend">Frontend</option>
+                                                <option value="devops">DevOps</option>
+                                            </select>
+                                            <div className="label justify-start">
+                                                {errors.category ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.category?.type === "required" && "category required"}</span>
+                                            </div>
+                                        </div>
+                                       <div className='form-control basis-1/4 mr-10 flex flex-col'>
+                                            <label className="label p-0 flex flex-col items-start mb-4">
+                                                <span className="label-text text-lg text-base-100 font-bold">Mentor</span>
+                                                <p className='text-base-300 text-xs'>Mentor is who teach the course</p>
+                                            </label>
+                                            <select id='mentor' name='mentor' className={`${!errors.mentor?.type ? 'select' : 'select border-2 border-error'} mt-auto w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("mentor", { required: true })}>
+                                                <option value="none" disabled>Choose your superpower</option>
+                                                <option value="whyyu">Whyyu</option>
+                                                <option value="sandikagalih">Sandhika Galih</option>
+                                                <option value="eko">Eko</option>
+                                            </select>
+                                            <div className="label justify-start">
+                                                {errors.mentor ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.mentor?.type === "required" && "mentor required"}</span>
+                                            </div>
+                                       </div>
+                                       <div className='form-control basis-1/4 mr-10 flex flex-col'>
+                                            <label className="label p-0 flex flex-col items-start mb-4">
+                                                <span className="label-text text-lg text-base-100 font-bold">Level</span>
+                                                <p className='text-base-300 text-xs'>Level course is according to material of the course</p>
+                                            </label>
+                                            <select id='level' name='level' className={`${!errors.level?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("level", { required: true })}>
+                                                <option value="none" disabled>Choose your superpower</option>
+                                                <option value="middle">Middle</option>
+                                                <option value="advanced">Advanced</option>
+                                                <option value="demigod">Demigod</option>
+                                            </select>
+                                            <div className="label justify-start">
+                                                {errors.level ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.level?.type === "required" && "level required"}</span>
+                                            </div>
+                                       </div>
                                     </div>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">level</span>
-                                    </label>
-                                    <select id='level' name='level' className={`${!errors.level?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("level", { required: true })}>
-                                        <option value="none" disabled>Choose your superpower</option>
-                                        <option value="middle">Middle</option>
-                                        <option value="advanced">Advanced</option>
-                                        <option value="demigod">Demigod</option>
-                                    </select>
-                                    <div className="label justify-start">
-                                        {errors.level ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>{errors.level?.type === "required" && "level required"}</span>
-                                    </div>
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">thumbnail</span>
+                                </div>  
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Thumbnail</span>
+                                        <p className='text-base-300 text-xs'>The general information about the course</p>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="thumbnail" className={`${!errors.thumbnail?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("thumbnail", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.thumbnail ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.thumbnail?.type === "required" && "thumbnail required"}
-                                            {errors.thumbnail?.type === "pattern" && "Invalid thumbnail Address"}
-                                        </span>
+                                    <div className='flex-grow'>
+                                        <input type="text" placeholder="Insert Thumbnail Course" className={`${!errors.thumbnail?.type ? 'input' : 'input border-2 border-error'}  my-2 w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("thumbnail", { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.thumbnail ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.thumbnail?.type === "required" && "thumbnail required"}
+                                                {errors.thumbnail?.type === "pattern" && "Invalid thumbnail Address"}
+                                            </span>
+                                        </div>
                                     </div>
+                                    
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">kode</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Kode</span>
+                                        <p className='text-base-300 text-xs'>Unique code for a course to define something unique</p>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="kode" className={`${!errors.kode?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("kode", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.kode ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.kode?.type === "required" && "kode required"}
-                                            {errors.kode?.type === "pattern" && "Invalid kode Address"}
-                                        </span>
+                                    <div className='flex-grow'>
+                                        <input type="text" placeholder="kode" className={`${!errors.kode?.type ? 'input' : 'input border-2 border-error'} w-full my-2 transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("kode", { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.kode ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.kode?.type === "required" && "kode required"}
+                                                {errors.kode?.type === "pattern" && "Invalid kode Address"}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">Type</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Type</span>
+                                        <p className='text-base-300 text-xs'>Type course is about free or premium course</p>
                                     </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">Premium</span>
-                                        <input type="radio" name="typekelas" defaultChecked="true" className="radio" value="premium" {...register('typekelas', { required: true })} />
-                                    </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">Free</span>
-                                        <input type="radio" name="typekelas" className="radio" value="free" {...register('typekelas', { required: true })} />
-                                    </label>
+                                    <div className='flex-grow flex my-2'>
+                                        <label className="cursor-pointer label mr-4">
+                                            <input type="radio" name="typekelas" defaultChecked="true" className="radio mr-2 radio-primary" value="premium" {...register('typekelas', { required: true })} />
+                                            <span className="label-text text-lg text-base-100">Premium</span>
+                                        </label>
+                                        <label className="cursor-pointer label">
+                                            <input type="radio" name="typekelas" className="radio radio-primary mr-2" value="free" {...register('typekelas', { required: true })} />
+                                            <span className="label-text text-lg text-base-100">Free</span>
+                                        </label>
+                                    </div>
+                                   
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">Status</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Status</span>
+                                        <p className='text-base-300 text-xs'>Status course is about is the course is available for any user</p>
                                     </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">Draft</span>
-                                        <input type="radio" name="status" defaultChecked="true" className="radio" value="draft" {...register('status', { required: true })} />
-                                    </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">Published</span>
-                                        <input type="radio" name="status" className="radio" value="published" {...register('status', { required: true })} />
-                                    </label>
+                                    <div className='flex-grow flex my-2'>   
+                                        <label className="cursor-pointer label mr-4">
+                                            <input type="radio" name="status" defaultChecked="true" className="radio radio-primary mr-2" value="draft" {...register('status', { required: true })} />
+                                            <span className="label-text text-lg text-base-100">Draft</span>
+                                        
+                                        </label>
+                                        <label className="cursor-pointer label">
+                                            <input type="radio" name="status" className="radio radio-primary mr-2" value="published" {...register('status', { required: true })} />
+                                            <span className="label-text text-lg text-base-100">Published</span>
+                                        </label>
+                                    </div>
+                                    
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">Certificate</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Certificate</span>
+                                        <p className='text-base-300 text-xs'>Status course is about is the course is available for any user</p>
                                     </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">Yes</span>
-                                        <input type="radio" name="certificate" defaultChecked="true" className="radio" value="yes" {...register('certificate', { required: true })} />
-                                    </label>
-                                    <label className="cursor-pointer label">
-                                        <span className="label-text">No</span>
-                                        <input type="radio" name="certificate" className="radio" value="no" {...register('certificate', { required: true })} />
-                                    </label>
+                                    <div className='flex-grow flex my-2'>
+                                        <label className="cursor-pointer label">
+                                            <input type="radio" name="certificate" defaultChecked="true" className="radio radio-primary mr-2" value="yes" {...register('certificate', { required: true })} />
+                                            <span className="label-text text-lg text-base-100 mr-4">Yes</span>
+                                        </label>
+                                        <label className="cursor-pointer label">
+                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value="no" {...register('certificate', { required: true })} />
+                                            <span className="label-text text-lg text-base-100">No</span>
+                                        </label>
+                                    </div>
+                                   
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">price</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Price</span>
+                                        <p className='text-base-300 text-xs'>Price is how much money that user spend if the course is premium</p>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.price ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.price?.type === "required" && "price required"}
-                                            {errors.price?.type === "pattern" && "Invalid price Address"}
-                                        </span>
+                                    <div className='flex-grow'>
+                                        <input type="number" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  w-full my-2 transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price", { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.price ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.price?.type === "required" && "price required"}
+                                                {errors.price?.type === "pattern" && "Invalid price Address"}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text text-lg text-base-100 font-bold">description</span>
+                                <div className="form-control flex flex-row items-start my-4">
+                                    <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
+                                        <span className="label-text text-lg  font-bold text-primary">Description</span>
+                                        <p className='text-base-300 text-xs'>Describe the information about the course</p>
                                     </label>
-                                    {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description", { required: true })} />
-                                    <div className="label justify-start">
-                                        {errors.description ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                        <span className='text-error text-sm font-bold'>
-                                            {errors.description?.type === "required" && "description required"}
-                                            {errors.description?.type === "pattern" && "Invalid description Address"}
-                                        </span>
+                                    <div className='flex-grow'>
+                                        <input type="text" placeholder="description" className={`${!errors.description?.type ? 'input' : 'input border-2 border-error'} w-full my-2  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("description", { required: true })} />
+                                        <div className="label justify-start">
+                                            {errors.description ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.description?.type === "required" && "description required"}
+                                                {errors.description?.type === "pattern" && "Invalid description Address"}
+                                            </span>
+                                        </div>
                                     </div>
+                                    {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
                                 </div>
-                                <button type='submit' disabled={isLoading}>Next Move</button>
+                                <div className='flex justify-end '>
+                                    <button type='submit'  disabled={isLoading} className='btn btn-lg text-base-100 btn-hover-primary bg-transparent border-2 border-primary'>Next Move</button>
+                                </div>
                             </div>
                             {/* End Of Form Container */}
                         </div>
