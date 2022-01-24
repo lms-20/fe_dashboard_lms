@@ -1,16 +1,38 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 
-const CourseInformationPreview = () => {
+const CourseInformationPreview = ({ courseId }) => {
     const token = useSelector(state => state.userData.user?.data.token);
+    const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
+    const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot`;
+    // const [isHaveCourse, setIsHaveCourse] = useState(false);
+    // console.log(courseId)
+
+    useEffect(() => {
+        axios.get(pivotApi)
+            .then(response => {
+                response?.data.forEach(dataCourses => {
+                    setuserCourses(
+                        prevstate => [...prevstate, dataCourses.id]
+                    )
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+
+    const have = userCourses.includes(parseInt(courseId))
 
     return (
         <>
@@ -48,7 +70,7 @@ const CourseInformationPreview = () => {
                 <Reviews />
                 <Link to="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
             </div>
-            <PricingPlans />
+            {!have && <PricingPlans />}
         </>
     )
 

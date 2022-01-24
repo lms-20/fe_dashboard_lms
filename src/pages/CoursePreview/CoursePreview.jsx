@@ -1,21 +1,25 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChalkboardTeacher,faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faChalkboardTeacher, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from '../../components/YoutubePlayer/YoutubePlayer';
 import Navbar from '../../components/Navbar/Navbar';
 import CollapsedContentPreview from '../../components/CollapsedContentPreview/CollapsedContentPreview';
 import SidebarPreview from '../../components/SidebarPreview/SidebarPreview';
 import Reviews from '../../components/Reviews/Reviews';
 import CourseInformationPreview from '../../components/CourseInformationPreview/CourseInformationPreview';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
 
 const CoursePreview = () => {
-    return(
+    const params = useParams();
+    // console.log(params.course_id);
+
+    return (
         <div className='bg-neutral-content min-h-screen'>
             {/* Centered Content */}
             <div className='w-11/12 mx-auto'>
@@ -25,19 +29,19 @@ const CoursePreview = () => {
                         {/* Video Container */}
                         <div className='basis-8/12 bg-neutral-content'>
                             <h3 className='text-primary font-extrabold text-4xl mb-4'>Judul Course</h3>
-                            
-                            <YoutubePlayer/>
+
+                            <YoutubePlayer />
                             <div className='hidden lg:block'>
-                                <CourseInformationPreview/>
+                                <CourseInformationPreview courseId={params.course_id} />
                             </div>
                             {/* Mobile View */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
-                                <input type="checkbox" /> 
+                                <input type="checkbox" />
                                 <div className="collapse-title text-xl font-medium">
                                     Course Information
                                 </div>
                                 <div className="collapse-content">
-                                    <CourseInformationPreview/>
+                                    <CourseInformationPreview courseId={params.course_id} />
                                 </div>
                             </div>
                             {/* <div className='my-4'>
@@ -49,19 +53,19 @@ const CoursePreview = () => {
                         <div className='basis-4/12 lg:px-4 flex-grow'>
                             {/* Sidebar desktop view */}
                             <div className='hidden lg:block'>
-                                <SidebarPreview/>
+                                <SidebarPreview />
                             </div>
                             {/* Sidebar mobile view */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
-                                <input type="checkbox" /> 
+                                <input type="checkbox" />
                                 <div className="collapse-title text-xl font-medium">
                                     Course Content
                                 </div>
                                 <div className="collapse-content">
-                                    <SidebarPreview/>
+                                    <SidebarPreview />
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 {/* End Of Container For The Content */}

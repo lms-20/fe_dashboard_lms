@@ -34,17 +34,17 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route element={<Drawer/>}>
-          <Route path="/landing" element={<Landing/>}/>
-          <Route path="/allcategories" element={<Categories/>}/>
-          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
-          <Route exact path = "/course/:course_id" element={<CoursePreview/>}/>
-          <Route exact path = "/payments/course/:course_id" element={<Payments/>}/>
+        <Route element={<Drawer />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/allcategories" element={<Categories />} />
+          <Route path="/categories/:category_id" element={<CategoriesDetails />} />
+          <Route exact path="/course/:course_id" element={<CoursePreview />} />
+          <Route exact path="/payments/course/:course_id" element={<Payments />} />
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/req-courses" element={<RequestCourse />} />
-        <Route exact path="/help/courses/:course_id" element={<RequestCounselling/>} />
+        <Route exact path="/help/courses/:course_id" element={<RequestCounselling />} />
         <Route path="/mycourses/:my_course_id" element={<Course />} />
         <Route element={<PrivateRoute />}>
           <Route exact path="/" element={<PermanentDrawer />} >
@@ -52,8 +52,8 @@ function App() {
             <Route exact path="/transactions" element={<Transaction />} />
             <Route exact path="/settings" element={<UserSettings />} />
             <Route element={<Feedback />} >
-              <Route exact path="/feedback/reqCourse" element ={<FeedbackReqCourse/>}/>
-              <Route exact path="/feedback/reqCounselling" element ={<FeedbackReqCouns/>}/>
+              <Route exact path="/feedback/reqCourse" element={<FeedbackReqCourse />} />
+              <Route exact path="/feedback/reqCounselling" element={<FeedbackReqCouns />} />
             </Route>
           </Route>
           <Route exact path="/addcourse" element={<AddNewCourse />} />
