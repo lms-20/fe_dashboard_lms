@@ -44,10 +44,12 @@ const SidebarPreview = ({ courseId }) => {
                 {/* If Course Was Enrolled */}
                 {
                     token && have ?
-                        <div className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
-                            <FontAwesomeIcon icon={faSchool} className='mr-2 text-neutral' />
-                            <Link to={`/mycourses/${courseId}`}>Go to class</Link>
-                        </div>
+                        <Link to={`/mycourses/${courseId}`} onClick={() => console.log(courseId)}>
+                            <div className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
+                                <FontAwesomeIcon icon={faSchool} className='mr-2 text-neutral' />
+                                <p>Go to class</p>
+                            </div>
+                        </Link>
                         :
                         <Link to="#" className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
                             <FontAwesomeIcon icon={faShoppingCart} className='mr-2 text-neutral' />
