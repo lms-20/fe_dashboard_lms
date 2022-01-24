@@ -29,8 +29,6 @@ const SidebarPreview = ({ courseId }) => {
             })
     }, []);
 
-    console.log(userCourses)
-    console.log(courseId)
     const have = userCourses.includes(parseInt(courseId))
 
     return (
@@ -48,10 +46,10 @@ const SidebarPreview = ({ courseId }) => {
                     token && have ?
                         <div className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
                             <FontAwesomeIcon icon={faSchool} className='mr-2 text-neutral' />
-                            <p>Go to class</p>
+                            <Link to={`/mycourses/${courseId}`}>Go to class</Link>
                         </div>
                         :
-                        <Link to="" className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
+                        <Link to="#" className=' btn w-full bg-primary hover:bg-primary text-neutral my-2 text-lg rounded-lg font-bold grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
                             <FontAwesomeIcon icon={faShoppingCart} className='mr-2 text-neutral' />
                             <p>Buy course</p>
                         </Link>
