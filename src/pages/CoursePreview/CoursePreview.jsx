@@ -53,7 +53,7 @@ const CoursePreview = () => {
                         <div className='basis-4/12 lg:px-4 flex-grow'>
                             {/* Sidebar desktop view */}
                             <div className='hidden lg:block'>
-                                <SidebarPreview />
+                                <SidebarPreview courseId={params.course_id} />
                             </div>
                             {/* Sidebar mobile view */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
@@ -62,7 +62,7 @@ const CoursePreview = () => {
                                     Course Content
                                 </div>
                                 <div className="collapse-content">
-                                    <SidebarPreview />
+                                    <SidebarPreview courseId={params.course_id} />
                                 </div>
                             </div>
                         </div>

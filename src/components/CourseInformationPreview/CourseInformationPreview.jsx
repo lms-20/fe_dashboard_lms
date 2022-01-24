@@ -15,8 +15,6 @@ const CourseInformationPreview = ({ courseId }) => {
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot`;
-    // const [isHaveCourse, setIsHaveCourse] = useState(false);
-    // console.log(courseId)
 
     useEffect(() => {
         axios.get(pivotApi)
