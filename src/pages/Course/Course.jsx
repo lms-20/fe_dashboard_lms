@@ -36,37 +36,27 @@ const Course = () => {
     // <Route path="/mycourses/:my_course_id" element={<PermanentDrawer />} />
 
     useEffect(() => {
-
+        const haveTemp = []
         axios.get(pivotApi)
             .then(response => {
                 response?.data.forEach(dataCourses => {
-                    setuserCourses(
-                        prevstate => [...prevstate, dataCourses.id]
-                    )
+                    haveTemp.push(dataCourses.id)
                 })
+                setuserCourses(haveTemp)
             })
             .catch(error => {
                 console.log(error)
             })
-
-        // axios.get(`${pivotApi}${params.my_course_id}`)
-        //     .then(response => {
-        //         setDetailCourse(response?.data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
     }, []);
 
     useEffect(() => {
         if (userCourses.length > 0) {
             const have = userCourses.includes(parseInt(params.my_course_id))
-            console.log(have)
+            if (!have) {
+                navigate(`/course/${params.my_course_id}`)
+            }
         }
-        console.log(userCourses)
     }, [userCourses]);
-    // console.log(typeof userCourses[1])
-    // console.log(typeof parseInt(params.my_course_id))
 
     return (
         <>
