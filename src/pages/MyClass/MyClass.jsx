@@ -19,7 +19,7 @@ const MyClass = props => {
     const [isError, setIsError] = useState(false);
     // Function for request get with axios
     const retrieveMyCourses = async () => {
-        const response = await axios.get(globalStateUser?.data.role === 1 ? apiUrl : apiPivot);
+        const response = await axios.get(globalStateUser?.data.role === 'admin' ? apiUrl : apiPivot);
         return response.data;
 
     }
@@ -104,7 +104,7 @@ const MyClass = props => {
                 </div>
             }
             {/* End of course content */}
-            {globalStateUser?.data.role === 1
+            {globalStateUser?.data.role === 'admin'
                 ?
                 <Link className='btn btn-primary' to='/addcourse'>Add New Course</Link>
                 :

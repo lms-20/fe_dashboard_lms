@@ -19,7 +19,7 @@ const Card = (props) => {
                 <h2 className="font-bold text-base h-12 overflow-hidden break-all ">{course.name}</h2>
                 <p className='text-base-300 h-6 overflow-hidden break-all'>Mentor by : {course.mentor}</p>
 
-                {globalStateUser?.data.role === 1
+                {globalStateUser?.data.role === 'admin'
                     ?
                     <div>
                         <Link to="" className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Edit Course</Link>

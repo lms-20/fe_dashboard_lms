@@ -31,7 +31,7 @@ const PermanentDrawer = props => {
                             </svg>
                         </label>
                         <div className='hidden lg:flex lg:flex-col justify-center'>
-                            <p className='text-lg text-base-100 font-bold '>Welcome, {globalStateUser?.data.name}</p>
+                            <p className='text-lg text-base-100 font-bold '>Welcome, {globalStateUser?.data.fullname}</p>
                             <p className='text-sm text-base-300'>You’re doing a great job,keep it up!</p>
                         </div>
 
@@ -83,7 +83,7 @@ const PermanentDrawer = props => {
                     <li className='mb-2'>
                         <Link to="/myclass" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
                             <FontAwesomeIcon icon={faGraduationCap} className='mr-4' />
-                            {globalStateUser?.data.role === 1
+                            {globalStateUser?.data.role === 'admin'
                                 ?
                                 'Class'
                                 :
@@ -106,7 +106,7 @@ const PermanentDrawer = props => {
                             Catalog
                         </Link>
                     </li>
-                    {globalStateUser?.data.role === 1
+                    {globalStateUser?.data.role === 'admin'
                         ?
                         <li className='mb-2'>
                             <Link to="/feedback/reqCourse" className='text-xl btn-hover-primary' style={{ padding: "1.2rem 1.25rem" }}>
@@ -123,7 +123,7 @@ const PermanentDrawer = props => {
                             Settings
                         </Link>
                     </li>
-                    {globalStateUser?.data.role === 1
+                    {globalStateUser?.data.role === 'admin'
                         ?
                         null
                         :
