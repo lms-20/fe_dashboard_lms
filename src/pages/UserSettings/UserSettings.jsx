@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle,faEye,faUser } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle, faEye, faUser } from '@fortawesome/free-solid-svg-icons';
 import propTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom'
@@ -16,7 +16,7 @@ const UserSettings = () => {
     const [userResponse, setUserResponse] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [isPasswordShown,setIsPasswordShown] = useState(false);
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
 
 
     const retrieveUser = async () => {
@@ -110,9 +110,9 @@ const UserSettings = () => {
                                     <label className="label">
                                         <span className="label-text text-inherit font-bold">Email</span>
                                     </label>
-                                    <input name='emailAddress' disabled={isFormDisabled} type="email" placeholder="Email" className="input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("emailAddress", { required: true,pattern : emailRegex })} />
+                                    <input name='emailAddress' disabled={isFormDisabled} type="email" placeholder="Email" className="input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("emailAddress", { required: true, pattern: emailRegex })} />
                                     <div className="label justify-start">
-                                        {errors.emailAddress ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.emailAddress ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>
                                             {errors.emailAddress?.type === "required" && "Email is required"}
                                             {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
@@ -123,9 +123,9 @@ const UserSettings = () => {
                                     <label className="label">
                                         <span className="label-text text-inherit font-bold">Age</span>
                                     </label>
-                                    <input name='age' disabled={isFormDisabled} type="text" placeholder="Age" className="input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("age", { required: true })} />
+                                    <input name='age' disabled={isFormDisabled} type="text" placeholder="Age" className="input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("age", { required: true, setValueAs: v => parseInt(v) })} />
                                     <div className="label justify-start">
-                                        {errors.age ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.age ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>
                                             {errors.age?.type === "required" && "Age is required"}
                                         </span>
@@ -137,10 +137,10 @@ const UserSettings = () => {
                                     </label>
                                     <div className='flex flex-nowrap items-center w-full'>
                                         <input name='password' disabled={isFormDisabled} type={isPasswordShown ? "text" : "password"} placeholder="Password" className="input w-full transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none"  {...register("password", { required: true })} />
-                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
+                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)} />
                                     </div>
                                     <div className="label justify-start">
-                                        {errors.password ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.password ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.password?.type === "required" && "Password required"}</span>
                                     </div>
                                 </div>
@@ -148,14 +148,14 @@ const UserSettings = () => {
                                     <label className="label">
                                         <span className="label-text text-inherit font-bold">Occupation</span>
                                     </label>
-                                    <select disabled = {isFormDisabled} id='occupation' name='occupation' className="select w-full transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("occupation", { required: true })}>
+                                    <select disabled={isFormDisabled} id='occupation' name='occupation' className="select w-full transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("occupation", { required: true })}>
                                         <option value="none" disabled>Choose your superpower</option>
                                         <option value="tele">telekinesis</option>
                                         <option value="time">time travel</option>
                                         <option value="invi">invisibility</option>
                                     </select>
                                     <div className="label justify-start">
-                                        {errors.occupation ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.occupation ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.occupation?.type === "required" && "Occupation required"}</span>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@ const UserSettings = () => {
                                     </label>
                                     <input name='phoneNumber' disabled={isFormDisabled} type="text" placeholder="Phone Number" className="input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 disabled:text-base-100 disabled:bg-primary-focus disabled:border-none" {...register("phoneNumber", { required: true })} />
                                     <div className="label justify-start">
-                                        {errors.phoneNumber ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.phoneNumber ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.phoneNumber?.type === "required" && "Phone Number required"}</span>
                                     </div>
                                 </div>
