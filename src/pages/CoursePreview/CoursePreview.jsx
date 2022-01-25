@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChalkboardTeacher,faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from '../../components/YoutubePlayer/YoutubePlayer';
@@ -11,11 +11,40 @@ import CollapsedContentPreview from '../../components/CollapsedContentPreview/Co
 import SidebarPreview from '../../components/SidebarPreview/SidebarPreview';
 import Reviews from '../../components/Reviews/Reviews';
 import CourseInformationPreview from '../../components/CourseInformationPreview/CourseInformationPreview';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
+import axios from 'axios';
 
 const CoursePreview = () => {
+    let params = useParams();
+
+    const domain = 'http://5b28-140-213-168-132.ngrok.io'
+    const ApiSections = `${domain}/courses/${params.course_id}`;
+
+    const [course,setCourse] = useState({});
+
+    useEffect(() => {
+        axios.get(ApiSections)
+            .then(response => {
+                setCourse(response.data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+    function getVideoId(url) {
+        url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
+        let result = "";
+        for(let i = url.length-1; i >= 1; i--){
+            if (url[i] === "/") {
+                return result
+            } else {
+                result = url[i] + result;
+            }
+        }
+    }
     return(
+        
         <div className='bg-neutral-content min-h-screen'>
             {/* Centered Content */}
             <div className='w-11/12 mx-auto'>
@@ -24,11 +53,15 @@ const CoursePreview = () => {
                     <div className=' mx-auto text-base-100 py-4 flex flex-col lg:flex-row'>
                         {/* Video Container */}
                         <div className='basis-8/12 bg-neutral-content'>
-                            <h3 className='text-primary font-extrabold text-4xl mb-4'>Judul Course</h3>
+                            <h3 className='text-primary font-extrabold text-4xl mt-4 mb-6'>{course?.name}</h3>
                             
-                            <YoutubePlayer/>
+                            <YoutubePlayer
+                                videoId={getVideoId(`${course?.chapters?.[0].lessons?.[-0].video}`)}
+                            />
                             <div className='hidden lg:block'>
-                                <CourseInformationPreview/>
+                                <CourseInformationPreview
+                                    data = {course}
+                                />
                             </div>
                             {/* Mobile View */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
@@ -37,7 +70,9 @@ const CoursePreview = () => {
                                     Course Information
                                 </div>
                                 <div className="collapse-content">
-                                    <CourseInformationPreview/>
+                                    <CourseInformationPreview
+                                        data = {course}
+                                    />
                                 </div>
                             </div>
                             {/* <div className='my-4'>
@@ -49,7 +84,9 @@ const CoursePreview = () => {
                         <div className='basis-4/12 lg:px-4 flex-grow'>
                             {/* Sidebar desktop view */}
                             <div className='hidden lg:block'>
-                                <SidebarPreview/>
+                                <SidebarPreview
+                                    data = {course?.chapters}
+                                />
                             </div>
                             {/* Sidebar mobile view */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
@@ -58,7 +95,9 @@ const CoursePreview = () => {
                                     Course Content
                                 </div>
                                 <div className="collapse-content">
-                                    <SidebarPreview/>
+                                    <SidebarPreview
+                                        data = {course?.chapters}
+                                    />
                                 </div>
                             </div>
                         </div> 

@@ -3,8 +3,10 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import YouTube from 'react-youtube';
+import PropTypes from 'prop-types';
 
-class Example extends React.Component {
+
+class YoutubePlayer extends React.Component {
     videoOnReady(event) {
         // access to player in all event handlers via event.target
         event.target.pauseVideo();
@@ -12,7 +14,10 @@ class Example extends React.Component {
     videoOnEnd(event) {
         event.target.playVideo();
     }
+    
   render() {
+    const {videoId} = this.props
+
     const opts = {
       height: '480',
       width: '100%',
@@ -27,7 +32,7 @@ class Example extends React.Component {
     };
 
     return <YouTube 
-            videoId="2g811Eo7K8U" 
+            videoId={videoId} 
             opts={opts} 
             onReady={this.videoOnReady}
             onEnd = {this.videoOnEnd} 
@@ -36,4 +41,7 @@ class Example extends React.Component {
 
  
 }
-export default Example
+export default YoutubePlayer
+YoutubePlayer.propTypes = {
+  videoId : PropTypes.string
+}

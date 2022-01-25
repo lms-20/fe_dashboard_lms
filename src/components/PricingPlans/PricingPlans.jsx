@@ -5,8 +5,10 @@ import React, {useRef} from "react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-const PricingPlans = () => {
+
+const PricingPlans = (props) => {
     const pricingRef = useRef()
     return(
         <>
@@ -15,7 +17,7 @@ const PricingPlans = () => {
                     <div className=' flex flex-col items-center rounded-lg  p-4 border-2 grow lg:grow-0 lg:border-primary basis-2/4'>
                         <div className="text-center">
                             <p className='text-3xl font-extrabold text-primary mb-2'>Selamanya</p>
-                            <p className='font-bold text-4xl mb-8'>Rp900.000 </p>
+                            <p className='font-bold text-4xl mb-8'>Rp{new Intl.NumberFormat(['ban', 'id']).format(props.data)}</p>
                             <p className='text-center mb-4'>Miliki kelas Premium secara permanen dan bangun sebuah projek nyata</p>
                         </div>
                         
@@ -55,3 +57,6 @@ const PricingPlans = () => {
 }
 
 export default PricingPlans
+PricingPlans.propTypes = {
+    data : PropTypes.number
+}

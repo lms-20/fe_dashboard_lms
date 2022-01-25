@@ -12,16 +12,19 @@ import CardCourseFull from '../../components/CardCourseFull/CardCourseFull';
 import Footer from '../../components/Footer/Footer';
 import axios from 'axios';
 import CardCategory from '../../components/CardCategory/CardCategory';
+import FetchLandingCourses from '../../components/FetchLandingCourses/FetchLandingCourses';
 
 
 const Landing = () => {
     const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/category`;
+    // const ApiSections = 'http://d58c-140-213-161-53.ngrok.io/categories';
     const [categories, setCategories] = useState([]);
     let navigate = useNavigate();
 
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
+                console.log(response.data.data);
                 response?.data.forEach(dataSections => {
                     setCategories(
                         prevstate => [...prevstate, dataSections]
@@ -115,7 +118,7 @@ const Landing = () => {
                     {/* End OF Categories Items */}
                     <div className=' basis-2/4 mb-10 lg:mb-0 lg:ml-10 flex flex-col  justify-center flex-grow'>
                         <h3 className='font-extrabold text-5xl text-primary'>Feel Free <span className='mt-3 text-base-100 block'>To Explore More</span></h3>
-                        <p className='text-base-300 my-10 hidden lg:block'>Megangar. Enkortsdator. Självoptimering. Hegisk. Pugon. Iren. Nykalingar. Regt. Sönera. Biokemi. Kroselig. Miren. Ode. Kefåtoskapet. Masuligen. Hämndporr. Tin. Treseda. Desplastisk. Brony. </p>
+                        <p className='text-base-300 my-10 hidden lg:block'>Emang bisa ketagihan belajar? Di E-Learning, belajar itu berarti menelusuri hal baru, sambil memecahkan teka-teki ilmu tiap harinya. Ini yang bikin penasaran dan lama-lama jadi ketagihan belajar. </p>
                         <Link to="/allcategories" className=" hidden lg:flex btn w-2/5 bg-transparent text-base-100 border-primary btn-hover-primary rounded-full">See All Categories</Link>
 
                     </div>
@@ -128,14 +131,14 @@ const Landing = () => {
                     <div className=''>
                         <div className='inline-block rounded-full py-3 px-6 bg-primary'>
                             <FontAwesomeIcon icon={faListUl} className=' align-middle text-neutral-content text-xl inline-block'></FontAwesomeIcon>
-                            <p className='text-xl inline-block ml-2 align-middle font-bold'>Top Courses</p>
+                            <p className='text-xl inline-block ml-2 align-middle font-bold'>Courses</p>
                         </div>
                     </div>
                     {/* Card */}
-                    <CardCourseFull />
+                    <FetchLandingCourses/>
                     {/* End Of Cart */}
                     <div className='flex justify-center mt-8 '>
-                        <Link to="" className='bg-transparent w-full lg:w-2/5 rounded-full text-base-100 btn btn-hover-primary border-2 border-primary'>See All Courses</Link>
+                        <Link to="/allcourses" className='bg-transparent w-full lg:w-2/5 rounded-full text-base-100 btn btn-hover-primary border-2 border-primary'>See All Courses</Link>
                     </div>
                 </div>
             </div>
@@ -157,13 +160,23 @@ const Landing = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="collapse w-full lg:w-3/5 mx-auto text-base-100  rounded-box bg-neutral collapse-arrow">
+                    <div className="collapse w-full lg:w-3/5 mx-auto text-base-100 mb-4 rounded-box bg-neutral collapse-arrow">
                         <input type="checkbox" />
                         <div className="collapse-title font-bold">
-                            Apakah
+                            Apakah Semua Kursusnya Itu Gratis ?
                         </div>
                         <div className="collapse-content text-base-300">
-                            <p>Sistem pembelajaran elektronik atau e-pembelajaran dapat didefinisikan sebagai sebuah bentuk teknologi informasi yang diterapkan di bidang pendidikan berupa situs web yang dapat diakses di mana saja
+                            <p> E-Learning tersedia materi yang gratis ataupun yang berbayar
+                            </p>
+                        </div>
+                    </div>
+                    <div className="collapse w-full lg:w-3/5 mx-auto text-base-100 mb-4 rounded-box bg-neutral collapse-arrow">
+                        <input type="checkbox" />
+                        <div className="collapse-title font-bold">
+                            Bagaimana Cara Mengkuti Kursus?
+                        </div>
+                        <div className="collapse-content text-base-300">
+                            <p> Cukup dengan membayar 1x seumur hidup untuk kelas premium,dan cukup dengan join kelas untuk kelas gratis
                             </p>
                         </div>
                     </div>
