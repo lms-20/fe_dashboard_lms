@@ -19,8 +19,8 @@ const RequestCounselling = () => {
         const haveTemp = []
         axios.get(pivotApi)
             .then(response => {
-                response?.data.forEach(dataCourses => {
-                    haveTemp.push(dataCourses.id)
+                response?.data.data.forEach(dataCourses => {
+                    haveTemp.push(dataCourses.course_id)
                 })
                 setuserCourses(haveTemp)
             })

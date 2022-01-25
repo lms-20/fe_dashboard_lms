@@ -19,9 +19,9 @@ const CourseInformationPreview = ({ courseId }) => {
     useEffect(() => {
         axios.get(pivotApi)
             .then(response => {
-                response?.data.forEach(dataCourses => {
+                response?.data.data.forEach(dataCourses => {
                     setuserCourses(
-                        prevstate => [...prevstate, dataCourses.id]
+                        prevstate => [...prevstate, dataCourses.course_id]
                     )
                 })
             })
