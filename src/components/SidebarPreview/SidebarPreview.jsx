@@ -19,9 +19,10 @@ const SidebarPreview = ({ courseId }) => {
         axios.get(pivotApi)
             .then(response => {
                 response?.data.forEach(dataCourses => {
-                    setuserCourses(
-                        prevstate => [...prevstate, dataCourses.id]
-                    )
+                    console.log(dataCourses);
+                    // setuserCourses(
+                    //     prevstate => [...prevstate, dataCourses.id]
+                    // )
                 })
             })
             .catch(error => {

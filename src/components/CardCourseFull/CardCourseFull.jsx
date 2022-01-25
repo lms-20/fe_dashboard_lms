@@ -16,7 +16,8 @@ const CardCourseFull = () => {
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
-                response?.data.forEach(dataSections => {
+                // console.log(response.data.data)
+                response.data.data?.forEach(dataSections => {
                     setCourses(
                         prevstate => [...prevstate, dataSections]
                     )
@@ -27,6 +28,8 @@ const CardCourseFull = () => {
             })
     }, []);
 
+    console.log(courses)
+    console.log(courses.slice(0, 4).map((elm, idx) => elm.mentor.name))
 
     return (
         <>
@@ -42,12 +45,12 @@ const CardCourseFull = () => {
                                     <h2 className="font-bold text-base-100 text-ellipsis">{elm.name}</h2>
 
                                 </div>
-                                <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm.mentor}</p>
+                                <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm.mentor.name}</p>
                                 <div className='flex h-6 items-center mb-2'>
                                     <div className='h-6 overflow-hidden basis-6/12 break-all'>
                                         <p className='text-base-300'>
                                             <FontAwesomeIcon icon={faLightbulb} className='mr-2'></FontAwesomeIcon>
-                                            {elm.category}
+                                            {elm.category.name}
                                         </p>
                                     </div>
 
@@ -63,7 +66,7 @@ const CardCourseFull = () => {
                                         <p className='font-bold text-primary text-2xl'>Rp{elm.price}</p>
                                     </div>
                                     <div className='text-sm text-base-300 flex flex-col'>
-                                        <p>{elm.typekelas}</p>
+                                        <p>{elm.type}</p>
                                         <p className='font-bold text-sm text-right'>58 Videos</p>
                                     </div>
                                 </div>
@@ -98,12 +101,12 @@ const CardCourseFull = () => {
                                                 <h2 className="font-bold text-base-100 text-ellipsis">{elm.name}</h2>
 
                                             </div>
-                                            <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm.mentor}</p>
+                                            <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm.mentor.name}</p>
                                             <div className='flex h-6 items-center mb-2'>
                                                 <div className='h-6 overflow-hidden basis-6/12 break-all'>
                                                     <p className='text-base-300'>
                                                         <FontAwesomeIcon icon={faLightbulb} className='mr-2'></FontAwesomeIcon>
-                                                        {elm.category}
+                                                        {elm.category.name}
                                                     </p>
                                                 </div>
 
@@ -124,7 +127,7 @@ const CardCourseFull = () => {
                                                 </div>
 
                                                 <div className='text-sm text-base-300 flex flex-col'>
-                                                    <p>{elm.typekelas}</p>
+                                                    <p>{elm.type}</p>
                                                     <p className='font-bold text-sm text-right'>58 Videos</p>
 
                                                 </div>
