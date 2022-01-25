@@ -10,6 +10,7 @@ import Quiz from '../../components/Quiz/Quiz';
 import CollapsedContent from '../../components/CollapsedContent/CollapsedContent';
 import YoutubeIframe from '../../components/YoutubeIframe/YoutubeIframe';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Course = () => {
     const params = useParams();
@@ -107,7 +108,7 @@ const Course = () => {
                             </div>
                             {/* Request Counselling */}
                             <div className='flex justify-center my-4'>
-                                <a href="#" className='text-xs text-base-300 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>Are you have a problem? <span className='text-primary underline decoration-solid'>Request Consultation</span></a>
+                                <Link to={`/help/courses/${params.my_course_id}`} className='text-xs text-base-300 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>Are you have a problem? <span className='text-primary underline decoration-solid'>Request Consultation</span></Link>
                             </div>
                             {/* Card Section Container*/}
                             <div className='rounded-lg my-3'>
