@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 const Card = (props) => {
     const globalStateUser = useSelector(state => state.userData?.user);
     const course = props.course;
+    console.log(course);
 
     return (
         <div className={`card ${props.width === "full" ? "w-full" : "w-72"} card-compact bg-neutral drop-shadow-lg m-3`}>
@@ -29,7 +30,7 @@ const Card = (props) => {
                     <div>
                         <progress className="progress progress-primary bg-base-300 mt-1" value={course.progress} max="100"></progress>
                         <p className='my-2 font-bold'>{course.progress}% Completed</p>
-                        <Link to="" className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Start Learning</Link>
+                        <Link to={`/mycourses/${course.id}`} className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Start Learning</Link>
                     </div>
                 }
             </div>

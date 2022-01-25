@@ -40,7 +40,7 @@ const MyClass = props => {
         }
         getAllMyCourses();
     }, [])
-    console.log(myCourses)
+
     return (
         // Pages Container
         <div className=' mt-8 flex flex-col  w-11/12 mx-auto'>
@@ -61,7 +61,6 @@ const MyClass = props => {
                                     <Card
                                         key={course.id}
                                         course={course}
-
                                     />
                                 )
                             })
