@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 const MyClass = props => {
     const globalStateUser = useSelector(state => state.userData?.user);
     // Init API endpoint
-    const apiUrl = "https://61d3c74ab4c10c001712ba8e.mockapi.io/courses";
+    const apiUrl = "https://6141ca84357db50017b3dd36.mockapi.io/courses";
     const apiPivot = "https://61e62635ce3a2d0017358fa7.mockapi.io/pivot";
     const [myCourses, setMyCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ const MyClass = props => {
     // Function for request get with axios
     const retrieveMyCourses = async () => {
         const response = await axios.get(globalStateUser?.data.role === 'admin' ? apiUrl : apiPivot);
-        return response.data;
+        return response.data.data;
 
     }
     useEffect(() => {
@@ -58,9 +58,10 @@ const MyClass = props => {
                         {
                             myCourses.map((course) => {
                                 return (
+                                    // console.log(course.course)
                                     <Card
                                         key={course.id}
-                                        course={course}
+                                        course={globalStateUser?.data.role === 'admin' ? course : course.course}
                                     />
                                 )
                             })
@@ -80,18 +81,18 @@ const MyClass = props => {
                     <div className="lg:hidden carousel rounded-box">
                         {
                             // Rendering Carousel Items
-                            myCourses.map((course) => {
-                                return (
-                                    <div className='w-full carousel-item' key={course.id}>
-                                        <Card
-                                            course={course}
-                                            width="full"
-                                        />
-                                    </div>
+                            // myCourses.map((course) => {
+                            //     return (
+                            //         <div className='w-full carousel-item' key={course.id}>
+                            //             <Card
+                            //                 course={course}
+                            //                 width="full"
+                            //             />
+                            //         </div>
 
 
-                                )
-                            })
+                            //     )
+                            // })
                         }
 
                     </div>
