@@ -21,10 +21,12 @@ const Course = () => {
     const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
-    const courseApi = `https://241a-182-2-71-0.ngrok.io/courses/`;
+    const courseApi = `http://8701-182-2-68-139.ngrok.io/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
+        url = url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
+
         let result = "";
         for (let i = url.length - 1; i >= 1; i--) {
             if (url[i] === "/") {

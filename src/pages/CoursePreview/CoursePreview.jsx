@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const CoursePreview = () => {
     let params = useParams();
-    const domain = 'https://241a-182-2-71-0.ngrok.io'
+    const domain = 'http://8701-182-2-68-139.ngrok.io'
     const ApiSections = `${domain}/courses/${params.course_id}`;
 
     const [course, setCourse] = useState({});

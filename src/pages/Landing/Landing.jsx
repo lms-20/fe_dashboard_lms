@@ -16,7 +16,7 @@ import FetchLandingCourses from '../../components/FetchLandingCourses/FetchLandi
 
 
 const Landing = () => {
-    const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/category`;
+    const ApiSections = `http://8701-182-2-68-139.ngrok.io/categories`;
     // const domain = 'http://5b28-140-213-168-132.ngrok.io'
     // const ApiSections = `${domain}/categories`;
     // const ApiSections = 'http://d58c-140-213-161-53.ngrok.io/categories';
@@ -26,7 +26,7 @@ const Landing = () => {
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
-                console.log(response.data.data);
+                console.log("ini",response.data.data);
                 response?.data.forEach(dataSections => {
                     setCategories(
                         prevstate => [...prevstate, dataSections]

@@ -25,7 +25,7 @@ const CollapsedContent = (props) => {
                             </div>
                             <div className="collapse-content">
                                 {/* The First Collapse Content Is Always The Resource Of The Section */}
-                                <a href="#" target="_blank" rel='noreferrer' title="Download The Resource For This Section" className=' p-1 border border-primary my-1 inline-block  grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
+                                <a href={elm.link_ppt} target="_blank" rel='noreferrer' title="Download The Resource For This Section" className=' p-1 border border-primary my-1 inline-block  grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100'>
                                     <FontAwesomeIcon icon={faFileAlt} className='mx-1' />
                                     <span className='mx-1' >Resources</span>
                                 </a>
