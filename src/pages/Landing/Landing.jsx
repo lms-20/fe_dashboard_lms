@@ -17,6 +17,8 @@ import FetchLandingCourses from '../../components/FetchLandingCourses/FetchLandi
 
 const Landing = () => {
     const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/category`;
+    // const domain = 'http://5b28-140-213-168-132.ngrok.io'
+    // const ApiSections = `${domain}/categories`;
     // const ApiSections = 'http://d58c-140-213-161-53.ngrok.io/categories';
     const [categories, setCategories] = useState([]);
     let navigate = useNavigate();

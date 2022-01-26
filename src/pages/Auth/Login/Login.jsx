@@ -104,12 +104,12 @@ const Login = props => {
                                         <span className="label-text text-lg text-base-100 font-bold">Email</span>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="Email" className={`${!errors.email?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("email", { required: true, pattern: emailRegex })} />
+                                    <input type="text" placeholder="Email" className={`${!errors.email?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("emailAddress", { required: true, pattern: emailRegex })} />
                                     <div className="label justify-start">
-                                        {errors.email ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.emailAddress ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
                                         <span className='text-error text-sm font-bold'>
-                                            {errors.email?.type === "required" && "Email required"}
-                                            {errors.email?.type === "pattern" && "Invalid Email Address"}
+                                            {errors.emailAddress?.type === "required" && "Email required"}
+                                            {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
                                         </span>
                                     </div>
                                 </div>
