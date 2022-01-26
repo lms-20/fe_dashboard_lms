@@ -18,9 +18,10 @@ const Course = () => {
     const [isError, setIsError] = useState(false);
     const [isQuizTime, setIsQuizTime] = useState(false);
     const navigate = useNavigate();
-    const token = useSelector(state => state.userData.user?.data.token);
+    const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
+    const courseApi = `https://6141ca84357db50017b3dd36.mockapi.io/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
@@ -59,6 +60,16 @@ const Course = () => {
         }
     }, [userCourses]);
 
+    useEffect(() => {
+        axios.get(courseApi + params.my_course_id)
+            .then(response => {
+                setDetailCourse(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+
     return (
         <>
             <div className='  min-h-screen bg-neutral-content'>
@@ -73,7 +84,7 @@ const Course = () => {
                         </div>
                     </div>
                     <div className="divider divider-vertical  before:bg-base-100 after:bg-base-100  grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100"></div>
-                    <h2 className=' text-base-100 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>Nama Coursenya</h2>
+                    <h2 className=' text-base-100 grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>{detailCourse.name}</h2>
                 </div>
                 {/* End Of Navbar */}
 
@@ -85,17 +96,17 @@ const Course = () => {
                             <Quiz />
                             :
                             //    <YoutubeIframe videoId='2g811Eo7K8U'/>
-                            <YoutubeIframe videoId={getVideoId("https://www.youtube.com/embed/IxxstCcJlsc")} />
+                            <YoutubeIframe videoId={getVideoId(linkVideo)} />
 
                             // <iframe width="100%" height="500" src="https://www.youtube.com/embed/IxxstCcJlsc" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         }
                         {/* Logic For Next Video Button */}
-                        {isQuizTime == false ?
+                        {/* {isQuizTime == false ?
                             <div className=' active:translate-y-1 opacity-0 absolute transition-all next-video bg-primary top-1/2 -right-10 py-3 px-2 cursor-pointer text-neutral-content grayscale opacity-70 hover:grayscale-0 transition-all hover:opacity-100 '>
                                 <p className='font-bold'>Next Lesson</p>
                             </div>
 
-                            : ""}
+                            : ""} */}
                     </div>
                     {/* Container For The Sidebar */}
                     <div className='basis-4/12 mt-8 lg:mt-0 px-0 lg:px-4 flex-grow'>
@@ -114,6 +125,7 @@ const Course = () => {
                             <div className='rounded-lg my-3'>
                                 <CollapsedContent
                                     changeState={setIsQuizTime}
+                                    dataCourses={detailCourse}
                                 />
                             </div>
                             {/* End Of Card Section Container*/}
