@@ -26,8 +26,8 @@ const Landing = () => {
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
-                console.log("ini",response.data.data);
-                response?.data.forEach(dataSections => {
+                console.log("ini", response.data.data);
+                response?.data.data.forEach(dataSections => {
                     setCategories(
                         prevstate => [...prevstate, dataSections]
                     )
@@ -37,6 +37,8 @@ const Landing = () => {
                 console.log(error)
             })
     }, []);
+
+    console.log(categories)
 
     return (
         <>
@@ -137,7 +139,7 @@ const Landing = () => {
                         </div>
                     </div>
                     {/* Card */}
-                    <FetchLandingCourses/>
+                    <FetchLandingCourses />
                     {/* End Of Cart */}
                     <div className='flex justify-center mt-8 '>
                         <Link to="/allcourses" className='bg-transparent w-full lg:w-2/5 rounded-full text-base-100 btn btn-hover-primary border-2 border-primary'>See All Courses</Link>

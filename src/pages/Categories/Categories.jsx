@@ -11,14 +11,14 @@ import Navbar from '../../components/Navbar/Navbar';
 
 
 const Categories = () => {
-    const ApiSections = `https://61e62635ce3a2d0017358fa7.mockapi.io/category`;
+    const ApiSections = `http://8701-182-2-68-139.ngrok.io/categories`;
     const [categories, setCategories] = useState([]);
     let navigate = useNavigate();
 
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
-                response?.data.forEach(dataSections => {
+                response?.data.data.forEach(dataSections => {
                     setCategories(
                         prevstate => [...prevstate, dataSections]
                     )
