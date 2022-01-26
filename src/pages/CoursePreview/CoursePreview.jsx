@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const CoursePreview = () => {
     let params = useParams();
-    const domain = 'http://5b28-140-213-168-132.ngrok.io'
+    const domain = 'https://6141ca84357db50017b3dd36.mockapi.io'
     const ApiSections = `${domain}/courses/${params.course_id}`;
 
     const [course, setCourse] = useState({});

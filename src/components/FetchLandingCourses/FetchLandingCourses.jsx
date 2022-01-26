@@ -9,7 +9,7 @@ import CardCourseFullMobile from '../CardCourseFullMobile/CardCourseFullMobile';
 
 
 const FetchLandingCourses = () => {
-    const domain = 'http://5b28-140-213-168-132.ngrok.io'
+    const domain = 'https://6141ca84357db50017b3dd36.mockapi.io'
     const ApiSections = `${domain}/courses`;
     const [courses, setCourses] = useState([]);
     // let navigate = useNavigate();
@@ -19,25 +19,25 @@ const FetchLandingCourses = () => {
             .then(response => {
                 response.data.data.forEach(dataSections => {
                     setCourses(prevState => [...prevState, dataSections])
-                   
+
                 })
             })
             .catch(error => {
                 console.log(error)
             })
     }, []);
-    return(
+    return (
         <>
             <div className='mt-8 hidden lg:flex'>
                 {
                     courses.map((elm, idx) => {
-                        return(
+                        return (
                             <CardCourseFull
                                 key={elm.id}
-                                course = {elm}
+                                course={elm}
                             />
                         )
-                        
+
                     })
                 }
             </div>
@@ -53,18 +53,18 @@ const FetchLandingCourses = () => {
                 <div className="lg:hidden  carousel rounded-box">
                     {
                         courses.map((elm, idx) => {
-                            return(
+                            return (
                                 <CardCourseFullMobile
                                     key={elm.id}
-                                    course = {elm}
+                                    course={elm}
                                 />
                             )
-                            
+
                         })
                     }
                 </div>
             </div>
-        
+
         </>
     )
 }

@@ -33,6 +33,7 @@ const CourseInformationPreview = (props) => {
     }, []);
 
     const have = userCourses.includes(parseInt(courseId))
+    console.log(props.data)
 
     return (
         <>
@@ -68,11 +69,11 @@ const CourseInformationPreview = (props) => {
             <div className='my-4'>
                 <h3 className='text-primary font-extrabold text-3xl mb-4'>What They Think ?</h3>
                 <Reviews
-                    data = {props.data.reviews}
+                    data={props.data?.reviews}
                 />
                 <Link to="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
             </div>
-            {!have || !token ? <PricingPlans data = {props.data.price} /> : null}
+            {!have || !token ? <PricingPlans data={props.data?.price} /> : null}
         </>
     )
 
@@ -80,7 +81,7 @@ const CourseInformationPreview = (props) => {
 
 export default CourseInformationPreview
 CourseInformationPreview.propTypes = {
-    data : PropTypes.object
+    data: PropTypes.object
 }
 
 
