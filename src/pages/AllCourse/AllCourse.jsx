@@ -7,7 +7,7 @@ import CardCourseFull from '../../components/CardCourseFull/CardCourseFull';
 import CardCourseFullMobile from '../../components/CardCourseFullMobile/CardCourseFullMobile';
 
 const AllCourse = () => {
-    const domain = 'https://6141ca84357db50017b3dd36.mockapi.io'
+    const domain = 'https://241a-182-2-71-0.ngrok.io'
     const ApiSections = `${domain}/courses`;
     const [courses, setCourses] = useState([]);
     // let navigate = useNavigate();

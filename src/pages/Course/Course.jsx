@@ -21,7 +21,7 @@ const Course = () => {
     const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
-    const courseApi = `https://6141ca84357db50017b3dd36.mockapi.io/courses/`;
+    const courseApi = `https://241a-182-2-71-0.ngrok.io/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
@@ -61,14 +61,18 @@ const Course = () => {
     }, [userCourses]);
 
     useEffect(() => {
+        console.log(courseApi + params.my_course_id)
         axios.get(courseApi + params.my_course_id)
             .then(response => {
-                setDetailCourse(response.data)
+                // console.log('h', response.data.data)
+                setDetailCourse(response.data.data)
             })
             .catch(error => {
                 console.log(error)
             })
     }, []);
+
+    console.log('h', detailCourse)
 
     return (
         <>
