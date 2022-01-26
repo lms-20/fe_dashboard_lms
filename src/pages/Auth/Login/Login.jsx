@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle,faEye,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 //SWAL
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -30,12 +30,13 @@ const Login = props => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const ApiUrl = `http://yr19g.mocklab.io/users`;
+    // const ApiUrl = `https://dbaf-182-2-39-138.ngrok.io/users/login`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const token = useSelector(state => state.userData.user?.data.token);
     // For toggle,if the eye in input password fieed is clicked,the password is shown
-    const [isPasswordShown,setIsPasswordShown] = useState(false);
+    const [isPasswordShown, setIsPasswordShown] = useState(false);
 
     useEffect(() => {
         if (token) {
@@ -80,7 +81,7 @@ const Login = props => {
                 <div className='absolute top-4 left-4'>
                     <div className='flex items-center cursor-pointer' onClick={() => navigate("/landing")}>
                         <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
-                                <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
+                            <FontAwesomeIcon icon={faArrowLeft} className='text-neutral text-xl ' />
                         </div>
                         <div className=''>
                             <p className='text-primary text-sm ml-2'>Back to home</p>
@@ -88,9 +89,9 @@ const Login = props => {
                     </div>
                 </div>
                 {/* Form Flex Container */}
-                <div className = "min-h-screen flex justify-center items-center">
+                <div className="min-h-screen flex justify-center items-center">
                     {/* Form Container */}
-                    <form  className = "w-full lg:w-2/4 mx-auto"onSubmit={handleSubmit(onSubmit)}>
+                    <form className="w-full lg:w-2/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="card-body">
                             {/* Border Form Container */}
@@ -104,9 +105,9 @@ const Login = props => {
                                         <span className="label-text text-lg text-base-100 font-bold">Email</span>
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
-                                    <input type="text" placeholder="Email" className={`${!errors.email?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("emailAddress", { required: true, pattern: emailRegex })} />
+                                    <input type="text" placeholder="Email" className={`${!errors.emailAddress?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("emailAddress", { required: true, pattern: emailRegex })} />
                                     <div className="label justify-start">
-                                        {errors.emailAddress ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.emailAddress ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>
                                             {errors.emailAddress?.type === "required" && "Email required"}
                                             {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
@@ -119,23 +120,22 @@ const Login = props => {
                                     </label>
                                     <div className='flex flex-nowrap items-center'>
                                         <input type={isPasswordShown ? "text" : "password"} placeholder="Password" className={`${!errors.password?.type ? 'input' : 'input border-2 border-error'}  w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("password", { required: true })} />
-                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)}/>
+                                        <FontAwesomeIcon icon={faEye} className={`${isPasswordShown ? "text-info" : "text-base-300"} text-2xl -ml-10`} onClick={() => setIsPasswordShown((curr) => !curr)} />
                                     </div>
-                                    
+
                                     <div className="label justify-start">
-                                        {errors.password ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        {errors.password ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.password?.type === "required" && "Password required"}</span>
                                     </div>
                                 </div>
                                 <div className="form-control flex flex-col items-center">
                                     <button className="btn w-full mt-4 bg-transparent border-2 border-primary text-base-100 btn-hover-primary" type='submit' disabled={isLoading}>Login</button>
-                                   
                                     <div className="flex flex-col w-full mt-8">
                                         <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
                                             <p className='text-base-300 text-sm'>Are you dont have an account?</p>
                                             <Link to="/register" className='text-sm ml-1 text-info'>Register Here</Link>
                                         </div>
-                                        <div className="divider text-primary">OR</div> 
+                                        <div className="divider text-primary">OR</div>
                                         <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
                                             <p className='text-base-300 text-sm'>Are you forgot your password?</p>
                                             <Link to="/register" className='text-sm ml-1 text-info'>Forgot Password</Link>
@@ -152,7 +152,7 @@ const Login = props => {
                 </div>
                 {/* Emd Of Form Flex Container */}
             </div>
-            
+
         </Fragment>
     )
 }

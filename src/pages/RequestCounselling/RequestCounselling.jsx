@@ -1,27 +1,28 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React,{useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React,{useState, useEffect} from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 //REACT SPINNERS
 import ClipLoader from "react-spinners/ClipLoader"
 
-
 const RequestCounselling = () => {
+    const params = useParams();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const domain = `https://6141ca84357db50017b3dd36.mockapi.io`;
     const ApiUrl = `${domain}/users`;
+    const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
+    const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
     const style = {
         position: "fixed",
         top: "50%",
@@ -53,7 +54,30 @@ const RequestCounselling = () => {
             });
     }
 
-    return(
+    useEffect(() => {
+        const haveTemp = []
+        axios.get(pivotApi)
+            .then(response => {
+                response?.data.data.forEach(dataCourses => {
+                    haveTemp.push(dataCourses.course_id)
+                })
+                setuserCourses(haveTemp)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+
+    useEffect(() => {
+        if (userCourses.length > 0) {
+            const have = userCourses.includes(parseInt(params.course_id))
+            if (!have) {
+                navigate(`/course/${params.course_id}`)
+            }
+        }
+    }, [userCourses]);
+
+    return (
         /* Pages Container */
         <>
 
@@ -64,17 +88,16 @@ const RequestCounselling = () => {
              <div className='absolute top-4 left-4'>
                 <div className='flex items-center cursor-pointer' onClick={() => navigate("/")}>
                     <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
-                            <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
+                        <FontAwesomeIcon icon={faArrowLeft} className='text-neutral text-xl ' />
                     </div>
                     <div className=''>
                         <p className='text-primary text-sm ml-2'>Back to course</p>
                     </div>
                 </div>
             </div>
-            <div className = "min-h-screen flex justify-center items-center">
+            <div className="min-h-screen flex justify-center items-center">
                 {/* Form Container */}
                 <form  className = "w-full lg:w-2/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-
                     <div className="card-body">
                         {/* Border Form Container */}
                         <div className="p-10 card">

@@ -17,9 +17,6 @@ const CardCourseFull = (props) => {
     let navigate = useNavigate();
 
     const elm = props.course;
-
- 
-
     const validateImageInput = (data) => {
         const isValid = data?.slice(0,4);
         return isValid === "http" ? data : "https://ik.imagekit.io/rizkysr90/thought-catalog-505eectW54k-unsplash__1__CN3SRWz7Z.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1643043475277";
@@ -34,7 +31,6 @@ const CardCourseFull = (props) => {
                 <div className="card-body flex flex-col">
                     <div className='overflow-hidden break-all mb-1'>
                         <h2 className="font-bold text-base-100 text-lg">{elm?.name}</h2>
-
                     </div>
                     <p className='text-base-300 h-6 overflow-hidden break-all mb-4'>Mentor by : {elm?.mentor?.name}</p>
                     <div className='flex h-6 items-center mb-2 mt-auto'>
@@ -113,7 +109,7 @@ const CardCourseFull = (props) => {
                                                
 
                                                 <div className='text-sm text-base-300 flex flex-col'>
-                                                    <p>{elm.typekelas}</p>
+                                                    <p>{elm.type}</p>
                                                     <p className='font-bold text-sm text-right'>58 Videos</p>
 
                                                 </div>

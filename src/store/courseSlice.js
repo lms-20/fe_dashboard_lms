@@ -9,7 +9,8 @@ export const courseSlice = createSlice({
         courseId: null,
         courseAdded: null,
         sectionAdded: null,
-        quizAdded: null
+        quizAdded: null,
+        linkVideo: null,
     },
     reducers: {
         storeIdCourse: (state, action) => {
@@ -31,10 +32,13 @@ export const courseSlice = createSlice({
             state.courseAdded = action.payload
             state.sectionAdded = action.payload
             state.quizAdded = action.payload
+        },
+        setLinkVideo: (state, action) => {
+            state.linkVideo = action.payload
         }
     }
 });
 
 export const courseReducer = courseSlice.reducer;
 
-export const { storeIdCourse, deleteIdCourse, setFalseCourseAdded, setFalseSectionAdded, setFalseQuizAdded, completedAddCoursePackages } = courseSlice.actions
+export const { storeIdCourse, deleteIdCourse, setFalseCourseAdded, setFalseSectionAdded, setFalseQuizAdded, completedAddCoursePackages, setLinkVideo } = courseSlice.actions

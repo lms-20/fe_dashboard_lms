@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChalkboardTeacher,faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faChalkboardTeacher, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import YoutubePlayer from '../../components/YoutubePlayer/YoutubePlayer';
 import Navbar from '../../components/Navbar/Navbar';
 import CollapsedContentPreview from '../../components/CollapsedContentPreview/CollapsedContentPreview';
@@ -12,6 +13,7 @@ import SidebarPreview from '../../components/SidebarPreview/SidebarPreview';
 import Reviews from '../../components/Reviews/Reviews';
 import CourseInformationPreview from '../../components/CourseInformationPreview/CourseInformationPreview';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
 import axios from 'axios';
 
@@ -43,8 +45,11 @@ const CoursePreview = () => {
             }
         }
     }
-    return(
-        
+  
+    const params = useParams();
+    // console.log(params.course_id);
+
+    return (
         <div className='bg-neutral-content min-h-screen'>
             {/* Centered Content */}
             <div className='w-11/12 mx-auto'>
@@ -65,13 +70,14 @@ const CoursePreview = () => {
                             </div>
                             {/* Mobile View */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
-                                <input type="checkbox" /> 
+                                <input type="checkbox" />
                                 <div className="collapse-title text-xl font-medium">
                                     Course Information
                                 </div>
                                 <div className="collapse-content">
                                     <CourseInformationPreview
                                         data = {course}
+                                        courseId={params.course_id}
                                     />
                                 </div>
                             </div>
@@ -86,21 +92,23 @@ const CoursePreview = () => {
                             <div className='hidden lg:block'>
                                 <SidebarPreview
                                     data = {course?.chapters}
+                                    courseId={params.course_id}
                                 />
                             </div>
                             {/* Sidebar mobile view */}
                             <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
-                                <input type="checkbox" /> 
+                                <input type="checkbox" />
                                 <div className="collapse-title text-xl font-medium">
                                     Course Content
                                 </div>
                                 <div className="collapse-content">
                                     <SidebarPreview
                                         data = {course?.chapters}
+                                        courseId={params.course_id}
                                     />
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 {/* End Of Container For The Content */}
