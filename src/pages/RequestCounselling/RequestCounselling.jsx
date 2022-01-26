@@ -1,35 +1,59 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
-
-
+import axios from 'axios';
 
 const RequestCounselling = () => {
+    const params = useParams();
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+    const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
+    const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
 
+    useEffect(() => {
+        const haveTemp = []
+        axios.get(pivotApi)
+            .then(response => {
+                response?.data.data.forEach(dataCourses => {
+                    haveTemp.push(dataCourses.course_id)
+                })
+                setuserCourses(haveTemp)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
 
-    return(
+    useEffect(() => {
+        if (userCourses.length > 0) {
+            const have = userCourses.includes(parseInt(params.course_id))
+            if (!have) {
+                navigate(`/course/${params.course_id}`)
+            }
+        }
+    }, [userCourses]);
+
+    return (
         /* Pages Container */
         <div className='min-h-screen bg-neutral-content relative'>
-             <div className='absolute top-4 left-4'>
+            <div className='absolute top-4 left-4'>
                 <div className='flex items-center cursor-pointer' onClick={() => navigate("")}>
                     <div className='flex h-8 w-8 items-center justify-center rounded-full bg-primary'>
-                            <FontAwesomeIcon icon = {faArrowLeft} className='text-neutral text-xl '/>
+                        <FontAwesomeIcon icon={faArrowLeft} className='text-neutral text-xl ' />
                     </div>
                     <div className=''>
                         <p className='text-primary text-sm ml-2'>Back to course</p>
                     </div>
                 </div>
             </div>
-            <div className = "min-h-screen flex justify-center items-center">
+            <div className="min-h-screen flex justify-center items-center">
                 {/* Form Container */}
-                <form  className = "w-full lg:w-2/4 mx-auto">
+                <form className="w-full lg:w-2/4 mx-auto">
 
                     <div className="card-body">
                         {/* Border Form Container */}
@@ -50,7 +74,7 @@ const RequestCounselling = () => {
                                 <option value="invi">invisibility</option>
                             </select>
                             <div className="label justify-start">
-                                {errors.section ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                {errors.section ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                 <span className='text-error text-sm font-bold'>{errors.section?.type === "required" && "Occupation required"}</span>
                             </div>
                         </div>
@@ -58,13 +82,13 @@ const RequestCounselling = () => {
                             <label className="label">
                                 <span className="label-text text-lg text-base-100 font-bold">Short Description</span>
                             </label>
-                            <textarea id = "description" placeholder="Please,give our team short description about what you want" className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 " {...register("description", { required: true })}/>
+                            <textarea id="description" placeholder="Please,give our team short description about what you want" className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 " {...register("description", { required: true })} />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text text-lg text-base-100 font-bold">Goals</span>
                             </label>
-                            <textarea id ="goals" placeholder="Please,describe your goals " className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 "{...register("goals", { required: true })}/>
+                            <textarea id="goals" placeholder="Please,describe your goals " className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 "{...register("goals", { required: true })} />
                         </div>
                         <div className="form-control flex flex-col items-center  mt-8">
                             <button className="btn w-full bg-transparent border-2 border-primary btn-hover-primary" type='submit' >Send Your Problem</button>

@@ -17,9 +17,9 @@ const Card = (props) => {
             </figure>
             <div className="card-body ">
                 <h2 className="font-bold text-base h-12 overflow-hidden break-all ">{course.name}</h2>
-                <p className='text-base-300 h-6 overflow-hidden break-all'>Mentor by : {course.mentor}</p>
+                <p className='text-base-300 h-6 overflow-hidden break-all'>Mentor by : {course.mentor.name}</p>
 
-                {globalStateUser?.data.role === 1
+                {globalStateUser?.data.role === 'admin'
                     ?
                     <div>
                         <Link to="" className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Edit Course</Link>
@@ -27,9 +27,9 @@ const Card = (props) => {
                     </div>
                     :
                     <div>
-                        <progress className="progress progress-primary bg-base-300 mt-1" value={course.progress} max="100"></progress>
-                        <p className='my-2 font-bold'>{course.progress}% Completed</p>
-                        <Link to="" className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Start Learning</Link>
+                        <progress className="progress progress-primary bg-base-300 mt-1" value={10} max="100"></progress>
+                        <p className='my-2 font-bold'>{10}% Completed</p>
+                        <Link to={`/mycourses/${course.id}`} className='btn btn-hover-primary w-full bg-transparent border-2 border-primary text-base-100'>Start Learning</Link>
                     </div>
                 }
             </div>
