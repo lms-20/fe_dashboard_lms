@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -27,22 +27,46 @@ const style = {
 };
 
 const AddNewCourse = props => {
+    const token = useSelector(state => state.userData.user?.data.token);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
+    const [categories, setCategories] = useState([]);
+    const [mentors, setMentors] = useState([]);
+    const ApiUrl = `https://bef3-182-2-68-139.ngrok.io/courses`;
+    const ApiCategories = `https://bef3-182-2-68-139.ngrok.io/categories`;
+    const ApiMentors = `https://bef3-182-2-68-139.ngrok.io/mentors`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        axios.get(ApiCategories)
+            .then(response => {
+                response.data.data.forEach(dataCategories => {
+                    setCategories(preffState => [...preffState, dataCategories])
+                })
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get(ApiMentors)
+            .then(response => {
+                response.data.data.forEach(dataCategories => {
+                    setMentors(preffState => [...preffState, dataCategories])
+                })
+            })
+    }, [])
+
     const onSubmit = async (data) => {
         setIsLoading(true);
+        console.log(data)
         axios.post(
             ApiUrl,
             data,
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: { "Authorization": `Bearer ${token}` } }
         )
             .then(response => {
                 setIsLoading(false);
-                dispatch(storeIdCourse(response.data.id))
+                dispatch(storeIdCourse(response.data.data.id))
                 dispatch(setFalseCourseAdded(true))
                 navigate('/addsection')
             })
@@ -75,7 +99,7 @@ const AddNewCourse = props => {
                                         <p className='text-base-300 text-xs'>Include course name,the course name should have minimum 40 characters</p>
                                     </label>
                                     <div className=' flex-grow'>
-                                        <input type="text" placeholder="Insert your product name" name = "name" id = "name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  my-2 w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300`} {...register("name", { required: true })} />
+                                        <input type="text" placeholder="Insert your product name" name="name" id="name" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  my-2 w-full transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300`} {...register("name", { required: true })} />
                                         <div className="label justify-start">
                                             {errors.name ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                             <span className='text-error text-sm font-bold'>
@@ -96,34 +120,38 @@ const AddNewCourse = props => {
                                                 <span className="label-text text-lg text-base-100 font-bold">Category</span>
                                                 <p className='text-base-300 text-xs'>Categories according to the field studied</p>
                                             </label>
-                                            <select id='category' name='category' className={`${!errors.category?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("category", { required: true })}>
-                                                <option value="none" disabled>Choose your superpower</option>
-                                                <option value="backend">Backend</option>
-                                                <option value="frontend">Frontend</option>
-                                                <option value="devops">DevOps</option>
+                                            <select id='category_id' name='category_id' className={`${!errors.category_id?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("category_id", { required: true, setValueAs: v => parseInt(v), })}>
+                                                <option value="none" disabled>Chose categories</option>
+                                                {
+                                                    categories.map((elm, idx) => {
+                                                        return <option key={idx} value={elm.id}>{elm.name}</option>
+                                                    })
+                                                }
                                             </select>
                                             <div className="label justify-start">
-                                                {errors.category ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                                <span className='text-error text-sm font-bold'>{errors.category?.type === "required" && "category required"}</span>
+                                                {errors.category_id ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.category_id?.type === "required" && "category required"}</span>
                                             </div>
                                         </div>
-                                       <div className='form-control basis-1/4 mr-10 flex flex-col'>
+                                        <div className='form-control basis-1/4 mr-10 flex flex-col'>
                                             <label className="label p-0 flex flex-col items-start mb-4">
                                                 <span className="label-text text-lg text-base-100 font-bold">Mentor</span>
                                                 <p className='text-base-300 text-xs'>Mentor is who teach the course</p>
                                             </label>
-                                            <select id='mentor' name='mentor' className={`${!errors.mentor?.type ? 'select' : 'select border-2 border-error'} mt-auto w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("mentor", { required: true })}>
-                                                <option value="none" disabled>Choose your superpower</option>
-                                                <option value="whyyu">Whyyu</option>
-                                                <option value="sandikagalih">Sandhika Galih</option>
-                                                <option value="eko">Eko</option>
+                                            <select id='mentor_id' name='mentor_id' className={`${!errors.mentor_id?.type ? 'select' : 'select border-2 border-error'} mt-auto w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("mentor_id", { required: true, setValueAs: v => parseInt(v), })}>
+                                                <option value="none" disabled>Choose mentor_id</option>
+                                                {
+                                                    mentors.map((elm, idx) => {
+                                                        return <option key={idx} value={elm.id}>{elm.name}</option>
+                                                    })
+                                                }
                                             </select>
                                             <div className="label justify-start">
-                                                {errors.mentor ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                                <span className='text-error text-sm font-bold'>{errors.mentor?.type === "required" && "mentor required"}</span>
+                                                {errors.mentor_id ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.mentor_id?.type === "required" && "mentor required"}</span>
                                             </div>
-                                       </div>
-                                       <div className='form-control basis-1/4 mr-10 flex flex-col'>
+                                        </div>
+                                        <div className='form-control basis-1/4 mr-10 flex flex-col'>
                                             <label className="label p-0 flex flex-col items-start mb-4">
                                                 <span className="label-text text-lg text-base-100 font-bold">Level</span>
                                                 <p className='text-base-300 text-xs'>Level course is according to material of the course</p>
@@ -138,9 +166,9 @@ const AddNewCourse = props => {
                                                 {errors.level ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                                 <span className='text-error text-sm font-bold'>{errors.level?.type === "required" && "level required"}</span>
                                             </div>
-                                       </div>
+                                        </div>
                                     </div>
-                                </div>  
+                                </div>
                                 <div className="form-control flex flex-row items-start my-4">
                                     <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
                                         <span className="label-text text-lg  font-bold text-primary">Thumbnail</span>
@@ -157,7 +185,7 @@ const AddNewCourse = props => {
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div className="form-control flex flex-row items-start my-4">
                                     <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
@@ -183,33 +211,33 @@ const AddNewCourse = props => {
                                     </label>
                                     <div className='flex-grow flex my-2'>
                                         <label className="cursor-pointer label mr-4">
-                                            <input type="radio" name="typekelas" defaultChecked="true" className="radio mr-2 radio-primary" value="premium" {...register('typekelas', { required: true })} />
+                                            <input type="radio" name="type" defaultChecked="true" className="radio mr-2 radio-primary" value="premium" {...register('type', { required: true })} />
                                             <span className="label-text text-lg text-base-100">Premium</span>
                                         </label>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="typekelas" className="radio radio-primary mr-2" value="free" {...register('typekelas', { required: true })} />
+                                            <input type="radio" name="type" className="radio radio-primary mr-2" value="free" {...register('type', { required: true })} />
                                             <span className="label-text text-lg text-base-100">Free</span>
                                         </label>
                                     </div>
-                                   
+
                                 </div>
                                 <div className="form-control flex flex-row items-start my-4">
                                     <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
                                         <span className="label-text text-lg  font-bold text-primary">Status</span>
                                         <p className='text-base-300 text-xs'>Status course is about is the course is available for any user</p>
                                     </label>
-                                    <div className='flex-grow flex my-2'>   
+                                    <div className='flex-grow flex my-2'>
                                         <label className="cursor-pointer label mr-4">
                                             <input type="radio" name="status" defaultChecked="true" className="radio radio-primary mr-2" value="draft" {...register('status', { required: true })} />
                                             <span className="label-text text-lg text-base-100">Draft</span>
-                                        
+
                                         </label>
                                         <label className="cursor-pointer label">
                                             <input type="radio" name="status" className="radio radio-primary mr-2" value="published" {...register('status', { required: true })} />
                                             <span className="label-text text-lg text-base-100">Published</span>
                                         </label>
                                     </div>
-                                    
+
                                 </div>
                                 <div className="form-control flex flex-row items-start my-4">
                                     <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
@@ -218,15 +246,15 @@ const AddNewCourse = props => {
                                     </label>
                                     <div className='flex-grow flex my-2'>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="certificate" defaultChecked="true" className="radio radio-primary mr-2" value="yes" {...register('certificate', { required: true })} />
+                                            <input type="radio" name="certificate" defaultChecked="true" className="radio radio-primary mr-2" value={true} {...register('certificate', { required: true, setValueAs: v => Boolean(v), })} />
                                             <span className="label-text text-lg text-base-100 mr-4">Yes</span>
                                         </label>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value="no" {...register('certificate', { required: true })} />
+                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value={false} {...register('certificate', { required: true, setValueAs: v => Boolean(v), })} />
                                             <span className="label-text text-lg text-base-100">No</span>
                                         </label>
                                     </div>
-                                   
+
                                 </div>
                                 <div className="form-control flex flex-row items-start my-4">
                                     <label className="label flex flex-col items-start p-0 basis-1/5 mr-8">
@@ -235,7 +263,7 @@ const AddNewCourse = props => {
                                     </label>
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
                                     <div className='flex-grow'>
-                                        <input type="number" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  w-full my-2 transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price", { required: true })} />
+                                        <input type="number" placeholder="price" className={`${!errors.price?.type ? 'input' : 'input border-2 border-error'}  w-full my-2 transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register("price", { required: true, setValueAs: v => parseInt(v), })} />
                                         <div className="label justify-start">
                                             {errors.price ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                             <span className='text-error text-sm font-bold'>
@@ -263,7 +291,7 @@ const AddNewCourse = props => {
                                     {/* input transition-all focus:outline-primary text-neutral-content text-lg placeholder:text-base-300 */}
                                 </div>
                                 <div className='flex justify-end '>
-                                    <button type='submit'  disabled={isLoading} className='btn btn-lg text-base-100 btn-hover-primary bg-transparent border-2 border-primary'>Next Move</button>
+                                    <button type='submit' disabled={isLoading} className='btn btn-lg text-base-100 btn-hover-primary bg-transparent border-2 border-primary'>Next Move</button>
                                 </div>
                             </div>
                             {/* End Of Form Container */}

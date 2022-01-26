@@ -6,7 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const courseSlice = createSlice({
     name: 'courseData',
     initialState: {
-        courseId: null,
+        course_id: null,
         courseAdded: null,
         sectionAdded: null,
         quizAdded: null,
@@ -14,10 +14,10 @@ export const courseSlice = createSlice({
     },
     reducers: {
         storeIdCourse: (state, action) => {
-            state.courseId = action.payload;
+            state.course_id = action.payload;
         },
         deleteIdCourse: (state, action) => {
-            state.courseId = null
+            state.course_id = null
         },
         setFalseCourseAdded: (state, action) => {
             state.courseAdded = action.payload

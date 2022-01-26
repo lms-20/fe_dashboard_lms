@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const CoursePreview = () => {
     let params = useParams();
-    const domain = 'http://8701-182-2-68-139.ngrok.io'
+    const domain = 'https://bef3-182-2-68-139.ngrok.io'
     const ApiSections = `${domain}/courses/${params.course_id}`;
 
     const [course, setCourse] = useState({});
@@ -33,7 +33,7 @@ const CoursePreview = () => {
             })
     }, []);
     function getVideoId(url) {
-        url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
+        url = url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
         let result = "";
         for (let i = url.length - 1; i >= 1; i--) {
             if (url[i] === "/") {

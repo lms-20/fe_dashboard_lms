@@ -9,7 +9,7 @@ import CardCourseFullMobile from '../CardCourseFullMobile/CardCourseFullMobile';
 
 
 const FetchLandingCourses = () => {
-    const domain = 'http://8701-182-2-68-139.ngrok.io'
+    const domain = 'https://bef3-182-2-68-139.ngrok.io'
     const ApiSections = `${domain}/courses`;
     const [courses, setCourses] = useState([]);
     // let navigate = useNavigate();

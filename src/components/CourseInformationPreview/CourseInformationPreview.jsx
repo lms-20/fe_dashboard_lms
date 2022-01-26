@@ -16,10 +16,12 @@ const CourseInformationPreview = (props) => {
     const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot`;
+    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+
+    console.log(token);
 
     useEffect(() => {
-        axios.get(pivotApi)
+        axios.get(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
             .then(response => {
                 response?.data.data.forEach(dataCourses => {
                     setuserCourses(
@@ -33,7 +35,7 @@ const CourseInformationPreview = (props) => {
     }, []);
 
     const have = userCourses.includes(parseInt(courseId))
-    console.log(props.data)
+    console.log("a", userCourses)
 
     return (
         <>

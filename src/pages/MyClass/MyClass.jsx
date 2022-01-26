@@ -10,16 +10,17 @@ import { useSelector } from 'react-redux';
 
 
 const MyClass = props => {
+    const token = useSelector(state => state.userData.user?.data.token);
     const globalStateUser = useSelector(state => state.userData?.user);
     // Init API endpoint
-    const apiUrl = "https://6141ca84357db50017b3dd36.mockapi.io/courses";
-    const apiPivot = "https://61e62635ce3a2d0017358fa7.mockapi.io/pivot";
+    const apiUrl = "https://bef3-182-2-68-139.ngrok.io/courses";
+    const apiPivot = "https://bef3-182-2-68-139.ngrok.io/mycourses";
     const [myCourses, setMyCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     // Function for request get with axios
     const retrieveMyCourses = async () => {
-        const response = await axios.get(globalStateUser?.data.role === 'admin' ? apiUrl : apiPivot);
+        const response = await axios.get(globalStateUser?.data.role === 'admin' ? apiUrl : apiPivot, { headers: { "Authorization": `Bearer ${token}` } });
         return response.data.data;
 
     }

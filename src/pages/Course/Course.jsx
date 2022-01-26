@@ -16,12 +16,13 @@ const Course = () => {
     const params = useParams();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+    const token = useSelector(state => state.userData.user?.data.token);
     const [isQuizTime, setIsQuizTime] = useState(false);
     const navigate = useNavigate();
     const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot/`;
-    const courseApi = `http://8701-182-2-68-139.ngrok.io/courses/`;
+    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+    const courseApi = `https://bef3-182-2-68-139.ngrok.io/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
@@ -41,7 +42,7 @@ const Course = () => {
 
     useEffect(() => {
         const haveTemp = []
-        axios.get(pivotApi)
+        axios.get(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
             .then(response => {
                 response?.data.data.forEach(dataCourses => {
                     haveTemp.push(dataCourses.course_id)
@@ -54,27 +55,21 @@ const Course = () => {
     }, []);
 
     useEffect(() => {
-        if (userCourses.length > 0) {
-            const have = userCourses.includes(parseInt(params.my_course_id))
-            if (!have) {
-                navigate(`/course/${params.my_course_id}`)
-            }
+        const have = userCourses.includes(parseInt(params.my_course_id))
+        if (!have) {
+            navigate(`/courses/${params.my_course_id}`)
         }
     }, [userCourses]);
 
     useEffect(() => {
-        console.log(courseApi + params.my_course_id)
         axios.get(courseApi + params.my_course_id)
             .then(response => {
-                // console.log('h', response.data.data)
                 setDetailCourse(response.data.data)
             })
             .catch(error => {
                 console.log(error)
             })
     }, []);
-
-    console.log('h', detailCourse)
 
     return (
         <>

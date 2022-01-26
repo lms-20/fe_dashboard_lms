@@ -8,19 +8,21 @@ import { faTimesCircle, faEye, faUser } from '@fortawesome/free-solid-svg-icons'
 import propTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+
 const UserSettings = () => {
+    const token = useSelector(state => state.userData.user?.data.token);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const apiUrl = "https://6141ca84357db50017b3dd36.mockapi.io/users/48"
+    const apiUrl = "https://bef3-182-2-68-139.ngrok.io/users/fetch"
     const [isFormDisabled, setIsFormDisabled] = useState(true);
     const [userResponse, setUserResponse] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isPasswordShown, setIsPasswordShown] = useState(false);
 
-
     const retrieveUser = async () => {
-        const response = await axios.get(apiUrl);
+        const response = await axios.get(apiUrl, { headers: { "Authorization": `Bearer ${token}` } });
         return response.data
     }
 
@@ -29,9 +31,10 @@ const UserSettings = () => {
             try {
                 setIsLoading(true)
                 const userData = await retrieveUser();
+                console.log(userData.data)
                 if (userData) {
                     setIsLoading(false);
-                    setUserResponse(userData)
+                    setUserResponse(userData.data)
                 }
             } catch {
                 setIsLoading(false)
@@ -44,7 +47,7 @@ const UserSettings = () => {
     const onSubmit = async (data) => {
         setIsFormDisabled((current) => !current)
         try {
-            const updateData = await axios.put(apiUrl, data)
+            const updateData = await axios.put(apiUrl, data, { headers: { "Authorization": `Bearer ${token}` } })
             alert('SUCCESS!! :-)\n\n' + updateData);
         } catch (error) {
             setIsLoading(false)
@@ -131,7 +134,7 @@ const UserSettings = () => {
                                         </span>
                                     </div>
                                 </div>
-                                <div className="form-control text-base-100 my-4">
+                                {/* <div className="form-control text-base-100 my-4">
                                     <label className="label">
                                         <span className="label-text text-inherit font-bold">Password</span>
                                     </label>
@@ -158,7 +161,7 @@ const UserSettings = () => {
                                         {errors.occupation ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
                                         <span className='text-error text-sm font-bold'>{errors.occupation?.type === "required" && "Occupation required"}</span>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="form-control text-base-100 my-4">
                                     <label className="label">
                                         <span className="label-text text-inherit font-bold">Phone</span>

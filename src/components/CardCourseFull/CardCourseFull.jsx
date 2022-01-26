@@ -11,20 +11,17 @@ import PropTypes from 'prop-types';
 
 
 const CardCourseFull = (props) => {
-    // const ApiSections = `https://6141ca84357db50017b3dd36.mockapi.io/courses`;
-    // const ApiSections = 'https://d58c-140-213-161-53.ngrok.io/courses';
-    // const [courses, setCourses] = useState([]);
     let navigate = useNavigate();
 
     const elm = props.course;
     const validateImageInput = (data) => {
-        const isValid = data?.slice(0,4);
+        const isValid = data?.slice(0, 4);
         return isValid === "http" ? data : "https://ik.imagekit.io/rizkysr90/thought-catalog-505eectW54k-unsplash__1__CN3SRWz7Z.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1643043475277";
-    
-    }    
+
+    }
     return (
         <>
-            <div  className="card-compact bg-neutral transition-all hover:scale-105 flex flex-col drop-shadow-lg mr-3 basis-3/12 rounded-lg">
+            <div className="card-compact bg-neutral transition-all hover:scale-105 flex flex-col drop-shadow-lg mr-3 basis-3/12 rounded-lg">
                 <figure className=' px-4 pt-4 flex h-56'>
                     <img src={validateImageInput(elm?.thumbnail)} className='rounded-box w-fit flex-grow object-cover' />
                 </figure>
@@ -62,7 +59,7 @@ const CardCourseFull = (props) => {
                     </div>
                 </div>
             </div>
-              
+
             {/* <div className='mt-8 lg:hidden'>
                 <div className="alert flex-row lg:hidden bg-transparent px-0 py-4">
                     <div className="flex justify-start text-base-100">
@@ -132,5 +129,5 @@ const CardCourseFull = (props) => {
 
 export default CardCourseFull
 CardCourseFull.propTypes = {
-    course : PropTypes.object
+    course: PropTypes.object
 }
