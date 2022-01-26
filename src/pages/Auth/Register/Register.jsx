@@ -38,8 +38,7 @@ const Register = props => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const password = useRef({});
     password.current = watch("password", "");
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/users`;
-    // const ApiUrl = `https://dbaf-182-2-39-138.ngrok.io/users/register`;
+    const ApiUrl = `http://8701-182-2-68-139.ngrok.io/users/register`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const token = useSelector(state => state.userData.user?.data.token);
@@ -71,6 +70,14 @@ const Register = props => {
             })
             .catch(error => {
                 setIsLoading(false);
+                if (error.message === "Request failed with status code 409") {
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Email already exist!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
             });
     }
 
