@@ -13,17 +13,15 @@ import SidebarPreview from '../../components/SidebarPreview/SidebarPreview';
 import Reviews from '../../components/Reviews/Reviews';
 import CourseInformationPreview from '../../components/CourseInformationPreview/CourseInformationPreview';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
 import axios from 'axios';
 
 const CoursePreview = () => {
     let params = useParams();
-
     const domain = 'http://5b28-140-213-168-132.ngrok.io'
     const ApiSections = `${domain}/courses/${params.course_id}`;
 
-    const [course,setCourse] = useState({});
+    const [course, setCourse] = useState({});
 
     useEffect(() => {
         axios.get(ApiSections)
@@ -37,7 +35,7 @@ const CoursePreview = () => {
     function getVideoId(url) {
         url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
         let result = "";
-        for(let i = url.length-1; i >= 1; i--){
+        for (let i = url.length - 1; i >= 1; i--) {
             if (url[i] === "/") {
                 return result
             } else {
@@ -45,8 +43,6 @@ const CoursePreview = () => {
             }
         }
     }
-  
-    const params = useParams();
     // console.log(params.course_id);
 
     return (
@@ -59,13 +55,13 @@ const CoursePreview = () => {
                         {/* Video Container */}
                         <div className='basis-8/12 bg-neutral-content'>
                             <h3 className='text-primary font-extrabold text-4xl mt-4 mb-6'>{course?.name}</h3>
-                            
+
                             <YoutubePlayer
                                 videoId={getVideoId(`${course?.chapters?.[0].lessons?.[-0].video}`)}
                             />
                             <div className='hidden lg:block'>
                                 <CourseInformationPreview
-                                    data = {course}
+                                    data={course}
                                 />
                             </div>
                             {/* Mobile View */}
@@ -76,7 +72,7 @@ const CoursePreview = () => {
                                 </div>
                                 <div className="collapse-content">
                                     <CourseInformationPreview
-                                        data = {course}
+                                        data={course}
                                         courseId={params.course_id}
                                     />
                                 </div>
@@ -91,7 +87,7 @@ const CoursePreview = () => {
                             {/* Sidebar desktop view */}
                             <div className='hidden lg:block'>
                                 <SidebarPreview
-                                    data = {course?.chapters}
+                                    data={course?.chapters}
                                     courseId={params.course_id}
                                 />
                             </div>
@@ -103,7 +99,7 @@ const CoursePreview = () => {
                                 </div>
                                 <div className="collapse-content">
                                     <SidebarPreview
-                                        data = {course?.chapters}
+                                        data={course?.chapters}
                                         courseId={params.course_id}
                                     />
                                 </div>
