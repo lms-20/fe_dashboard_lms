@@ -2,15 +2,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight, faShoppingCart, faSchool } from '@fortawesome/free-solid-svg-icons';
 import CollapsedContentPreview from '../CollapsedContentPreview/CollapsedContentPreview';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const SidebarPreview = ({ courseId }) => {
+const SidebarPreview = (props) => {
+    const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot`;
@@ -39,7 +42,9 @@ const SidebarPreview = ({ courseId }) => {
                     <FontAwesomeIcon icon={faAngleDoubleRight} className='text-4xl text-neutral-content mr-2 ' />
                     <p className='text-neutral-content font-bold text-xl w-full text-center -ml-4'>Course Content</p>
                 </div>
-                <CollapsedContentPreview />
+                <CollapsedContentPreview 
+                    data = {props?.data}
+                />
                 {/* Button */}
                 {/* If Course Was Enrolled */}
                 {
@@ -64,3 +69,6 @@ const SidebarPreview = ({ courseId }) => {
 }
 
 export default SidebarPreview
+SidebarPreview.propTypes = {
+    data : PropTypes.array
+}

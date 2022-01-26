@@ -129,8 +129,7 @@ const Login = props => {
                                     </div>
                                 </div>
                                 <div className="form-control flex flex-col items-center">
-                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Login</button>
-
+                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary text-base-100 btn-hover-primary" type='submit' disabled={isLoading}>Login</button>
                                     <div className="flex flex-col w-full mt-8">
                                         <div className='flex flex-col lg:flex-row items-center lg:items-start justify-center'>
                                             <p className='text-base-300 text-sm'>Are you dont have an account?</p>

@@ -7,17 +7,55 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle,faEye,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle,faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+//REACT SPINNERS
+import ClipLoader from "react-spinners/ClipLoader"
 
 const RequestCourse = () => {
+    const style = {
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        zIndex: "9999"
+    };
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+    
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+    const domain = `https://6141ca84357db50017b3dd36.mockapi.io`;
+    const ApiUrl = `${domain}/users`;
 
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+        axios.post(
+            ApiUrl,
+            data,
+            { headers: { 'Content-Type': 'application/json' } }
+        )
+            .then(response => {
+                setIsLoading(false);
+                MySwal.fire({
+                    icon: 'success',
+                    title: 'Succes',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                reset();
+            })
+            .catch(error => {
+                setIsLoading(false);
+            });
+    }
     return(
             <Fragment>
-          
+                <div style={style}>
+                    <ClipLoader color="#ffffff" loading={isLoading} size={150} />
+                </div>
             {/* Pages Container */}
             <div className='min-h-screen bg-neutral-content relative'>
                 {/* Navigation for go to the homepage lms */}
@@ -34,7 +72,7 @@ const RequestCourse = () => {
                 {/* Form Flex Container */}
                 <div className = "min-h-screen flex justify-center items-center">
                     {/* Form Container */}
-                    <form  className = "w-full lg:w-2/4 mx-auto ">
+                    <form  className = "w-full lg:w-2/4 mx-auto " onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="card-body">
                             {/* Border Form Container */}
@@ -47,12 +85,11 @@ const RequestCourse = () => {
                                         <label className="label">
                                             <span className="label-text text-lg text-base-100 font-bold">Course Name</span>
                                         </label>
-                                        <input type="text" id='emailAddress' name='name' placeholder="The name of course what you imagine" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `}  {...register("name", { required: true })} />
+                                        <input type="text" id='name' name='name' placeholder="The name of course what you imagine" className={`${!errors.name?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `}  {...register("name", { required: true })} />
                                         <div className="label justify-start">
-                                            {errors.emailAddress ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                            {errors.name ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
                                             <span className='text-error text-sm font-bold'>
-                                                {errors.emailAddress?.type === "required" && "Email is required"}
-                                                {errors.emailAddress?.type === "pattern" && "Invalid Email Address"}
+                                                {errors.name?.type === "required" && "Course name is required"}
                                             </span>
                                         </div>
                                 </div>
@@ -72,19 +109,29 @@ const RequestCourse = () => {
                                         <span className="label-text text-lg text-base-100 font-bold">Short Description</span>
                                     </label>
                                     <textarea id = "description" placeholder="Please,give our team short description about what you want" className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 " {...register("description", { required: true })}/>
-
+                                    <div className="label justify-start">
+                                            {errors.description ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                            <span className='text-error text-sm font-bold'>
+                                                {errors.description?.type === "required" && "Description is required"}
+                                            </span>
+                                    </div>
                                 
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-lg text-base-100 font-bold">Goals</span>
                                     </label>
-                                    <textarea id ="goals" placeholder="Please,describe your goals " className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 "{...register("goals", { required: true })}/>
-
+                                    <textarea id ="goal" placeholder="Please,describe your goals " className="textarea h-24 textarea-bordered textarea-primary transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 "{...register("goal", { required: true })}/>
+                                    <div className="label justify-start">
+                                        {errors.goal ? <FontAwesomeIcon icon = {faTimesCircle} className='text-error mr-2'/> : ""}
+                                        <span className='text-error text-sm font-bold'>
+                                            {errors.goal?.type === "required" && "The goal is required"}
+                                        </span>
+                                    </div>
                                 
                                 </div>
                                 <div className="form-control flex flex-col items-center">
-                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary" type='submit' >Login</button>
+                                    <button className="btn w-full mt-4 bg-transparent border-2 border-primary btn-hover-primary text-base-100" type='submit' >Send Request</button>
                                 </div>
                             </div>
                             {/* End Of Form Container */}

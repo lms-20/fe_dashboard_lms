@@ -60,7 +60,7 @@ const MyClass = props => {
             {isLoading === true ? <p>Loading Bro</p> : isError == true ? <p>Error Bro</p> :
                 // {/* Course Content Container */}
                 <div className='w-96 mx-auto lg:w-full lg:mx-0'>
-                    <div className='hidden lg:flex flex mt-4 flex-wrap'>
+                    <div className='hidden lg:flex lg:justify-center mt-4 flex-wrap '>
                         {/* Card only appear in desktop view */}
                         {
                             myCourses.map((course) => {

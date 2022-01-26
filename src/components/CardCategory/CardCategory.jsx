@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const CardCategory = ({ id, name, courses }) => {
     let navigate = useNavigate();
     return (
-        <div>
             <div className="card mb-8 bg-neutral lg:card-side basis-5/12 flex-grow mr-6 cursor-pointer" onClick={() => navigate(`/categories/${id}`)}>
                 <div className="card-body">
                     <div>
@@ -25,7 +24,6 @@ const CardCategory = ({ id, name, courses }) => {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

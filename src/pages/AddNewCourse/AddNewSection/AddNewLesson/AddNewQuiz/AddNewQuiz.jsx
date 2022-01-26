@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFalseQuizAdded } from '../../../../../store/courseSlice';
 // FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle, faEye, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle, faArrowRight, faTrash,faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 //SWAL
 import Swal from 'sweetalert2'
@@ -97,56 +97,82 @@ const AddNewQuiz = props => {
             <div className='min-h-screen bg-neutral-content relative'>
                 <div className="min-h-screen flex justify-center items-center">
                     <form className="w-full lg:w-2/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+                        <div className='mb-4 flex items-center'>
+                            <div>
+                                <p className='text-base-100'>Section Info</p>
+                                <h2 className='text-primary text-4xl font-extrabold'>
+                                    Add Quiz
+                                </h2>
+                            </div>
+                            <div className='ml-auto'>
+                                <button className='btn bg-transparent text-base-100 border-2 border-primary btn-hover-primary' type='button' onClick={() => append({ section: "", namequiz: "" })}>
+                                    <FontAwesomeIcon icon = {faPlusCircle} className='mr-2'/>
+                                    Tambah Form</button>
+                            </div>
+                        </div>
                         {fields.map((field, index) => {
                             return (
-                                <div className="card-body" key={field.id}>
-                                    {/* Border Form Container */}
-                                    <div className="form-control">
-                                        <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">section</span>
-                                        </label>
-                                        <select id='section' name='section' className={`${!errors.section?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].section`, { required: true })}>
-                                            <option value="" disabled >Choose your superpower</option>
-                                            {
-                                                sections.map((data, index) => {
-                                                    return <option key={index} value={data.id}>{data.namesection}</option>
-                                                })
+                                <div className="collapse w-full border border-2 border-primary rounded-box collapse-arrow my-4" key = {field.id}>
+                                    <input type="checkbox" className=''/> 
+                                    <div className="collapse-title text-xl text-base-100 font-medium">
+                                        {`Lessons ${index+1}`}
+                                    </div> 
+                                    <div className="collapse-content"> 
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-lg text-base-100 font-bold">Section</span>
+                                            </label>
+                                            <select id='section' name='section' className={`${!errors.section?.type ? 'select' : 'select border-2 border-error'}  w-full transition-all text-neutral-content text-md focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].section`, { required: true })}>
+                                                <option value="" disabled >Choose your superpower</option>
+                                                {
+                                                    sections.map((data, index) => {
+                                                        return <option key={index} value={data.id}>{data.namesection}</option>
+                                                    })
+                                                }
+                                            </select>
+                                            <div className="label justify-start">
+                                                {errors.section ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>{errors.section?.type === "required" && "section required"}</span>
+                                            </div>
+                                        </div>
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text text-lg text-base-100 font-bold">Quiz Name</span>
+                                            </label>
+                                            <input type="text" placeholder="namequiz" className={`${!errors.namequiz?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namequiz`, { required: true })} />
+                                            <div className="label justify-start">
+                                                {errors.namequiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
+                                                <span className='text-error text-sm font-bold'>
+                                                    {errors.namequiz?.type === "required" && "namequiz required"}
+                                                    {errors.namequiz?.type === "pattern" && "Invalid namequiz Address"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="form-control">
+                                            <button className = "btn border-2 border-error bg-transparent text-base-100 hover:bg-error" type='button' onClick={() => {
+                                                // if (items >= 0) {
+                                                remove(index)
+                                                // }
                                             }
-                                        </select>
-                                        <div className="label justify-start">
-                                            {errors.section ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                            <span className='text-error text-sm font-bold'>{errors.section?.type === "required" && "section required"}</span>
+                                            }>
+                                            <FontAwesomeIcon icon = {faTrash} className='mr-2' />
+                                            Remove Section </button> 
                                         </div>
                                     </div>
-                                    <div className="form-control">
-                                        <label className="label">
-                                            <span className="label-text text-lg text-base-100 font-bold">namequiz</span>
-                                        </label>
-                                        <input type="text" placeholder="namequiz" className={`${!errors.namequiz?.type ? 'input' : 'input border-2 border-error'}  transition-all text-neutral-content text-lg focus:outline-primary focus:bg-base-100  placeholder:text-base-300 `} {...register(`items[${index}].namequiz`, { required: true })} />
-                                        <div className="label justify-start">
-                                            {errors.namequiz ? <FontAwesomeIcon icon={faTimesCircle} className='text-error mr-2' /> : ""}
-                                            <span className='text-error text-sm font-bold'>
-                                                {errors.namequiz?.type === "required" && "namequiz required"}
-                                                {errors.namequiz?.type === "pattern" && "Invalid namequiz Address"}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="form-control">
-                                        <button type='button' onClick={() => {
-                                            // if (items >= 0) {
-                                            remove(index)
-                                            // }
-                                        }
-                                        }> - </button>
-                                    </div>
-                                    <div className="form-control">
+                                    
+                                    {/* <div className="form-control">
                                         <button type='button' onClick={() => append({ section: "", namequiz: "" })}> + </button>
-                                    </div>
+                                    </div> */}
                                     {/* End Of Form Container */}
                                 </div>
                             )
                         })}
-                        <button type='submit' disabled={isLoading}>Next Move</button>
+                         <div className=' flex justify-end'>
+                            <button className = "btn btn-hover-primary bg-transparent border-2 border-primary text-base-100 my-2" type='submit' disabled={isLoading}>
+                                Next Move
+                                <FontAwesomeIcon icon = {faArrowRight} className='ml-2'/>
+                                </button>
+                        </div>
                     </form>
                     {/* Form Container */}
                     {/* End Of Form Container */}

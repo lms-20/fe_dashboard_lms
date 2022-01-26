@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import Reviews from '../Reviews/Reviews';
 import PricingPlans from '../../components/PricingPlans/PricingPlans';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import CollapsedContentPreview from '../CollapsedContentPreview/CollapsedContentPreview';
 import axios from 'axios';
 
-
-const CourseInformationPreview = ({ courseId }) => {
+const CourseInformationPreview = (props) => {
+    const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `https://61e62635ce3a2d0017358fa7.mockapi.io/pivot`;
@@ -38,8 +40,8 @@ const CourseInformationPreview = ({ courseId }) => {
             <div className='flex flex-wrap my-4'>
                 <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>345 Students</div>
                 <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>120 Videos</div>
-                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>Beginner</div>
-                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>Premium</div>
+                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>{props.data?.level}</div>
+                <div className=' btn bg-transparent border-primary text-base-100 rounded-full btn-hover-primary mr-4 mb-4'>{props.data?.type}</div>
             </div>
             {/* Mentor */}
             <div className='my-4'>
@@ -51,8 +53,8 @@ const CourseInformationPreview = ({ courseId }) => {
                         </div>
                     </div>
                     <div className='-ml-4 py-2 px-10 rounded-lg inline border-2 border-primary'>
-                        <p className='font-bold text-xl'>Ronaldo Gates</p>
-                        <p className='text-base-300'>Software Engineer</p>
+                        <p className='font-bold text-xl'>{props.data?.mentor?.name}</p>
+                        <p className='text-base-300'>{props.data?.mentor?.profession}</p>
                     </div>
 
 
@@ -61,18 +63,24 @@ const CourseInformationPreview = ({ courseId }) => {
             {/* Description */}
             <div className='my-4'>
                 <h3 className='text-primary font-extrabold text-3xl mb-4'>Description</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id velit ut dignissimos voluptate totam inventore et voluptates odio exercitationem quia eveniet deleniti cum amet incidunt, molestiae non officia praesentium? Assumenda?</p>
+                <p>{props.data?.description}</p>
             </div>
             <div className='my-4'>
                 <h3 className='text-primary font-extrabold text-3xl mb-4'>What They Think ?</h3>
-                <Reviews />
+                <Reviews
+                    data = {props.data.reviews}
+                />
                 <Link to="" className='btn btn-hover-primary bg-transparent text-base-100 w-full border-2 border-primary'>See more reviews</Link>
             </div>
-            {!have || !token ? <PricingPlans /> : null}
+            {!have || !token ? <PricingPlans data = {props.data.price} /> : null}
         </>
     )
 
 }
 
 export default CourseInformationPreview
+CourseInformationPreview.propTypes = {
+    data : PropTypes.object
+}
+
 

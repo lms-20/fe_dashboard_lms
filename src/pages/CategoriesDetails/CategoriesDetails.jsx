@@ -5,9 +5,9 @@
 import React from 'react'
 import CardCourseFull from '../../components/CardCourseFull/CardCourseFull'
 import Navbar from '../../components/Navbar/Navbar'
+import PropTypes from 'prop-types';
 
-
-const CategoriesDetails = () => {
+const CategoriesDetails = (props) => {
     return(
         <div className='min-h-screen bg-neutral-content'>
             <div className='w-11/12 mx-auto my-10'>
@@ -15,7 +15,9 @@ const CategoriesDetails = () => {
                         <h3 className='text-primary font-extrabold text-4xl'>Finance Accounting</h3>
                 </div>
                 <div className='mt-10'>
-                        <CardCourseFull/> 
+                        <CardCourseFull
+                        
+                        /> 
 
                 </div>
             </div>

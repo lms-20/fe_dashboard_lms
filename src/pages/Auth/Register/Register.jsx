@@ -194,7 +194,7 @@ const Register = props => {
                                     </div>
                                 </div>
                                 <div className="form-control">
-                                    <button className="btn w-full mt-6 bg-transparent border-2 border-primary btn-hover-primary" type='submit' disabled={isLoading}>Register</button>
+                                    <button className="btn w-full mt-6 bg-transparent border-2 border-primary btn-hover-primary text-base-100" type='submit' disabled={isLoading}>Register</button>
                                 </div>
                             </form>
                         </div>
