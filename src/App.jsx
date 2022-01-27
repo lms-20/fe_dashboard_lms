@@ -34,7 +34,8 @@ function App() {
 
   return (
     <div className="App">
-      <Routes>
+      <h1>hello</h1>
+      {/* <Routes>
         <Route element={<Drawer/>}>
           <Route path="/landing" element={<Landing/>}/>
           <Route path="/allcategories" element={<Categories/>}/>
@@ -64,7 +65,7 @@ function App() {
           <Route exact path="/addquiz" element={<AddNewQuiz />} />
           <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
