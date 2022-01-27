@@ -56,8 +56,10 @@ const Course = () => {
 
     useEffect(() => {
         const have = userCourses.includes(parseInt(params.my_course_id))
-        if (!have) {
-            navigate(`/courses/${params.my_course_id}`)
+        if (userCourses.length > 0) {
+            if (!have) {
+                navigate(`/courses/${params.my_course_id}`)
+            }
         }
     }, [userCourses]);
 
@@ -69,6 +71,7 @@ const Course = () => {
             .catch(error => {
                 console.log(error)
             })
+
     }, []);
 
     return (

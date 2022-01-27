@@ -35,7 +35,7 @@ const CoursePreview = () => {
     function getVideoId(url) {
         url = url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
         let result = "";
-        for (let i = url.length - 1; i >= 1; i--) {
+        for (let i = url?.length - 1; i >= 1; i--) {
             if (url[i] === "/") {
                 return result
             } else {
@@ -57,7 +57,7 @@ const CoursePreview = () => {
                             <h3 className='text-primary font-extrabold text-4xl mt-4 mb-6'>{course?.name}</h3>
 
                             <YoutubePlayer
-                                videoId={getVideoId(`${course?.chapters?.[0].lessons?.[-0].video}`)}
+                                videoId={getVideoId(`${course?.chapters?.[0]?.lessons?.[-0]?.video}`)}
                             />
                             <div className='hidden lg:block'>
                                 <CourseInformationPreview
