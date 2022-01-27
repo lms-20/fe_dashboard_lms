@@ -34,15 +34,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>hello</h1>
-      {/* <Routes>
-        <Route element={<Drawer/>}>
-          <Route path="/landing" element={<Landing/>}/>
-          <Route path="/allcategories" element={<Categories/>}/>
-          <Route path = "/allcourses" element = {<AllCourse/>}/>
-          <Route path="/categories/:category_id" element={<CategoriesDetails/>}/>
-          <Route exact path = "/courses/:course_id" element={<CoursePreview/>}/>
-          <Route exact path = "/payments/course/:course_id" element={<Payments/>}/>
+      <Routes>
+        <Route element={<Drawer />}>
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/allcategories" element={<Categories />} />
+          <Route path="/allcourses" element={<AllCourse />} />
+          <Route path="/categories/:category_id" element={<CategoriesDetails />} />
+          <Route exact path="/courses/:course_id" element={<CoursePreview />} />
+          <Route exact path="/payments/course/:course_id" element={<Payments />} />
         </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
@@ -65,7 +64,7 @@ function App() {
           <Route exact path="/addquiz" element={<AddNewQuiz />} />
           <Route exact path="/addexercise" element={<AddNewExercise />} />
         </Route>
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
