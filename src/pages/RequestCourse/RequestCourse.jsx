@@ -28,7 +28,7 @@ const RequestCourse = () => {
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
-    const domain = `https://bef3-182-2-68-139.ngrok.io`;
+    const domain = `http://128.199.232.31:3030`;
     const ApiUrl = `${domain}/req-courses`;
 
     const onSubmit = async (data) => {

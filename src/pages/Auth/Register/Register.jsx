@@ -38,7 +38,7 @@ const Register = props => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const password = useRef({});
     password.current = watch("password", "");
-    const ApiUrl = `https://bef3-182-2-68-139.ngrok.io/users/register`;
+    const ApiUrl = `http://128.199.232.31:3030/users/register`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const token = useSelector(state => state.userData.user?.data.token);

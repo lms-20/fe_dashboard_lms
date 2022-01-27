@@ -29,12 +29,14 @@ const style = {
 const AddNewLesson = props => {
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm({
         defaultValues: {
-            items: [{ chapter_id: "", name: "", video: "" }]
+            items: [{ chapter_id: 0, name: "", video: "" }]
         }
     });
+    const token = useSelector(state => state.userData.user?.data.token);
+
     const [isLoading, setIsLoading] = useState(false);
-    const ApiSections = `https://bef3-182-2-68-139.ngrok.io/chapters`;
-    const ApiUrl = `https://6141ca84357db50017b3dd36.mockapi.io/lessons`;
+    const ApiSections = `http://128.199.232.31:3030/chapters`;
+    const ApiUrl = `http://128.199.232.31:3030/lessons`;
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,
@@ -68,11 +70,13 @@ const AddNewLesson = props => {
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {
+            element.chapter_id = parseInt(element.chapter_id);
+
             setIsLoading(true);
             axios.post(
                 ApiUrl,
                 element,
-                { headers: { 'Content-Type': 'application/json' } }
+                { headers: { "Authorization": `Bearer ${token}` } }
             )
                 .then(response => {
                     setIsLoading(false);
@@ -101,7 +105,7 @@ const AddNewLesson = props => {
                                 </h2>
                             </div>
                             <div className='ml-auto'>
-                                <button className='btn bg-transparent text-base-100 border-2 border-primary btn-hover-primary' type='button' onClick={() => append({ chapter_id: "", name: "", video: "" })}>
+                                <button className='btn bg-transparent text-base-100 border-2 border-primary btn-hover-primary' type='button' onClick={() => append({ chapter_id: 0, name: "", video: "" })}>
                                     <FontAwesomeIcon icon={faPlusCircle} className='mr-2' />
                                     Tambah Form</button>
                             </div>

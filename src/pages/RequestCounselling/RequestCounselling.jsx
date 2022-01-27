@@ -24,7 +24,7 @@ const RequestCounselling = () => {
     const domain = `https://6141ca84357db50017b3dd36.mockapi.io`;
     const ApiUrl = `${domain}/users`;
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+    const pivotApi = `http://128.199.232.31:3030/mycourses`;
     const style = {
         position: "fixed",
         top: "50%",

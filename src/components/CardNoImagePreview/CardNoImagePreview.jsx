@@ -17,7 +17,7 @@ const CardNoImagePreview = (props) => {
                         <div className=" p-2 flex items-center justify-start">
                             <FontAwesomeIcon icon={faLock} className='text-xl mr-4'></FontAwesomeIcon>
                             {/* To Do,Onclick function on this span element,so if the element is clicked it will go to video url */}
-                            <span className="label-text text-primary font-medium">{`${elm.order}.${elm.name} `}</span> 
+                            <span className="label-text text-primary font-medium">{`${elm.name} `}</span> 
                         </div>
                     </div>
                 </div>

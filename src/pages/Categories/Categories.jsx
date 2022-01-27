@@ -11,7 +11,7 @@ import Navbar from '../../components/Navbar/Navbar';
 
 
 const Categories = () => {
-    const ApiSections = `https://bef3-182-2-68-139.ngrok.io/categories`;
+    const ApiSections = `http://128.199.232.31:3030/categories`;
     const [categories, setCategories] = useState([]);
     let navigate = useNavigate();
 

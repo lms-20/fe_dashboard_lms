@@ -20,7 +20,7 @@ const CollapsedContentPreview = (props) => {
                         {/* This input purpose is,if the arrow is clicked,the div parent will expand */}
                         <input type="checkbox"/> 
                         <div className="collapse-title">
-                            <p className='font-bold'>{`Section ${elm.order} : ${elm.name}`}</p>
+                            <p className='font-bold'>{`Section : ${elm.name}`}</p>
                             <p className='text-sm'>{`${elm.lessons.length}`} Videos</p>
                         </div> 
                         {/* Collapse Content */}

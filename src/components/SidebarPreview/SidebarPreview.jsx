@@ -16,7 +16,7 @@ const SidebarPreview = (props) => {
     const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+    const pivotApi = `http://128.199.232.31:3030/mycourses`;
 
     useEffect(() => {
         axios.get(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
