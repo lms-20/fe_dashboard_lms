@@ -26,7 +26,7 @@ const Course = () => {
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
-        url = url === undefined ? "https://www.youtube.com/embed/4YKpBYo61Cs" : url
+        url = url ? url : "https://www.youtube.com/embed/4YKpBYo61Cs"
 
         let result = "";
         for (let i = url.length - 1; i >= 1; i--) {
