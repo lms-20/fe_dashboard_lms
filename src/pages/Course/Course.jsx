@@ -55,8 +55,8 @@ const Course = () => {
     }, []);
 
     useEffect(() => {
-        const have = userCourses.includes(parseInt(params.my_course_id))
-        if (userCourses.length > 0) {
+        const have = userCourses?.includes(parseInt(params.my_course_id))
+        if (userCourses?.length > 0) {
             if (!have) {
                 navigate(`/courses/${params.my_course_id}`)
             }
