@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const FeedbackReqCourse = () => {
     const token = useSelector(state => state.userData.user?.data.token);
-    const apiUrl = "https://bef3-182-2-68-139.ngrok.io/req-courses"
+    const apiUrl = "http://rizkysr90.space:3030/req-courses"
     const [reqCourse, setReqCourse] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);

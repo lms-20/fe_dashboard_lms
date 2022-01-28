@@ -32,9 +32,9 @@ const AddNewCourse = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [mentors, setMentors] = useState([]);
-    const ApiUrl = `https://bef3-182-2-68-139.ngrok.io/courses`;
-    const ApiCategories = `https://bef3-182-2-68-139.ngrok.io/categories`;
-    const ApiMentors = `https://bef3-182-2-68-139.ngrok.io/mentors`;
+    const ApiUrl = `http://rizkysr90.space:3030/courses`;
+    const ApiCategories = `http://rizkysr90.space:3030/categories`;
+    const ApiMentors = `http://rizkysr90.space:3030/mentors`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -58,7 +58,12 @@ const AddNewCourse = props => {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
-        console.log(data)
+        if (data.certificate === "true") {
+            data.certificate = true;
+        } else {
+            data.certificate = false;
+        }
+
         axios.post(
             ApiUrl,
             data,
@@ -74,6 +79,8 @@ const AddNewCourse = props => {
                 setIsLoading(false);
             });
     }
+    // const yes = true;
+    // const no = false;
 
     return (
         <Fragment>
@@ -246,11 +253,11 @@ const AddNewCourse = props => {
                                     </label>
                                     <div className='flex-grow flex my-2'>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="certificate" defaultChecked="true" className="radio radio-primary mr-2" value={true} {...register('certificate', { required: true, setValueAs: v => Boolean(v), })} />
+                                            <input type="radio" name="certificate" defaultChecked="true" className="radio radio-primary mr-2" value={true} {...register('certificate', { required: true, setValueAs: v => Boolean(v) })} />
                                             <span className="label-text text-lg text-base-100 mr-4">Yes</span>
                                         </label>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value={false} {...register('certificate', { required: true, setValueAs: v => Boolean(v), })} />
+                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value={false} {...register('certificate', { required: true, setValueAs: v => Boolean(v) })} />
                                             <span className="label-text text-lg text-base-100">No</span>
                                         </label>
                                     </div>

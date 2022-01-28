@@ -37,7 +37,7 @@ const AddNewSection = props => {
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const ApiUrl = `https://bef3-182-2-68-139.ngrok.io/chapters`;
+    const ApiUrl = `http://rizkysr90.space:3030/chapters`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({

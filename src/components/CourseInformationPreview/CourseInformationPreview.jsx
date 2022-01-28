@@ -16,7 +16,7 @@ const CourseInformationPreview = (props) => {
     const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+    const pivotApi = `http://rizkysr90.space:3030/mycourses`;
 
     console.log(token);
 

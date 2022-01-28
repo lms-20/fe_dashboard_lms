@@ -21,8 +21,8 @@ const Course = () => {
     const navigate = useNavigate();
     const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
-    const courseApi = `https://bef3-182-2-68-139.ngrok.io/courses/`;
+    const pivotApi = `http://rizkysr90.space:3030/mycourses`;
+    const courseApi = `http://rizkysr90.space:3030/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {
@@ -56,8 +56,10 @@ const Course = () => {
 
     useEffect(() => {
         const have = userCourses.includes(parseInt(params.my_course_id))
-        if (!have) {
-            navigate(`/courses/${params.my_course_id}`)
+        if (userCourses.length > 0) {
+            if (!have) {
+                navigate(`/courses/${params.my_course_id}`)
+            }
         }
     }, [userCourses]);
 
@@ -69,6 +71,7 @@ const Course = () => {
             .catch(error => {
                 console.log(error)
             })
+
     }, []);
 
     return (

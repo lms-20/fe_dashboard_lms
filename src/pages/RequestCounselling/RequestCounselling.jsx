@@ -21,10 +21,10 @@ const RequestCounselling = () => {
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
-    const domain = `https://6141ca84357db50017b3dd36.mockapi.io`;
-    const ApiUrl = `${domain}/users`;
+    const domain = `http://rizkysr90.space:3030`;
+    const ApiUrl = `${domain}/req-counselings`;
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `https://bef3-182-2-68-139.ngrok.io/mycourses`;
+    const pivotApi = `http://rizkysr90.space:3030/mycourses`;
     const style = {
         position: "fixed",
         top: "50%",
@@ -35,11 +35,12 @@ const RequestCounselling = () => {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
-        console.log(data)
+        data.course_id = parseInt(params.course_id);
+
         axios.post(
             ApiUrl,
             data,
-            { headers: { 'Content-Type': 'application/json' } }
+            { headers: { "Authorization": `Bearer ${token}` } }
         )
             .then(response => {
                 setIsLoading(false);
@@ -58,7 +59,7 @@ const RequestCounselling = () => {
 
     useEffect(() => {
         const haveTemp = []
-        axios.get(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
+        axios.post(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
             .then(response => {
                 response?.data.data.forEach(dataCourses => {
                     haveTemp.push(dataCourses.course_id)
