@@ -89,18 +89,18 @@ const MyClass = props => {
                     <div className="lg:hidden carousel rounded-box">
                         {
                             // Rendering Carousel Items
-                            // myCourses.map((course) => {
-                            //     return (
-                            //         <div className='w-full carousel-item' key={course.id}>
-                            //             <Card
-                            //                 course={course}
-                            //                 width="full"
-                            //             />
-                            //         </div>
+                            myCourses.map((course) => {
+                                return (
+                                    <div className='w-full carousel-item' key={course.id}>
+                                        <Card
+                                            course={globalStateUser?.data.role === 'admin' ? course : course.course}
+                                            width="full"
+                                        />
+                                    </div>
 
 
-                            //     )
-                            // })
+                                )
+                            })
                         }
 
                     </div>

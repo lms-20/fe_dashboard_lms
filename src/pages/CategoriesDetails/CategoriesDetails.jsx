@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar/Navbar'
 import PropTypes from 'prop-types';
 
 const CategoriesDetails = (props) => {
+    
     return(
         <div className='min-h-screen bg-neutral-content'>
             <div className='w-11/12 mx-auto my-10'>

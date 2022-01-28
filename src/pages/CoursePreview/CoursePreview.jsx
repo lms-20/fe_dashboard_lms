@@ -48,7 +48,7 @@ const CoursePreview = () => {
     return (
         <div className='bg-neutral-content min-h-screen'>
             {/* Centered Content */}
-            <div className='w-11/12 mx-auto'>
+            <div className='w-11/12 mx-auto pb-10'>
                 {/* Container For The Content */}
                 <div className=''>
                     <div className=' mx-auto text-base-100 py-4 flex flex-col lg:flex-row'>
@@ -65,7 +65,7 @@ const CoursePreview = () => {
                                 />
                             </div>
                             {/* Mobile View */}
-                            <div className="lg:hidden collapse w-full  rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
+                            <div className="lg:hidden collapse w-full rounded-lg bg-transparent border-2 border-primary collapse-arrow my-4" >
                                 <input type="checkbox" />
                                 <div className="collapse-title text-xl font-medium">
                                     Course Information
