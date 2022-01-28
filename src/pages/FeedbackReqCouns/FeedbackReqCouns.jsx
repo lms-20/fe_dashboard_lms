@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const FeedbackReqCouns = () => {
     const token = useSelector(state => state.userData.user?.data.token);
-    const apiUrl = "http://128.199.232.31:3030/req-counselings"
+    const apiUrl = "http://rizkysr90.space:3030/req-counselings"
     const [reqCouns, setReqCounse] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);

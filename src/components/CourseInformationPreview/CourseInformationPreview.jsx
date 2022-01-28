@@ -16,7 +16,7 @@ const CourseInformationPreview = (props) => {
     const { courseId } = props;
     const token = useSelector(state => state.userData.user?.data.token);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `http://128.199.232.31:3030/mycourses`;
+    const pivotApi = `http://rizkysr90.space:3030/mycourses`;
 
     console.log(token);
 

@@ -14,7 +14,7 @@ const UserSettings = () => {
     const token = useSelector(state => state.userData.user?.data.token);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const apiUrl = "http://128.199.232.31:3030/users/fetch"
+    const apiUrl = "http://rizkysr90.space:3030/users/fetch"
     const [isFormDisabled, setIsFormDisabled] = useState(true);
     const [userResponse, setUserResponse] = useState({});
     const [isLoading, setIsLoading] = useState(false);

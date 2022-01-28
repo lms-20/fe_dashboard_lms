@@ -38,7 +38,7 @@ const Register = props => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const password = useRef({});
     password.current = watch("password", "");
-    const ApiUrl = `http://128.199.232.31:3030/users/register`;
+    const ApiUrl = `http://rizkysr90.space:3030/users/register`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const token = useSelector(state => state.userData.user?.data.token);

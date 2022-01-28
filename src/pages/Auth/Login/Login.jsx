@@ -29,7 +29,7 @@ const style = {
 const Login = props => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const ApiUrl = `http://128.199.232.31:3030/users/login`;
+    const ApiUrl = `http://rizkysr90.space:3030/users/login`;
     // const ApiUrl = `https://dbaf-182-2-39-138.ngrok.io/users/login`;
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();

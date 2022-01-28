@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const CoursePreview = () => {
     let params = useParams();
-    const domain = 'http://128.199.232.31:3030'
+    const domain = 'http://rizkysr90.space:3030'
     const ApiSections = `${domain}/courses/${params.course_id}`;
 
     const [course, setCourse] = useState({});

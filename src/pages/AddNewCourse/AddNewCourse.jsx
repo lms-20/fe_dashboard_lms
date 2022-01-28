@@ -32,9 +32,9 @@ const AddNewCourse = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [mentors, setMentors] = useState([]);
-    const ApiUrl = `http://128.199.232.31:3030/courses`;
-    const ApiCategories = `http://128.199.232.31:3030/categories`;
-    const ApiMentors = `http://128.199.232.31:3030/mentors`;
+    const ApiUrl = `http://rizkysr90.space:3030/courses`;
+    const ApiCategories = `http://rizkysr90.space:3030/categories`;
+    const ApiMentors = `http://rizkysr90.space:3030/mentors`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -58,12 +58,12 @@ const AddNewCourse = props => {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
-        if (data.certificate === "true"){
+        if (data.certificate === "true") {
             data.certificate = true;
         } else {
             data.certificate = false;
         }
-      
+
         axios.post(
             ApiUrl,
             data,
@@ -257,7 +257,7 @@ const AddNewCourse = props => {
                                             <span className="label-text text-lg text-base-100 mr-4">Yes</span>
                                         </label>
                                         <label className="cursor-pointer label">
-                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value={false} {...register('certificate', { required: true,  setValueAs: v => Boolean(v)})} />
+                                            <input type="radio" name="certificate" className="radio radio-primary mr-2" value={false} {...register('certificate', { required: true, setValueAs: v => Boolean(v) })} />
                                             <span className="label-text text-lg text-base-100">No</span>
                                         </label>
                                     </div>

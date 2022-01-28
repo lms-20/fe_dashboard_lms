@@ -16,7 +16,7 @@ import FetchLandingCourses from '../../components/FetchLandingCourses/FetchLandi
 
 
 const Landing = () => {
-    const ApiSections = `http://128.199.232.31:3030/categories`;
+    const ApiSections = `http://rizkysr90.space:3030/categories`;
     // const domain = 'http://5b28-140-213-168-132.ngrok.io'
     // const ApiSections = `${domain}/categories`;
     // const ApiSections = 'http://d58c-140-213-161-53.ngrok.io/categories';

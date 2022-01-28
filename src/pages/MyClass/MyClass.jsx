@@ -13,8 +13,8 @@ const MyClass = props => {
     const token = useSelector(state => state.userData.user?.data.token);
     const globalStateUser = useSelector(state => state.userData?.user);
     // Init API endpoint
-    const apiUrl = "http://128.199.232.31:3030/courses";
-    const apiPivot = "http://128.199.232.31:3030/mycourses";
+    const apiUrl = "http://rizkysr90.space:3030/courses";
+    const apiPivot = "http://rizkysr90.space:3030/mycourses";
     const [myCourses, setMyCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);

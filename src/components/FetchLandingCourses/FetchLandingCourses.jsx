@@ -9,7 +9,7 @@ import CardCourseFullMobile from '../CardCourseFullMobile/CardCourseFullMobile';
 
 
 const FetchLandingCourses = () => {
-    const domain = 'http://128.199.232.31:3030'
+    const domain = 'http://rizkysr90.space:3030'
     const ApiSections = `${domain}/courses`;
     const [courses, setCourses] = useState([]);
     // let navigate = useNavigate();

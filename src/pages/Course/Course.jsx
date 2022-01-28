@@ -21,8 +21,8 @@ const Course = () => {
     const navigate = useNavigate();
     const linkVideo = useSelector(state => state.courseData.linkVideo);
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
-    const pivotApi = `http://128.199.232.31:3030/mycourses`;
-    const courseApi = `http://128.199.232.31:3030/courses/`;
+    const pivotApi = `http://rizkysr90.space:3030/mycourses`;
+    const courseApi = `http://rizkysr90.space:3030/courses/`;
     const [detailCourse, setDetailCourse] = useState({});
 
     function getVideoId(url) {

@@ -37,7 +37,7 @@ const AddNewSection = props => {
         }
     });
     const [isLoading, setIsLoading] = useState(false);
-    const ApiUrl = `http://128.199.232.31:3030/chapters`;
+    const ApiUrl = `http://rizkysr90.space:3030/chapters`;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({

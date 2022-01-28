@@ -35,8 +35,8 @@ const AddNewLesson = props => {
     const token = useSelector(state => state.userData.user?.data.token);
 
     const [isLoading, setIsLoading] = useState(false);
-    const ApiSections = `http://128.199.232.31:3030/chapters`;
-    const ApiUrl = `http://128.199.232.31:3030/lessons`;
+    const ApiSections = `http://rizkysr90.space:3030/chapters`;
+    const ApiUrl = `http://rizkysr90.space:3030/lessons`;
     const navigate = useNavigate();
     const { fields, append, remove } = useFieldArray({
         control,

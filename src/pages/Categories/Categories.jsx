@@ -11,7 +11,7 @@ import Navbar from '../../components/Navbar/Navbar';
 
 
 const Categories = () => {
-    const ApiSections = `http://128.199.232.31:3030/categories`;
+    const ApiSections = `http://rizkysr90.space:3030/categories`;
     const [categories, setCategories] = useState([]);
     let navigate = useNavigate();
 
