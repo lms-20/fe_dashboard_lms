@@ -1,4 +1,5 @@
 {
+  "homepage": "http://ec2-3-144-198-199.us-east-2.compute.amazonaws.com",
   "name": "fe_lms_20",
   "version": "0.1.0",
   "private": true,
