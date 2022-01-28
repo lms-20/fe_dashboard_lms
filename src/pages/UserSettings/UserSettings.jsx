@@ -31,7 +31,6 @@ const UserSettings = () => {
             try {
                 setIsLoading(true)
                 const userData = await retrieveUser();
-                console.log(userData.data)
                 if (userData) {
                     setIsLoading(false);
                     setUserResponse(userData.data)

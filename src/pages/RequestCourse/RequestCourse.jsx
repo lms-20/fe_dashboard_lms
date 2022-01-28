@@ -33,7 +33,6 @@ const RequestCourse = () => {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
-        console.log(data)
         axios.post(
             ApiUrl,
             data,

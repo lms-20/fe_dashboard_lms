@@ -26,7 +26,6 @@ const Landing = () => {
     useEffect(() => {
         axios.get(ApiSections)
             .then(response => {
-                console.log("ini", response.data.data);
                 response?.data.data.forEach(dataSections => {
                     setCategories(
                         prevstate => [...prevstate, dataSections]
@@ -37,8 +36,6 @@ const Landing = () => {
                 console.log(error)
             })
     }, []);
-
-    console.log(categories)
 
     return (
         <>

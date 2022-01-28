@@ -18,8 +18,6 @@ const CourseInformationPreview = (props) => {
     const [userCourses, setuserCourses] = useState([]);//this will be used to store, which courses user have
     const pivotApi = `http://rizkysr90.space:3030/mycourses`;
 
-    console.log(token);
-
     useEffect(() => {
         axios.get(pivotApi, { headers: { "Authorization": `Bearer ${token}` } })
             .then(response => {
@@ -35,7 +33,6 @@ const CourseInformationPreview = (props) => {
     }, []);
 
     const have = userCourses.includes(parseInt(courseId))
-    console.log("a", userCourses)
 
     return (
         <>

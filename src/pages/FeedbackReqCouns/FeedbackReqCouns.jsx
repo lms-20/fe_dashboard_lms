@@ -26,7 +26,6 @@ const FeedbackReqCouns = () => {
             try {
                 setIsLoading(true);
                 const data = await retrieveReqCouns();
-                console.log(data.data)
                 if (data) {
                     setIsLoading(false);
                     setReqCounse(data.data);

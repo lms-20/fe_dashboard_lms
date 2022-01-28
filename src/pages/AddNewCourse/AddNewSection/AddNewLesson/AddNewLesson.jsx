@@ -65,8 +65,6 @@ const AddNewLesson = props => {
             })
     }, []);
 
-    console.log(sections)
-
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {

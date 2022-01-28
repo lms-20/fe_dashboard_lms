@@ -54,7 +54,6 @@ const AddNewSection = props => {
     const onSubmit = async (data) => {
         // console.log(data.items)
         data.items.forEach(element => {
-            console.log(element)
             setIsLoading(true);
             axios.post(
                 ApiUrl,
